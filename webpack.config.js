@@ -41,7 +41,7 @@ module.exports = (options = {}) => ({
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
-      {
+      /*{
         test: /favicon\.png$/,
         use: [{
           loader: 'file-loader',
@@ -49,7 +49,7 @@ module.exports = (options = {}) => ({
             name: '[name].[ext]?[hash]'
           }
         }]
-      },
+      },*/
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         exclude: /favicon\.png$/,
