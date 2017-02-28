@@ -3,9 +3,8 @@
     <img src="./assets/clock.png">
     <h1>{{ msg }}</h1>
     <el-button @click="startHacking">Let's do it use click event</el-button>
-    <el-button @click.native="startHacking">Let's do it</el-button>
     <el-row>
-      <el-col :span="24"><div class="grid-content bg-purple-dark">test for github-webhook-handler</div></el-col>
+      <el-col :span="24"><div class="grid-content bg-purple-dark">test for 3rd github-webhook-handler</div></el-col>
     </el-row>
     <el-button type="primary" icon="search">Search</el-button>
     <el-button type="primary" icon="search">Search</el-button>
