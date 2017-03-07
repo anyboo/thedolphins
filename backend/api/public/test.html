@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<script type="text/javascript" src="jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="json2.js"></script>
+</head>
+<body>
+<div>
+info:<br/>
+GET /api/:tabel -> List all the tabel in JSON.<br/>
+GET /api/:tabel/:id -> Returns the tabel for the given ID<br/>
+POST /api/:tabel/ -> JSON data to inserted to the tabel db.<br/>
+PUT /api/:tabel/:id -> JSON data to update the tabel data.<br/>
+DELETE /api/:tabel/:id -> Removes the tabel with the specified ID.<br/>
+
+</div>
+<div style="height:40px;">
+url:
+<input type="txt" id="url" style="width:320px;" />
+</div>
+<div style="height:40px;">
+type:
+<select name="select" id="posttype">
+    <option value="GET">GET</option>
+<option value="POST">POST</option>
+<option value="PUT">PUT</option>
+<option value="DELETE">DELETE</option>
+    </select>
+	</div>
+<div >
+data
+<textarea id="data" cols="20" rows="5" style="width:320px;"></textarea>
+</div>
+<div style="height:40px;">
+<input type="button" id="btn" value="submit"/>
+</div>
+
+<div id="result">
+</div>
+</body>
+<script>
+$(function(){
+	$("#btn").click(function(){
+	var posttype = $("#posttype").val();
+		var str = "url:"+$("#url").val();
+		 str += "<br/>type:"+posttype;
+		 str += "<br/>data:"+$("#data").val();
+		 str += "<br/>result:<br/>";
+		 try{
+			 var postdata  = {};
+			 if (posttype=="GET")
+			 {
+				
+			 }else if (posttype=="POST")
+			 {
+			 postdata = JSON.parse($("#data").val());
+			 }else if (posttype=="PUT")
+			 {
+			 postdata = JSON.parse($("#data").val());
+			 }else if (posttype=="DELETE")
+			 {
+			
+			 }
+			 	   $.ajax({
+				 type: posttype,
+				 url: $("#url").val(),
+				 data: postdata,
+				 dataType: "json",
+				 success: function(data){
+					str += JSON.stringify(data);
+					$("#result").html(str);
+				 },
+				 error: function(XMLHttpRequest, textStatus, errorThrown) {
+					str +=XMLHttpRequest.status;
+					str +=XMLHttpRequest.readyState;
+					str +=textStatus;
+					 $("#result").html(str);
+				 }
+				 });
+		 }
+		 catch(e){
+			$("#result").html(error);
+		 }
+
+		 
+		
+	});
+});
+</script>
+</html>
