@@ -28,11 +28,12 @@
     </header>
     <el-row class="container">
       <el-col :span="4" class="menu">
-        <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark">
+        <el-menu default-active="2" class="el-menu-vertical-demo" @select="handleSelect" theme="dark">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>{{ langConfig.menu.pageOne[lang] }}</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="/activePublic">活动</el-menu-item>
+              <el-menu-item index="/studentlist">列表</el-menu-item>
+              <el-menu-item index="/activeManage">管理</el-menu-item>
           </el-submenu>
            <el-submenu index="2">
             <template slot="title"><i class="el-icon-message"></i>{{ langConfig.menu.pageTwo[lang] }}</template>
@@ -48,43 +49,9 @@
         </el-menu>
       </el-col>
       <el-col :span="20" class="content">
-        <el-breadcrumb>
-          <el-breadcrumb-item>{{ langConfig.breadcrumb.main[lang] }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ langConfig.breadcrumb.project[lang] }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ langConfig.breadcrumb.page[lang] }}</el-breadcrumb-item>
-        </el-breadcrumb>
-        <el-form inline :model="query" label-position="right" label-width="60px" class="query-form">
-          <el-form-item :label="langConfig.query.name[lang]" prop="name">
-            <el-input v-model="query.name" :placeholder="langConfig.query.nameHolder[lang]"></el-input>
-          </el-form-item>
-          <el-form-item :label="langConfig.query.date[lang]" prop="date">
-            <el-date-picker
-                v-model="query.date"
-                type="daterange"
-                :placeholder="langConfig.query.dateHolder[lang]">
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary">{{ langConfig.query.search[lang] }}</el-button>
-          </el-form-item>
-        </el-form>
-        <el-table :data="tableData[lang]" class="table" stripe border>
-          <el-table-column prop="date" :label="langConfig.table.date[lang]" sortable width="200"></el-table-column>
-          <el-table-column prop="name" :label="langConfig.table.name[lang]" width="200"></el-table-column>
-          <el-table-column prop="address" :label="langConfig.table.address[lang]"></el-table-column>
-          <el-table-column prop="zip" :label="langConfig.table.zip[lang]" width="200"></el-table-column>
-          <el-table-column :label="langConfig.table.operations[lang]" width="160">
-            <template scope="scope">
-              <el-button size="small">{{ langConfig.table.edit[lang] }}</el-button>
-              <el-button size="small" type="danger">{{ langConfig.table.delete[lang] }}</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="100"
-          class="pagination">
-        </el-pagination>
+        <transition name="fade">
+          <router-view class="view"></router-view>
+        </transition>
       </el-col>
     </el-row>
     <el-dialog v-model="themeDialogVisible" :title="langConfig.header.switch[lang]" size="tiny">
@@ -117,7 +84,6 @@
   import objectAssign from 'object-assign';
   import blobUtil from 'blob-util';
   import langConfig from './lang';
-  import tableData from './table-data';
   import Vue from 'vue';
 
   export default {
@@ -145,7 +111,6 @@
         originalStylesheetCount: -1,
         originalStyle: '',
         langConfig,
-        tableData,
         primaryColor: '#20a0ff',
         themeDialogVisible: false,
         helpDialogVisible: false,
@@ -163,6 +128,7 @@
     computed: {
       lang() {
         console.log(this.$route.path);
+        Vue.config.lang = 'zh-cn';
         return this.$route.path;
       }
     },
@@ -171,6 +137,7 @@
       '$route.path': {
         immediate: true,
         handler(val) {
+          console.log(val);
           if (val === '/zh-CN') {
             Vue.config.lang = 'zh-cn';
           } else {
@@ -210,6 +177,16 @@
 
       resetForm() {
         this.$refs.form.resetFields();
+      },
+      handleSelect(index) {
+        console.log(index);
+        if (index==='/activePublic') {
+          this.$router.push('/activePublic');
+        } else if (index==='/studentlist'){
+          this.$router.push('/studentlist');
+        }else if (index==='/activeManage'){
+          this.$router.push('/activeManage');
+        }
       },
     },
 
