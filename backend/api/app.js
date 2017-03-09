@@ -3,11 +3,12 @@ var compress = require('koa-compress');
 var logger = require('koa-logger');
 var serve = require('koa-static');
 var route = require('koa-route');
+var cors = require('koa-cors');
 var koa = require('koa');
 var path = require('path');
 var app = module.exports = koa();//kk/ Logger
 app.use(logger());
-
+app.use(cors());
 app.use(route.get('/api/:name',control.all));
 app.use(route.get('/api/:name/:id', control.fetch));
 app.use(route.post('/api/:name', control.add));
