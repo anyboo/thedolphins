@@ -36,6 +36,7 @@
     "url-loader": "^0.5.7",
     "vue-i18n": "^6.0.0-alpha.3",
     "vue-loader": "^10.0.0",
+    "vue-resource": "^1.2.1",
     "vue-router": "^2.3.0",
     "vue-template-compiler": "^2.1.8",
     "vuex": "^2.2.1",

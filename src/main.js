@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueResouse from 'vue-resource'
 import App from './app.vue';
 import router from './router';
 import VueI18n from 'vue-i18n';
@@ -9,6 +10,7 @@ import 'element-ui/lib/theme-default/index.css';
 import './styles/index.css';
 //require('es6-promise').polyfill();
 
+Vue.use(VueResouse)
 Vue.use(VueI18n);
 Vue.use(Element);
 Vue.config.lang = 'zh-cn';
