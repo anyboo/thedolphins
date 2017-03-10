@@ -34,7 +34,7 @@
         </el-pagination>
         <el-dialog title="新建" v-model="dialogFormVisible">
             <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="formLabelWidth">
+                <el-form-item label="活动名称" :label-width="formLabelWidth" v-model="form.name">
                     <el-input v-model="form.name" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="活动区域" :label-width="formLabelWidth">
@@ -60,7 +60,7 @@ export default {
         return {
             langConfig,
             tableData,
-            apiUrl: 'http://127.0.0.1:9999/api/table',
+            apiUrl: 'http://www.bullstech.cn:9999/api/table',
             dialogFormVisible: false,
             formLabelWidth: '120px',
             form: {
@@ -92,7 +92,7 @@ export default {
             var vm = this;
             vm.$http.post(vm.apiUrl, vm.form)
                 .then((response) => {
-                    vm.$set('form', {})
+                    //vm.$set('form', {})
                     vm.getApiData();
                 });
             this.dialogFormVisible = false;
