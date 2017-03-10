@@ -113,8 +113,11 @@ export default {
     computed: {
         lang() {
             console.log(this.$route.path);
-            Vue.config.lang = 'zh-cn';
-            return this.$route.path;
+            Vue.config.lang = '/zh-CN';
+            if (this.$route.path === '/en-US') {
+                Vue.config.lang = '/en-US';
+            }
+            return Vue.config.lang;; //this.$route.path;
         }
     },
 

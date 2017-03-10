@@ -18,7 +18,7 @@ Vue.config.lang = 'zh-cn';
 //Vue.locale('en', enLocale);
 
 new Vue({ // eslint-disable-line
-  el: '#app',
-  router,
-  render: h => h(App)
+    el: '#app',
+    router,
+    render: h => h(App)
 });
