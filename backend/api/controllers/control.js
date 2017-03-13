@@ -13,7 +13,11 @@ module.exports.all = function* all(name, next) {
 
     var dbtable = wrap(db.get(name));
     let count = yield dbtable.count({});
-    let data = yield dbtable.find({}, { 'skip': skip, 'limit': limit });
+    let data = yield dbtable.find({}, {
+        'skip': skip,
+        'limit': limit,
+        'sort': { '_id': -1 }
+    });
     this.body = {
         'data': data,
         'count': count,
