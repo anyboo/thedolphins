@@ -15,24 +15,24 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary">{{ langConfig.query.search[lang] }}</el-button>
-                <el-button type="primary" @click="dialogFormVisible = true">{{ langConfig.query.add[lang] }}</el-button>
+                <el-button type="primary" @click="handleAppend">{{ langConfig.query.add[lang] }}</el-button>
             </el-form-item>
         </el-form>
-        <el-table :data="tableData[lang]" class="table" stripe border>
-            <el-table-column prop="date" :label="langConfig.table.date[lang]" sortable width="200"></el-table-column>
+        <el-table :data="tableData" row-key="_id" class="table" stripe border>
+            <el-table-column prop="region" :label="langConfig.table.date[lang]" sortable width="200"></el-table-column>
             <el-table-column prop="name" :label="langConfig.table.name[lang]" width="200"></el-table-column>
-            <el-table-column prop="address" :label="langConfig.table.address[lang]"></el-table-column>
-            <el-table-column prop="zip" :label="langConfig.table.zip[lang]" width="200"></el-table-column>
+            <el-table-column prop="resource" :label="langConfig.table.address[lang]"></el-table-column>
+            <el-table-column prop="desc" :label="langConfig.table.zip[lang]" width="200"></el-table-column>
             <el-table-column :label="langConfig.table.operations[lang]" width="160">
                 <template scope="scope">
-                    <el-button size="small">{{ langConfig.table.edit[lang] }}</el-button>
-                    <el-button size="small" type="danger">{{ langConfig.table.delete[lang] }}</el-button>
+                    <el-button size="small" @click="handleEdit(scope.$index, scope.row)">{{ langConfig.table.edit[lang] }}</el-button>
+                    <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">{{ langConfig.table.delete[lang] }}</el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination layout="total, sizes, prev, pager, next, jumper" :total="100" class="pagination">
+        <el-pagination layout="total, sizes, prev, pager, next, jumper" :total="total" class="pagination" :current-page="currentPage" :page-size="pageSize" @size-change="handleSizeChange" @current-change="handleCurrentChange">
         </el-pagination>
-        <el-dialog title="新建" v-model="dialogFormVisible">
+        <el-dialog :title="title" v-model="dialogFormVisible">
             <el-form :model="form">
                 <el-form-item label="活动名称" :label-width="formLabelWidth" v-model="form.name">
                     <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -46,23 +46,27 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="postApiData">确 定</el-button>
+                <el-button type="primary" @click="handleSubmit">确 定</el-button>
             </div>
         </el-dialog>
     </div>
 </template>
 <script>
 import langConfig from '~/lang';
-import tableData from '~/table-data';
+
 export default {
     name: 'studentlist',
     data() {
         return {
             langConfig,
-            tableData,
-            apiUrl: 'http://www.bullstech.cn:9999/api/table',
+            tableData: [],
+            apiUrl: 'http://www.bullstech.cn:9999/api/table/',//'http://127.0.0.1:9999/api/table/',
             dialogFormVisible: false,
             formLabelWidth: '120px',
+            hasEdit: false,
+            total: 0,
+            currentPage: 1,
+            pageSize: 100,
             form: {
                 name: '',
                 region: '',
@@ -82,26 +86,79 @@ export default {
     computed: {
         lang() {
             return '/zh-CN';
+        },
+        title() {
+            return this.hasEdit ? '编辑' : '新建';
         }
     },
     mounted: function() {
-        this.getApiData();
+        this.operationGet();
     },
     methods: {
-        postApiData: function() {
+        handleAppend() {
+            this.hasEdit = false;
+            this.form = {};
+            this.dialogFormVisible = true;
+        },
+        handleEdit(index, row) {
+            this.hasEdit = true;
+            this.form = row;
+            this.dialogFormVisible = true;
+        },
+        handleDelete(index, row) {
+            let apiUrlDelete = this.apiUrl + row._id;
+            this.operationDelete(apiUrlDelete);
+        },
+        handleSubmit() {
+            if (this.hasEdit) {
+                let apiUrlPut = this.apiUrl + this.form._id;
+                this.operationEdit(apiUrlPut);
+            } else {
+                this.operationAppend();
+            }
+        },
+        handleSizeChange(val) {
+            this.pageSize = val;
+            this.operationGet();
+            console.log(`每页 ${val} 条`);
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.operationGet();
+            console.log(`当前页: ${val}`);
+        },
+        operationAppend() {
             var vm = this;
             vm.$http.post(vm.apiUrl, vm.form)
                 .then((response) => {
-                    //vm.$set('form', {})
-                    vm.getApiData();
+                    vm.operationGet();
                 });
             this.dialogFormVisible = false;
         },
-        getApiData: function() {
-            this.$http.get(this.apiUrl)
+        operationEdit(apiUrlPut) {
+            var vm = this;
+            vm.$http.put(apiUrlPut, vm.form)
+                .then((response) => {
+                    vm.operationGet();
+                });
+            this.dialogFormVisible = false;
+        },
+        operationDelete(apiUrlDelete) {
+            var vm = this;
+            vm.$http.delete(apiUrlDelete)
+                .then((response) => {
+                    vm.operationGet();
+                });
+        },
+        operationGet() {
+            var vm = this;
+            var page = vm.currentPage - 1;
+            var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize;
+            vm.$http.get(apiUrlGet)
                 .then((response) => {
                     console.log(response.data);
-                    //this.$set('gridData', response.data)
+                    vm.tableData = response.data.data;
+                    vm.total = response.data.count;
                 })
                 .catch(function(response) {
                     console.log(response)

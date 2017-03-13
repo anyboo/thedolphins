@@ -10,7 +10,14 @@ module.exports.all = function* all(name, next) {
     let query = this.query;
     let limit = Number.parseInt(query.prepage || 30);
     let skip = Number.parseInt(query.page || 0) * limit;
-    this.body = yield wrap(db.get(name)).find({}, { 'skip': skip, 'limit': limit });
+
+    var dbtable = wrap(db.get(name));
+    let count = yield dbtable.count({});
+    let data = yield dbtable.find({}, { 'skip': skip, 'limit': limit });
+    this.body = {
+        'data': data,
+        'count': count,
+    };
 };
 
 module.exports.fetch = function* fetch(name, id, next) {
