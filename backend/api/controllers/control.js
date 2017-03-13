@@ -7,7 +7,10 @@ var co = require('co');
 
 module.exports.all = function* all(name, next) {
     if ('GET' != this.method) return yield next;
-    this.body = yield wrap(db.get(name)).find({});
+    let query = this.query;
+    let limit = Number.parseInt(query.prepage || 30);
+    let skip = Number.parseInt(query.page || 0) * limit;
+    this.body = yield wrap(db.get(name)).find({}, { 'skip': skip, 'limit': limit });
 };
 
 module.exports.fetch = function* fetch(name, id, next) {
