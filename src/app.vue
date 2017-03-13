@@ -1,10 +1,17 @@
 <template>
     <div class="wrapper">
         <header :style="{ 'background-color': primaryColor }">
-            <img src="./assets/clock.png" alt="element-logo" class="header-logo">
+            <span class="header-logo"> Dolphin</span>
+            <!-- <img src="./assets/clock.png" alt="element-logo" class="header-logo"> -->
             <ul class="header-operations">
-                <li @click="showThemeDialog">{{ langConfig.header.switch[lang] }}</li>
-                <li @click="showHelpDialog">{{ langConfig.header.help[lang] }}</li>
+                <li @click="showThemeDialog">桌面</li>
+                <li @click="showHelpDialog">前台业务</li>
+                <li @click="showThemeDialog">教学教务</li>
+                <li @click="showHelpDialog">数据统计</li>
+                <li @click="showThemeDialog">财务统计</li>
+                <li @click="showHelpDialog">运营管理</li>
+                <li @click="showHelpDialog">系统设置</li>
+                <!--
                 <li>
                     <span @click="switchLang('/zh-CN')" :class="{ 'is-active': lang === '/zh-CN' }" class="header-lang">
             中文
@@ -13,28 +20,48 @@
                     <span @click="switchLang('/en-US')" :class="{ 'is-active': lang === '/en-US' }" class="header-lang">
             En
           </span>
-                </li>
+                </li>-->
             </ul>
         </header>
         <el-row class="container">
             <el-col :span="4" class="menu">
                 <el-menu default-active="2" class="el-menu-vertical-demo" @select="handleSelect" theme="dark">
                     <el-submenu index="1">
-                        <template slot="title"><i class="el-icon-message"></i>{{ langConfig.menu.pageOne[lang] }}</template>
-                        <el-menu-item index="/activePublic">活动</el-menu-item>
-                        <el-menu-item index="/studentlist">列表</el-menu-item>
-                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                        <template slot="title"><i class="el-icon-message"></i>咨询管理</template>
+                        <el-menu-item index="/activePublic">新建咨询</el-menu-item>
+                        <el-menu-item index="/studentlist">咨询查询</el-menu-item>
                     </el-submenu>
                     <el-submenu index="2">
-                        <template slot="title"><i class="el-icon-message"></i>{{ langConfig.menu.pageTwo[lang] }}</template>
-                        <el-menu-item index="2-1">选项3</el-menu-item>
+                        <template slot="title"><i class="el-icon-star-on"></i>学员管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
                     </el-submenu>
                     <el-submenu index="3">
-                        <template slot="title"><i class="el-icon-message"></i>{{ langConfig.menu.pageThree[lang] }}</template>
-                        <el-submenu index="3-1">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="3-1-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <template slot="title"><i class="el-icon-share"></i>班级管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="4">
+                        <template slot="title"><i class="el-icon-date"></i>班级管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="5">
+                        <template slot="title"><i class="el-icon-edit"></i>通知管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="6">
+                        <template slot="title"><i class="el-icon-loading"></i>活动管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="7">
+                        <template slot="title"><i class="el-icon-menu"></i>商品管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="8">
+                        <template slot="title"><i class="el-icon-document"></i>教师管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="9">
+                        <template slot="title"><i class="el-icon-time"></i>排课管理</template>
+                        <el-menu-item index="/activeManage">管理</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-col>
@@ -141,11 +168,11 @@ export default {
         },
 
         showThemeDialog() {
-            this.themeDialogVisible = true;
+            //this.themeDialogVisible = true;
         },
 
         showHelpDialog() {
-            this.helpDialogVisible = true;
+            //this.helpDialogVisible = true;
         },
 
         submitForm() {

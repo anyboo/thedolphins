@@ -60,13 +60,13 @@ export default {
         return {
             langConfig,
             tableData: [],
-            apiUrl: 'http://www.bullstech.cn:9999/api/table/',//'http://127.0.0.1:9999/api/table/',
+            apiUrl: 'http://www.bullstech.cn:9999/api/table/', //'http://127.0.0.1:9999/api/table/',//
             dialogFormVisible: false,
             formLabelWidth: '120px',
             hasEdit: false,
             total: 0,
             currentPage: 1,
-            pageSize: 100,
+            pageSize: 10,
             form: {
                 name: '',
                 region: '',
@@ -106,26 +106,52 @@ export default {
             this.dialogFormVisible = true;
         },
         handleDelete(index, row) {
-            let apiUrlDelete = this.apiUrl + row._id;
-            this.operationDelete(apiUrlDelete);
+            this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                let apiUrlDelete = this.apiUrl + row._id;
+                this.operationDelete(apiUrlDelete);
+                this.$notify({
+                    title: '消息',
+                    message: '删除成功',
+                    type: 'success'
+                });
+            }).catch(() => {
+                this.$notify({
+                    title: '消息',
+                    message: '已取消删除',
+                    type: 'warning'
+                });
+            });
         },
         handleSubmit() {
+            this.dialogFormVisible = false;
             if (this.hasEdit) {
                 let apiUrlPut = this.apiUrl + this.form._id;
                 this.operationEdit(apiUrlPut);
+                this.$notify({
+                    title: '消息',
+                    message: '编辑成功',
+                    type: 'success'
+                });
             } else {
                 this.operationAppend();
+                this.$notify({
+                    title: '消息',
+                    message: '新建成功',
+                    type: 'success'
+                });
             }
         },
         handleSizeChange(val) {
             this.pageSize = val;
             this.operationGet();
-            console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
             this.currentPage = val;
             this.operationGet();
-            console.log(`当前页: ${val}`);
         },
         operationAppend() {
             var vm = this;
@@ -133,7 +159,6 @@ export default {
                 .then((response) => {
                     vm.operationGet();
                 });
-            this.dialogFormVisible = false;
         },
         operationEdit(apiUrlPut) {
             var vm = this;
@@ -141,7 +166,7 @@ export default {
                 .then((response) => {
                     vm.operationGet();
                 });
-            this.dialogFormVisible = false;
+
         },
         operationDelete(apiUrlDelete) {
             var vm = this;
@@ -156,7 +181,7 @@ export default {
             var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize;
             vm.$http.get(apiUrlGet)
                 .then((response) => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     vm.tableData = response.data.data;
                     vm.total = response.data.count;
                 })
