@@ -1,10 +1,5 @@
 <template>
-    <div class="studentlist">
-        <el-breadcrumb>
-            <el-breadcrumb-item>{{ langConfig.breadcrumb.main[lang] }}</el-breadcrumb-item>
-            <el-breadcrumb-item>{{ langConfig.breadcrumb.project[lang] }}</el-breadcrumb-item>
-            <el-breadcrumb-item>{{ langConfig.breadcrumb.page[lang] }}</el-breadcrumb-item>
-        </el-breadcrumb>
+    <div class="moduletable">
         <el-form inline :model="query" label-position="right" label-width="60px" class="query-form">
             <el-form-item :label="langConfig.query.name[lang]" prop="name">
                 <el-input v-model="query.name" :placeholder="langConfig.query.nameHolder[lang]"></el-input>
@@ -19,10 +14,9 @@
             </el-form-item>
         </el-form>
         <el-table :data="tableData" row-key="_id" class="table" stripe border>
-            <el-table-column prop="region" :label="langConfig.table.date[lang]" sortable width="200"></el-table-column>
-            <el-table-column prop="name" :label="langConfig.table.name[lang]" width="200"></el-table-column>
-            <el-table-column prop="resource" :label="langConfig.table.address[lang]"></el-table-column>
-            <el-table-column prop="desc" :label="langConfig.table.zip[lang]" width="200"></el-table-column>
+            <template v-for="item in fieldColumn">
+                <el-table-column :prop="item.name" :label="fieldlang(item.name)"></el-table-column>
+            </template>
             <el-table-column :label="langConfig.table.operations[lang]" width="160">
                 <template scope="scope">
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">{{ langConfig.table.edit[lang] }}</el-button>
@@ -34,15 +28,16 @@
         </el-pagination>
         <el-dialog :title="title" v-model="dialogFormVisible">
             <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="formLabelWidth" v-model="form.name">
-                    <el-input v-model="form.name" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="活动区域" :label-width="formLabelWidth">
-                    <el-select v-model="form.region" placeholder="请选择活动区域">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
-                    </el-select>
-                </el-form-item>
+                <template v-for="item in fieldColumn">
+                    <el-form-item :label="fieldlang(item.name)" :label-width="formLabelWidth" v-model="form[item.name]">
+                        <el-input v-if="fieldType(item,'input')" v-model="form[item.name]" auto-complete="off"></el-input>
+                        <el-select v-if="fieldType(item,'select')" v-model="form.region" placeholder="请选择活动区域">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                        </el-select>
+                        <span v-if="fieldType(item,'text')">{{ form[item.name] }}</span>
+                    </el-form-item>
+                </template>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -54,30 +49,23 @@
 <script>
 import langConfig from '~/lang';
 import modulelist from '~/modulelist.js';
-console.log(modulelist);
+
 export default {
-    name: 'studentlist',
+    name: 'moduletable',
+    props: ['modulename'],
     data() {
         return {
             langConfig,
             tableData: [],
-            apiUrl: 'http://www.bullstech.cn:9999/api/table/', //'http://127.0.0.1:9999/api/table/',//
+            apiUrl: 'http://www.bullstech.cn:9999/api/', //'http://127.0.0.1:9999/api/table/',//
             dialogFormVisible: false,
             formLabelWidth: '120px',
             hasEdit: false,
             total: 0,
             currentPage: 1,
             pageSize: 10,
-            form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-            },
+            modulelist,
+            form:{},
             query: {
                 name: '',
                 date: []
@@ -90,12 +78,67 @@ export default {
         },
         title() {
             return this.hasEdit ? '编辑' : '新建';
-        }
+        },
+        fieldColumn() {
+            var tablefield = this.modulelist[this.modulename];
+            var fields = [];
+            for (var item in tablefield) {
+                if (tablefield[item].fieldColumn) {
+                    fields.push(tablefield[item]);
+                }
+            }
+            return fields;
+        },
     },
-    mounted: function() {
+    watch: {
+        modulename(val) {
+            console.log("watch");
+            //this.Initform();
+            this.operationGet();
+        },
+    },
+    mounted() {
+        this.Initform();
         this.operationGet();
     },
     methods: {
+        fieldType(item, eltype) {
+            var result = false;
+            if (typeof(item[eltype]) == "undefined") {
+
+            } else {
+                result = item[eltype];
+            }
+            return result;
+        },
+        Initform() {
+            var tablefield = this.modulelist[this.modulename];
+            //console.log(this.form);
+            this.form = {};
+            for (var item in tablefield) {
+                if (tablefield[item].fieldColumn) {
+                    this.form[tablefield[item].name] = "";
+                }
+            }
+            console.log(this.form);
+        },
+        url() {
+            return this.apiUrl + this.modulename + "/";
+        },
+        fieldlang(item) {
+            var mlang = this.langConfig[this.modulename];
+            if (typeof(mlang) == "undefined") {
+                mlang = item;
+            } else {
+                var ilang = mlang[item];
+                if (typeof(ilang) == "undefined") {
+                    mlang = item;
+                } else {
+                    mlang = ilang['/zh-CN'];
+                }
+            }
+            return mlang;
+        },
         handleAppend() {
             this.hasEdit = false;
             this.form = {};
@@ -112,7 +155,7 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                let apiUrlDelete = this.apiUrl + row._id;
+                let apiUrlDelete = this.url() + row._id;
                 this.operationDelete(apiUrlDelete);
                 this.$notify({
                     title: '消息',
@@ -130,7 +173,7 @@ export default {
         handleSubmit() {
             this.dialogFormVisible = false;
             if (this.hasEdit) {
-                let apiUrlPut = this.apiUrl + this.form._id;
+                let apiUrlPut = this.url() + this.form._id;
                 this.operationEdit(apiUrlPut);
                 this.$notify({
                     title: '消息',
@@ -156,7 +199,7 @@ export default {
         },
         operationAppend() {
             var vm = this;
-            vm.$http.post(vm.apiUrl, vm.form)
+            vm.$http.post(this.url(), vm.form)
                 .then((response) => {
                     vm.operationGet();
                 });
@@ -179,10 +222,9 @@ export default {
         operationGet() {
             var vm = this;
             var page = vm.currentPage - 1;
-            var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize;
+            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize;
             vm.$http.get(apiUrlGet)
                 .then((response) => {
-                    //console.log(response.data);
                     vm.tableData = response.data.data;
                     vm.total = response.data.count;
                 })

@@ -71,19 +71,6 @@ export default {
             provinces: formatData(addressData)
         }
     },
-    watch: {
-        form: {
-            handler: function() {
-                store.commit('setRuleForm', this.form);
-            },
-            deep: true
-        },
-        ifCheckFrom: function(val, oldVal) {
-            if (val) {
-                this.$refs.form.validate((valid) => {});
-            }
-        }
-    },
     computed: {
         citys: function() {
             return formatData(addressData[this.form.province])

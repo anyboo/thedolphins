@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <header :style="{ 'background-color': primaryColor }">
-            <span class="header-logo"> Dolphin</span>
+            <span class="header-logo">Dolphin</span>
             <!-- <img src="./assets/clock.png" alt="element-logo" class="header-logo"> -->
             <ul class="header-operations">
                 <li @click="showThemeDialog">桌面</li>
@@ -33,11 +33,11 @@
                     </el-submenu>
                     <el-submenu index="2">
                         <template slot="title"><i class="el-icon-star-on"></i>学员管理</template>
-                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                        <el-menu-item index="/studentManage">管理</el-menu-item>
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title"><i class="el-icon-share"></i>班级管理</template>
-                        <el-menu-item index="/activeManage">管理</el-menu-item>
+                        <el-menu-item index="/courseList">管理</el-menu-item>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title"><i class="el-icon-date"></i>班级管理</template>
@@ -66,9 +66,10 @@
                 </el-menu>
             </el-col>
             <el-col :span="20" class="content">
-                <transition name="fade">
+                <transition name="fade" v-if="viewshow">
                     <router-view class="view"></router-view>
                 </transition>
+                <moduletable :modulename="modulename" v-if="moduleshow"></moduletable>
             </el-col>
         </el-row>
         <el-dialog v-model="themeDialogVisible" :title="langConfig.header.switch[lang]" size="tiny">
@@ -86,6 +87,8 @@
             <div v-html="langConfig.help.content[lang]" class="help"></div>
             <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="helpDialogVisible = false">{{ langConfig.help.ok[lang] }}</el-button>
+
+
       </span>
         </el-dialog>
     </div>
@@ -95,7 +98,10 @@ import generateColors from './utils/color';
 import objectAssign from 'object-assign';
 import blobUtil from 'blob-util';
 import langConfig from './lang';
+
 import Vue from 'vue';
+import moduletable from './components/moduletable.vue';
+
 
 export default {
     name: 'app',
@@ -130,13 +136,18 @@ export default {
             styleFiles: [],
             fonts: [],
             canDownload: false,
+            moduleshow: false,
+            modulename: 'studentList',
+            viewshow: true,
             query: {
                 name: '',
                 date: []
             }
         };
     },
-
+    components: {
+        moduletable
+    },
     computed: {
         lang() {
             console.log(this.$route.path);
@@ -196,11 +207,25 @@ export default {
         handleSelect(index) {
             console.log(index);
             if (index === '/activePublic') {
+                this.moduleshow = false;
+                this.viewshow = true;
                 this.$router.push('/activePublic');
             } else if (index === '/studentlist') {
+                this.moduleshow = false;
+                this.viewshow = true;
                 this.$router.push('/studentlist');
             } else if (index === '/activeManage') {
+                this.moduleshow = false;
+                this.viewshow = true;
                 this.$router.push('/activeManage');
+            } else if (index === '/studentManage') {
+                this.modulename = 'studentList';
+                this.moduleshow = true;
+                this.viewshow = false;
+            } else if (index === '/courseList') {
+                this.modulename = 'courseList';
+                this.moduleshow = true;
+                this.viewshow = false;
             }
         },
     },

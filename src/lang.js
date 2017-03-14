@@ -1,4 +1,16 @@
 export default {
+    studentList:{
+        name: {
+            '/zh-CN': '名字',
+            '/en-US': 'name'
+        },
+    },
+    courseList:{
+        region: {
+            '/zh-CN': '区域',
+            '/en-US': 'name'
+        },
+    },
     header: {
         switch: {
             '/zh-CN': '切换主题色',

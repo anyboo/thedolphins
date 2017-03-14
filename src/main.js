@@ -11,7 +11,7 @@ import './styles/index.css';
 //require('es6-promise').polyfill();
 
 Vue.use(VueResouse)
-Vue.use(VueI18n);
+//Vue.use(VueI18n);
 Vue.use(Element);
 Vue.config.lang = 'zh-cn';
 //Vue.locale('zh-cn', zhLocale);
