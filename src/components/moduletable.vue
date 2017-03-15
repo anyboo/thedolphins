@@ -31,11 +31,14 @@
                 <template v-for="item in fieldColumn">
                     <el-form-item :label="fieldlang(item.name)" :label-width="formLabelWidth" v-model="form[item.name]">
                         <el-input v-if="fieldType(item,'input')" v-model="form[item.name]" auto-complete="off"></el-input>
-                        <el-select v-if="fieldType(item,'select')" v-model="form.region" placeholder="请选择活动区域">
+                        <el-select v-if="fieldType(item,'select')" v-model="form[item.name]" placeholder="请选择活动区域">
                             <el-option label="区域一" value="shanghai"></el-option>
                             <el-option label="区域二" value="beijing"></el-option>
                         </el-select>
                         <span v-if="fieldType(item,'text')">{{ form[item.name] }}</span>
+                        <el-upload v-if="fieldType(item,'upload')" list-type="picture-card" :file-list="form[item.name]" action="http://www.bullstech.cn:9999/upload/" :before-upload="beforeAvatarUpload" :on-preview="handlePictureCardPreview" :on-success="handleAvatarScucess" :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
                     </el-form-item>
                 </template>
             </el-form>
@@ -43,6 +46,9 @@
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="handleSubmit">确 定</el-button>
             </div>
+        </el-dialog>
+        <el-dialog v-model="dialogImageVisible" size="tiny">
+            <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
     </div>
 </template>
@@ -65,7 +71,10 @@ export default {
             currentPage: 1,
             pageSize: 10,
             modulelist,
-            form:{},
+            form: {},
+            uploadfield: '',
+            dialogImageUrl: '',
+            dialogImageVisible: false,
             query: {
                 name: '',
                 date: []
@@ -117,7 +126,12 @@ export default {
             this.form = {};
             for (var item in tablefield) {
                 if (tablefield[item].fieldColumn) {
-                    this.form[tablefield[item].name] = "";
+                    if (tablefield[item].upload) {
+                        this.uploadfield = tablefield[item].name;
+                        this.form[tablefield[item].name] = [];
+                    } else {
+                        this.form[tablefield[item].name] = "";
+                    }
                 }
             }
             console.log(this.form);
@@ -139,9 +153,33 @@ export default {
             }
             return mlang;
         },
+        handleRemove(file, fileList) {
+            this.form[this.uploadfield] = fileList;
+        },
+        handleAvatarScucess(res, file) {
+            if (res.success) {
+                this.form[this.uploadfield].push(res);
+            }
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        },
+        handlePictureCardPreview(file) {
+            this.dialogImageUrl = file.url;
+            this.dialogImageVisible = true;
+        },
         handleAppend() {
             this.hasEdit = false;
-            this.form = {};
+            this.Initform();
             this.dialogFormVisible = true;
         },
         handleEdit(index, row) {

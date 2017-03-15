@@ -9,6 +9,7 @@ var path = require('path');
 var app = module.exports = koa();//kk/ Logger
 app.use(logger());
 app.use(cors());
+app.use(route.post('/upload', control.upload));
 app.use(route.get('/api/:name',control.all));
 app.use(route.get('/api/:name/:id', control.fetch));
 app.use(route.post('/api/:name', control.add));
@@ -28,5 +29,5 @@ app.use(compress());
 
 if (!module.parent) {
   app.listen(9999);
-  console.log('listening on port 8888');
+  console.log('listening on port 9999');
 }

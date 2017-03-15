@@ -1,9 +1,13 @@
 'use strict';
 var parse = require('co-body');
+var uploadparse = require('co-busboy');
 var monk = require('monk');
 var wrap = require('co-monk');
 var db = monk('localhost/socrates');
 var co = require('co');
+var fs = require('fs');
+var os = require('os');
+var path = require('path');
 
 module.exports.all = function* all(name, next) {
     if ('GET' != this.method) return yield next;
@@ -22,6 +26,24 @@ module.exports.all = function* all(name, next) {
         'data': data,
         'count': count,
     };
+};
+
+module.exports.upload = function* upload(next) {
+    if ('POST' != this.method) return yield next;
+    if (!this.request.is('multipart/*')) return yield ne2xt;
+
+    var parts = uploadparse(this);
+    var part;
+
+    while ((part = yield parts)) {
+        var ext = path.extname(part.filename);
+        var filename = parseInt(Math.random() * 100) + Date.parse(new Date()).toString() + ext;
+        var newPath = path.resolve('public/upload', filename);
+        var stream = fs.createWriteStream(newPath);
+        part.pipe(stream);
+        console.log('uploading %s -> %s', part.filename, stream.path);
+    }
+    this.body = { success: 1, name: filename, url: 'http://www.bullstech.cn:9999/upload/'+filename };
 };
 
 module.exports.fetch = function* fetch(name, id, next) {

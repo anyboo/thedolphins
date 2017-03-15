@@ -1,11 +1,15 @@
 export default {
-    studentList:{
+    studentList: {
         name: {
             '/zh-CN': '名字',
             '/en-US': 'name'
         },
+        photo: {
+            '/zh-CN': '头像',
+            '/en-US': 'photo'
+        },
     },
-    courseList:{
+    courseList: {
         region: {
             '/zh-CN': '区域',
             '/en-US': 'name'

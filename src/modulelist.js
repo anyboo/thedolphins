@@ -25,6 +25,11 @@ export default {
     }, {
         name: 'desc',
         desc: '说明'
+    }, {
+        name: 'photo',
+        desc: '头像',
+        fieldColumn: true,
+        upload: true
     }],
     courseList: [{
         name: 'name',
@@ -41,5 +46,5 @@ export default {
         desc: '区域',
         fieldColumn: true,
         select: true
-    },]
+    }, ]
 };
