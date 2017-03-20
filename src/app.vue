@@ -69,6 +69,8 @@
                 <transition name="fade" v-if="viewshow">
                     <router-view class="view"></router-view>
                 </transition>
+                <bt-design></bt-design>
+                <bt-hello></bt-hello>
                 <moduletable :modulename="modulename" v-if="moduleshow"></moduletable>
             </el-col>
         </el-row>
@@ -101,7 +103,6 @@ import langConfig from './lang';
 
 import Vue from 'vue';
 import moduletable from './components/moduletable.vue';
-
 
 export default {
     name: 'app',

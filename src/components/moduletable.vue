@@ -31,7 +31,7 @@
                 <template v-for="item in fieldColumn">
                     <el-form-item :label="fieldlang(item.name)" :label-width="formLabelWidth" v-model="form[item.name]">
                         <el-input v-if="fieldType(item,'input')" v-model="form[item.name]" auto-complete="off"></el-input>
-                        <el-select v-if="fieldType(item,'select')" v-model="form[item.name]" placeholder="请选择活动区域">
+                        <el-select v-if="fieldType(item,'select')" v-model="form[item.name]" placeholder="请选择活动区域" :loading="true">
                             <el-option label="区域一" value="shanghai"></el-option>
                             <el-option label="区域二" value="beijing"></el-option>
                         </el-select>
@@ -134,7 +134,6 @@ export default {
                     }
                 }
             }
-            console.log(this.form);
         },
         url() {
             return this.apiUrl + this.modulename + "/";
