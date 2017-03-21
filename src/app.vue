@@ -9,7 +9,9 @@
                     <bt-breadcrumb-item>前台业务</bt-breadcrumb-item>
                     <bt-breadcrumb-item>报名</bt-breadcrumb-item>
                 </bt-breadcrumb>
-                <div class="page-content"></div>
+                <div class="page-content">
+                    <router-view></router-view>
+                </div>
             </div>
         </div>
         <bt-footer/>
@@ -26,7 +28,7 @@ export default {
     data() {
         return {
             langConfig,
-            isSidebarCollapsed: true,
+            isSidebarCollapsed: false,
         };
     },
     computed: {

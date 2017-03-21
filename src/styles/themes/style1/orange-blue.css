@@ -1447,24 +1447,24 @@ hr {
     width: 55px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.user-panel {
+.left-side-collapsed .navbar-static-side #side-menu li.user-panel {
     display: none;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a {
+.left-side-collapsed .navbar-static-side #side-menu li.nav-hover a {
     height: 50px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.menu-title {
+.left-side-collapsed .navbar-static-side #side-menu li.nav-hover a span.menu-title {
     display: block !important;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.submenu-title {
+.left-side-collapsed .navbar-static-side #side-menu li.nav-hover a span.submenu-title {
     display: block !important;
     margin-left: 0;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level {
+.left-side-collapsed .navbar-static-side #side-menu li.nav-hover ul.nav-second-level {
     display: block;
     position: absolute;
     top: 50px;
@@ -1472,19 +1472,19 @@ hr {
     width: 195px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level li a {
+.left-side-collapsed .navbar-static-side #side-menu li.nav-hover ul.nav-second-level li a {
     padding: 15px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li a span {
+.left-side-collapsed .navbar-static-side #side-menu li a span {
     display: none;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li a i.fa {
+.left-side-collapsed .navbar-static-side #side-menu li a i.fa {
     font-size: 18px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li a span.menu-title {
+.left-side-collapsed .navbar-static-side #side-menu li a span.menu-title {
     position: absolute;
     top: 0;
     left: 55px;
@@ -1496,7 +1496,7 @@ hr {
     height: 50px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level {
+.left-side-collapsed .navbar-static-side #side-menu li ul.nav-second-level {
     display: none;
     position: absolute;
     top: 50px;
@@ -1504,7 +1504,7 @@ hr {
     width: 195px;
 }
 
-.left-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level li a i {
+.left-side-collapsed .navbar-static-side #side-menu li ul.nav-second-level li a i {
     display: none;
 }
 
@@ -1522,24 +1522,24 @@ hr {
     width: 55px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.user-panel {
+.right-side-collapsed .navbar-static-side #side-menu li.user-panel {
     display: none;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a {
+.right-side-collapsed .navbar-static-side #side-menu li.nav-hover a {
     height: 50px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.menu-title {
+.right-side-collapsed .navbar-static-side #side-menu li.nav-hover a span.menu-title {
     display: block !important;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.submenu-title {
+.right-side-collapsed .navbar-static-side #side-menu li.nav-hover a span.submenu-title {
     display: block !important;
     margin-right: 0;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level {
+.right-side-collapsed .navbar-static-side #side-menu li.nav-hover ul.nav-second-level {
     display: block;
     position: absolute;
     top: 50px;
@@ -1547,19 +1547,19 @@ hr {
     width: 195px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level li a {
+.right-side-collapsed .navbar-static-side #side-menu li.nav-hover ul.nav-second-level li a {
     padding: 15px 5px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li a span {
+.right-side-collapsed .navbar-static-side #side-menu li a span {
     display: none;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li a i.fa {
+.right-side-collapsed .navbar-static-side #side-menu li a i.fa {
     font-size: 18px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li a span.menu-title {
+.right-side-collapsed .navbar-static-side #side-menu li a span.menu-title {
     position: absolute;
     top: 0;
     right: 55px;
@@ -1571,7 +1571,7 @@ hr {
     height: 50px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level {
+.right-side-collapsed .navbar-static-side #side-menu li ul.nav-second-level {
     display: none;
     position: absolute;
     top: 50px;
@@ -1579,7 +1579,7 @@ hr {
     width: 195px;
 }
 
-.right-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level li a i {
+.right-side-collapsed .navbar-static-side #side-menu li ul.nav-second-level li a i {
     display: none;
 }
 
@@ -4132,39 +4132,39 @@ body.sidebar-colors #wrapper #sidebar {
     background-color: #FFFFFF;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li {
+body.sidebar-colors #wrapper #sidebar #side-menu li {
     border-bottom: 1px solid #e5e5e5;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li.active a,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li:hover a {
+body.sidebar-colors #wrapper #sidebar #side-menu li.active a,
+body.sidebar-colors #wrapper #sidebar #side-menu li:hover a {
     background-color: #f8f8f8;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li.active a i:before,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li:hover a i:before {
+body.sidebar-colors #wrapper #sidebar #side-menu li.active a i:before,
+body.sidebar-colors #wrapper #sidebar #side-menu li:hover a i:before {
     color: #FFFFFF;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li.active a i .icon-bg,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li:hover a i .icon-bg {
+body.sidebar-colors #wrapper #sidebar #side-menu li.active a i .icon-bg,
+body.sidebar-colors #wrapper #sidebar #side-menu li:hover a i .icon-bg {
     left: 0;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li.user-panel {
+body.sidebar-colors #wrapper #sidebar #side-menu li.user-panel {
     display: none;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a {
+body.sidebar-colors #wrapper #sidebar #side-menu li a {
     color: #777777;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a:hover,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a:focus {
+body.sidebar-colors #wrapper #sidebar #side-menu li a:hover,
+body.sidebar-colors #wrapper #sidebar #side-menu li a:focus {
     background-color: #FFFFFF;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a i {
+body.sidebar-colors #wrapper #sidebar #side-menu li a i {
     position: relative;
     display: block;
     float: left;
@@ -4176,12 +4176,12 @@ body.sidebar-colors #wrapper #sidebar ul#side-menu li a i {
     margin: -13px 10px -16px -15px;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a i:before {
+body.sidebar-colors #wrapper #sidebar #side-menu li a i:before {
     position: relative;
     z-index: 1;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a i .icon-bg {
+body.sidebar-colors #wrapper #sidebar #side-menu li a i .icon-bg {
     display: block;
     position: absolute;
     z-index: 12;
@@ -4194,36 +4194,36 @@ body.sidebar-colors #wrapper #sidebar ul#side-menu li a i .icon-bg {
     transition: left 0.15s ease-in-out;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li a .arrow {
+body.sidebar-colors #wrapper #sidebar #side-menu li a .arrow {
     display: none;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li:first-child,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li:first-child {
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li:first-child,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li:first-child {
     border-top: 1px solid #e5e5e5;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li:last-child,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li:last-child {
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li:last-child,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li:last-child {
     border-bottom: 0;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li.active > a,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li.active > a,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li:hover > a,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li:hover > a {
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li.active > a,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li.active > a,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li:hover > a,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li:hover > a {
     background-color: #f1f1f1;
     color: #e74c3c;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li > a,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li > a {
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li > a,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li > a {
     padding: 15px;
     background-color: #f1f1f1;
 }
 
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-second-level li > a i:before,
-body.sidebar-colors #wrapper #sidebar ul#side-menu li ul.nav-third-level li > a i:before {
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-second-level li > a i:before,
+body.sidebar-colors #wrapper #sidebar #side-menu li ul.nav-third-level li > a i:before {
     color: #777777;
 }
 
@@ -4250,41 +4250,41 @@ body.sidebar-icons #wrapper #sidebar {
     width: 105px;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li.user-panel {
+body.sidebar-icons #wrapper #sidebar #side-menu > li.user-panel {
     display: none;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li:hover ul.nav-second-level {
+body.sidebar-icons #wrapper #sidebar #side-menu > li:hover ul.nav-second-level {
     display: block;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a {
+body.sidebar-icons #wrapper #sidebar #side-menu > li a {
     padding: 15px 10px;
     text-align: center;
     display: block;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a:hover,
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a:focus {
+body.sidebar-icons #wrapper #sidebar #side-menu > li a:hover,
+body.sidebar-icons #wrapper #sidebar #side-menu > li a:focus {
     background-color: transparent;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a span.menu-title {
+body.sidebar-icons #wrapper #sidebar #side-menu > li a span.menu-title {
     display: block;
     margin-top: 8px;
     margin-left: 0;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a i.fa {
+body.sidebar-icons #wrapper #sidebar #side-menu > li a i.fa {
     font-size: 25px;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a .arrow,
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li a .label {
+body.sidebar-icons #wrapper #sidebar #side-menu > li a .arrow,
+body.sidebar-icons #wrapper #sidebar #side-menu > li a .label {
     display: none;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level {
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level {
     display: none;
     position: absolute;
     top: 0px;
@@ -4292,21 +4292,21 @@ body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level {
     width: 195px;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level li a {
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level li a {
     text-align: left;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level li a:hover,
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level li a:focus {
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level li a:hover,
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level li a:focus {
     background-color: #e74c3c;
     color: #FFFFFF;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level li a i {
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level li a i {
     display: none;
 }
 
-body.sidebar-icons #wrapper #sidebar ul#side-menu > li ul.nav-second-level li:first-child:before {
+body.sidebar-icons #wrapper #sidebar #side-menu > li ul.nav-second-level li:first-child:before {
     width: 0;
     height: 0;
     border-top: 9px solid transparent;
@@ -4340,24 +4340,24 @@ body.sidebar-icons #wrapper #page-wrapper {
     width: 55px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li.user-panel {
+.sidebarCollapsed .navbar-static-side #side-menu li.user-panel {
     display: none;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li:hover a {
+.sidebarCollapsed .navbar-static-side #side-menu li:hover a {
     height: 45px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li:hover a span.menu-title {
+.sidebarCollapsed .navbar-static-side #side-menu li:hover a span.menu-title {
     display: block !important;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li:hover a span.submenu-title {
+.sidebarCollapsed .navbar-static-side #side-menu li:hover a span.submenu-title {
     display: block !important;
     margin-left: 0;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li:hover ul.nav-second-level {
+.sidebarCollapsed .navbar-static-side #side-menu li:hover ul.nav-second-level {
     display: block;
     position: absolute;
     top: 45px;
@@ -4365,19 +4365,19 @@ body.sidebar-icons #wrapper #page-wrapper {
     width: 195px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li:hover ul.nav-second-level li a {
+.sidebarCollapsed .navbar-static-side #side-menu li:hover ul.nav-second-level li a {
     padding: 15px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li a span {
+.sidebarCollapsed .navbar-static-side #side-menu li a span {
     display: none;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li a i.fa {
+.sidebarCollapsed .navbar-static-side #side-menu li a i.fa {
     font-size: 18px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li a span.menu-title {
+.sidebarCollapsed .navbar-static-side #side-menu li a span.menu-title {
     position: absolute;
     top: 0;
     left: 55px;
@@ -4389,11 +4389,11 @@ body.sidebar-icons #wrapper #page-wrapper {
     height: 45px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li a span.label {
+.sidebarCollapsed .navbar-static-side #side-menu li a span.label {
     display: block;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li ul.nav-second-level {
+.sidebarCollapsed .navbar-static-side #side-menu li ul.nav-second-level {
     display: none;
     position: absolute;
     top: 50px;
@@ -4401,17 +4401,17 @@ body.sidebar-icons #wrapper #page-wrapper {
     width: 195px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li ul.nav-second-level li a i {
+.sidebarCollapsed .navbar-static-side #side-menu li ul.nav-second-level li a i {
     display: none;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu li ul.nav-second-level li a span.label {
+.sidebarCollapsed .navbar-static-side #side-menu li ul.nav-second-level li a span.label {
     position: absolute;
     top: 15px;
     right: 10px;
 }
 
-.sidebarCollapsed .navbar-static-side ul#side-menu > li > a span.label {
+.sidebarCollapsed .navbar-static-side #side-menu > li > a span.label {
     display: block !important;
     position: absolute;
     right: -10px;
@@ -4432,22 +4432,22 @@ body.sidebar-icons #wrapper #page-wrapper {
     right: 0;
 }
 
-.sidebarCollapsed.right #wrapper #sidebar ul#side-menu li:hover a span.submenu-title {
+.sidebarCollapsed.right #wrapper #sidebar #side-menu li:hover a span.submenu-title {
     margin-right: 0;
 }
 
-.sidebarCollapsed.right #wrapper #sidebar ul#side-menu li:hover ul.nav-second-level {
+.sidebarCollapsed.right #wrapper #sidebar #side-menu li:hover ul.nav-second-level {
     right: 55px;
     left: auto;
 }
 
-.sidebarCollapsed.right #wrapper #sidebar ul#side-menu li a span.menu-title {
+.sidebarCollapsed.right #wrapper #sidebar #side-menu li a span.menu-title {
     right: 55px;
     left: auto;
     margin-right: 0;
 }
 
-.sidebarCollapsed.right #wrapper #sidebar ul#side-menu li ul.nav-second-level {
+.sidebarCollapsed.right #wrapper #sidebar #side-menu li ul.nav-second-level {
     right: 55px;
     left: auto;
 }

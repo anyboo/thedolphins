@@ -1,7 +1,7 @@
 <template>
     <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
-        <div class="sidebar-collapse menu-scroll">
-            <ul id="side-menu" class="nav">
+        <div class="sidebar-collapse menu-scroll" id="side-menu">
+            <ul class="nav">
                 <li class="user-panel">
                     <div class="thumb"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" alt="" class="img-circle" />
                     </div>
@@ -255,11 +255,11 @@
                 </li>-->
                 <li><a href="#"><i class="fa fa-envelope-o"><div class="icon-bg bg-primary"></div></i><span class="menu-title">Email</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a>
+                        <li><router-link to="studentlist"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></router-link>
                         </li>
-                        <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a>
+                        <li><router-link to="activePublic"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></router-link>
                         </li>
-                        <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a>
+                        <li><router-link to="link1"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></router-link>
                         </li>
                     </ul>
                 </li>

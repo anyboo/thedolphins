@@ -1,12 +1,5 @@
 <template>
-  <ul class="el-menu"
-    :class="{
-      'el-menu--horizontal': mode === 'horizontal',
-      'el-menu--dark': theme === 'dark'
-    }"
-  >
-
-  <ul id="side-menu" class="nav">
+  <ul class="nav">
     <slot></slot>
   </ul>
 </template>
