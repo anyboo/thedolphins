@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <bt-topbar/>
+    <div :class="{ sidebarCollapsed:isSidebarCollapsed }">
+        <bt-topbar v-on:sidebarCollapsed="sidebarCollapsed"/>
         <div id="wrapper">
             <bt-sidebar-menu/>
             <div id="page-wrapper">
@@ -16,58 +16,18 @@
     </div>
 </template>
 <script>
-import generateColors from './utils/color';
-import objectAssign from 'object-assign';
-import blobUtil from 'blob-util';
 import langConfig from './lang';
 
 import Vue from 'vue';
-import moduletable from './components/moduletable.vue';
 
 export default {
     name: 'app',
 
     data() {
-        const colorValidator = (rule, value, callback) => {
-            if (!value) {
-                return callback(new Error(this.langConfig.validate.required[this.lang]));
-            } else if (!/^#[\dabcdef]{6}$/i.test(value)) {
-                return callback(new Error(this.langConfig.validate.format[this.lang]));
-            } else {
-                callback();
-            }
-        };
         return {
-            colors: {
-                primary: '#20a0ff'
-            },
-            rules: {
-                primary: [{
-                    validator: colorValidator,
-                    trigger: 'blur'
-                }]
-            },
-            originalStylesheetCount: -1,
-            originalStyle: '',
             langConfig,
-            primaryColor: '#20a0ff',
-            themeDialogVisible: false,
-            helpDialogVisible: false,
-            zip: null,
-            styleFiles: [],
-            fonts: [],
-            canDownload: false,
-            moduleshow: false,
-            modulename: 'studentList',
-            viewshow: true,
-            query: {
-                name: '',
-                date: []
-            }
+            isSidebarCollapsed: true,
         };
-    },
-    components: {
-        moduletable
     },
     computed: {
         lang() {
@@ -79,10 +39,8 @@ export default {
             return Vue.config.lang;; //this.$route.path;
         }
     },
-
     watch: {
         '$route.path': {
-            immediate: true,
             handler(val) {
                 console.log(val);
                 if (val === '/zh-CN') {
@@ -93,37 +51,12 @@ export default {
             }
         }
     },
-
     methods: {
         switchLang(lang) {
             this.$router.push(lang);
         },
-
-        showThemeDialog() {
-            //this.themeDialogVisible = true;
-        },
-
-        showHelpDialog() {
-            //this.helpDialogVisible = true;
-        },
-
-        submitForm() {
-            this.$refs.form.validate(valid => {
-                if (valid) {
-                    this.themeDialogVisible = false;
-                    this.primaryColor = this.colors.primary;
-                    this.colors = objectAssign({}, this.colors, generateColors(this.colors.primary));
-
-                    this.canDownload = true;
-                    this.writeNewStyle();
-                } else {
-                    return false;
-                }
-            });
-        },
-
-        resetForm() {
-            this.$refs.form.resetFields();
+        sidebarCollapsed(){
+            this.isSidebarCollapsed = !this.isSidebarCollapsed;
         },
         handleSelect(index) {
             console.log(index);
@@ -149,16 +82,6 @@ export default {
                 this.viewshow = false;
             }
         },
-    },
-
-    created() {
-
-    },
-
-    mounted() {
-        this.$nextTick(_ => {
-            this.originalStylesheetCount = document.styleSheets.length;
-        });
     }
 };
 </script>

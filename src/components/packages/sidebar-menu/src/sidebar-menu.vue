@@ -252,7 +252,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li><a href="#"><i class="fa fa-envelope-o"><div class="icon-bg bg-primary"></div></i><span class="menu-title">Email</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a>
@@ -262,15 +262,15 @@
                         <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a>
                         </li>
                     </ul>
-                </li>-->
+                </li>
                 <li><a href="#"><i class="fa fa-bar-chart-o fa-fw"><div class="icon-bg bg-orange"></div></i><span class="menu-title">Charts</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul class="nav nav-second-level collapse">
                         <li><a href="charts-flotchart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Flot Charts</span></a>
                         </li>
                         <li><a href="charts-chartjs.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Chartjs</span></a>
                         </li>
                         <li><a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">HighCharts</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
+                            <ul class="nav nav-third-level collapse">
                                 <li><a href="charts-highchart-line.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Line Charts</span></a>
                                 </li>
                                 <li><a href="charts-highchart-area.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Area Charts</span></a>
