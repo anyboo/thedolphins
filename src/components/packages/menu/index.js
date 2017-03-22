@@ -1,4 +1,4 @@
-import BtMenu from './src/menu';
+import BtMenu from './src/menu.vue';
 
 /* istanbul ignore next */
 BtMenu.install = function(Vue) {

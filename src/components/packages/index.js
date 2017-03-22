@@ -4,6 +4,8 @@ import Breadcrumb from './breadcrumb';
 import BreadcrumbItem from './breadcrumb-item';
 import Topbar from './topbar';
 import Footer from './footer';
+import Menu from './menu';
+import MenuItem from './menu-item';
 import SidebarMenu from './sidebar-menu';
 
 const components = [
@@ -13,7 +15,9 @@ const components = [
 	BreadcrumbItem,
 	Topbar,
 	Footer,
-	SidebarMenu
+	SidebarMenu,
+	Menu,
+	MenuItem
 ];
 
 const install = function(Vue, opts = {}) {
@@ -34,5 +38,7 @@ export default {
 	BreadcrumbItem,
 	Topbar,
 	Footer,
-	SidebarMenu
+	SidebarMenu,
+	Menu,
+	MenuItem
 }
