@@ -7,6 +7,7 @@ import Footer from './footer';
 import Menu from './menu';
 import MenuItem from './menu-item';
 import SidebarMenu from './sidebar-menu';
+import Tabs from './tabs';
 
 const components = [
 	Design,
@@ -17,7 +18,8 @@ const components = [
 	Footer,
 	SidebarMenu,
 	Menu,
-	MenuItem
+	MenuItem,
+	Tabs
 ];
 
 const install = function(Vue, opts = {}) {
@@ -40,5 +42,6 @@ export default {
 	Footer,
 	SidebarMenu,
 	Menu,
-	MenuItem
+	MenuItem,
+	Tabs
 }

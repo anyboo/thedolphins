@@ -23,6 +23,10 @@ export default [{
         menuTitle: "课程设置",
         menuIcon: "fa-envelope-o",
         to: "class"
+    },{
+        menuTitle: "老师管理",
+        menuIcon: "fa-envelope-o",
+        to: "userprofile"
     }]
 }, {
     menuTitle: "菜单1",
