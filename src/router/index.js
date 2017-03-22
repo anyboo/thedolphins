@@ -18,6 +18,8 @@ import page3 from '../pages/activeManage/page3.vue'
 import page4 from '../pages/activeManage/page4.vue'
 import page5 from '../pages/activeManage/page5.vue'
 
+import consult from '../pages/desktop/consult.vue'
+
 if (!window.VueRouter) Vue.use(VueRouter);
 
 const routes = [{
@@ -70,6 +72,10 @@ const routes = [{
     }, {
         path: '/studentlist',
         component: studentlist
+    },
+    {
+        path: '/consult',
+        component: consult
     },
 
 ];
