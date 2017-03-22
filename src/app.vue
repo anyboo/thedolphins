@@ -2,7 +2,7 @@
     <div :class="{ sidebarCollapsed:isSidebarCollapsed }">
         <bt-topbar v-on:sidebarCollapsed="sidebarCollapsed"/>
         <div id="wrapper">
-            <bt-sidebar-menu/>
+            <bt-sidebar-menu :menu-store="menuStore"/>
             <div id="page-wrapper">
                 <bt-breadcrumb>
                     <bt-breadcrumb-item>首页</bt-breadcrumb-item>
@@ -19,15 +19,16 @@
 </template>
 <script>
 import langConfig from './lang';
-
+import menuStore from '~/store/menustore';
 import Vue from 'vue';
-
+console.log(menuStore);
 export default {
     name: 'app',
 
     data() {
         return {
             langConfig,
+            menuStore,
             isSidebarCollapsed: false,
         };
     },

@@ -3,7 +3,9 @@
         <div class="sidebar-collapse menu-scroll" id="side-menu">
             <bt-menu>
                 <li class="user-panel">
-                    <div class="thumb"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" alt="" class="img-circle" />
+                    <div class="thumb">
+                        <!--<img src="" alt="" class="img-circle" />-->
+                        <span class="badge badge-yellow">鑫 </span>
                     </div>
                     <div class="info">
                         <p>林祖鑫</p>
@@ -20,30 +22,18 @@
                     </div>
                     <div class="clearfix"></div>
                 </li>
-                <bt-menu-item menu-title="xxxx" menu-icon="fa-envelope-o" />
-                <bt-menu-item menu-name="xsdf" menu-title="Email" menu-icon="fa-envelope-o">
-                    <bt-menu navlevel="1" collapse="true" menu-name="xsdf">
-                        <bt-menu-item to="link1" menu-title="Inbox" menu-icon="fa-inbox" />
-                        <bt-menu-item menu-title="Compose Mail" menu-icon="fa-pencil" />
-                        <bt-menu-item menu-name="xsdf" menu-title="View Mail" menu-icon="fa-eye">
-                            <bt-menu navlevel="2" collapse="true" menu-name="xsdf">
-                                <bt-menu-item to="activePublic" menu-title="View Mail" menu-icon="fa-eye" />
-                                <bt-menu-item to="activePublic" menu-title="View Mail" menu-icon="fa-eye" />
-                            </bt-menu>
-                        </bt-menu-item>
-                    </bt-menu>
-                </bt-menu-item>
-                <bt-menu-item menu-name="xsdf" menu-title="Email" menu-icon="fa-envelope-o">
-                    <bt-menu navlevel="1" collapse="true" menu-name="xsdf">
-                        <bt-menu-item to="link1" menu-title="Inbox" menu-icon="fa-inbox" />
-                        <bt-menu-item menu-title="Compose Mail" menu-icon="fa-pencil" />
-                        <bt-menu-item menu-name="xsdf" menu-title="View Mail" menu-icon="fa-eye">
-                            <bt-menu navlevel="2" collapse="true" menu-name="xsdf">
-                                <bt-menu-item to="activePublic" menu-title="View Mail" menu-icon="fa-eye" />
-                                <bt-menu-item to="activePublic" menu-title="View Mail" menu-icon="fa-eye" />
-                            </bt-menu>
-                        </bt-menu-item>
-                    </bt-menu>
+                <bt-menu-item v-for="(menuItem, index) in menuStore" :to="menuItem.to" :menu-name="menuItem.menuName"  :menu-title="menuItem.menuTitle" :menu-icon="menuItem.menuIcon">
+                    <template v-if="menuItem.menu">
+                        <bt-menu navlevel="1" collapse="true">
+                            <bt-menu-item v-for="(menuItem1, index1) in menuItem.menu" :to="menuItem1.to" :menu-name="menuItem1.menuName" :menu-title="menuItem1.menuTitle" :menu-icon="menuItem1.menuIcon">
+                                <template v-if="menuItem1.menu">
+                                    <bt-menu navlevel="2" collapse="true">
+                                        <bt-menu-item v-for="(menuItem2, index2) in menuItem1.menu" :to="menuItem2.to" :menu-name="menuItem2.menuName" :menu-title="menuItem2.menuTitle" :menu-icon="menuItem2.menuIcon" />
+                                    </bt-menu>
+                                </template>
+                            </bt-menu-item>
+                        </bt-menu>
+                    </template>
                 </bt-menu-item>
             </bt-menu>
         </div>
@@ -54,6 +44,7 @@ import langConfig from '~/lang';
 
 export default {
     name: 'BtSidebarMenu',
+    props: ["menuStore"],
     data() {
         return {
             langConfig

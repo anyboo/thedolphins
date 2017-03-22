@@ -4,7 +4,7 @@
             <i class="fa " :class="menuIcon">
             <div class="icon-bg bg-orange"/>
             </i>
-            <span class="menu-title">{{ menuTitle+_uid }}</span>
+            <span class="menu-title">{{ menuTitle }}</span>
             <span v-if="menuName" class="fa arrow"></span>
         </a>
         <slot></slot>
