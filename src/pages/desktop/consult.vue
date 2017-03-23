@@ -8,14 +8,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-icon"><i class="fa fa-user"></i>
-                                    <input id="inputFirstName" placeholder="First Name" class="form-control" type="text">
+                                    <input id="inputFirstName" v-bind:placeholder="FirstName" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-icon"><i class="fa fa-user"></i>
-                                    <input id="inputLastName" placeholder="Last Name" class="form-control" type="text">
+                                    <input id="inputLastName" v-bind:placeholder="LastName" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
@@ -24,14 +24,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-icon"><i class="fa fa-envelope"></i>
-                                    <input id="inputEmail" placeholder="E-mail" class="form-control" type="text">
+                                    <input id="inputEmail" v-bind:placeholder="Email" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-icon"><i class="fa fa-phone"></i>
-                                    <input id="inputPhone" placeholder="Phone" class="form-control" type="text">
+                                    <input id="inputPhone" v-bind:placeholder="Phone" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
@@ -47,23 +47,23 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <input id="inputCity" placeholder="City" class="form-control" type="text">
+                                <input id="inputCity" v-bind:placeholder="City" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <input id="inputPostCode" placeholder="Post code" class="form-control" type="text">
+                                <input id="inputPostCode" v-bind:placeholder="Postcode" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input id="inputAddress" placeholder="Address" class="form-control" type="text">
+                        <input id="inputAddress" v-bind:placeholder="Address" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <textarea rows="8" placeholder="Additional info" class="form-control"></textarea>
+                        <textarea rows="8" v-bind:placeholder="Additionalinfo" class="form-control"></textarea>
                     </div>
                     <hr>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="radio">
                             <label class="radio-inline">
                                 <div class="iradio_minimal-grey checked" style="position: relative;">
@@ -81,22 +81,22 @@
                                 <div class="iradio_minimal-grey" style="position: relative;">
                                     <input id="optionsPayPal" name="optionsRadios" value="PayPal" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;" type="radio">
                                     <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                </div>&nbsp; PayPal
+                                </div>&nbspv; PayPal
                             </label>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input id="inputNameCard" placeholder="Name on card" class="form-control" type="text">
+                    </div> -->
+                    <!-- <div class="form-group">
+                        <input id="inputNameCard" v-bind:placeholder="Name_on_card" class="form-control" type="text">
                     </div>
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input id="inputCardNumber" placeholder="Card number" class="form-control" type="text">
+                                <input id="inputCardNumber" v-bind:placeholder="Cardnumber" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input id="inputCVV2" placeholder="CVV2" class="form-control" type="text">
+                                <input id="inputCVV2" v-bind:placeholder="CVV2" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -115,13 +115,13 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group mbn">
-                                <input id="inputYear" placeholder="Year" class="form-control" type="text">
+                                <input id="inputYear" v-bind:placeholder="Year" class="form-control" type="text">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-actions text-right pal">
-                    <button type="submit" class="btn btn-primary">Continue</button>
+                    <button type="submit" class="btn btn-primary">{{ Continue }}</button>
                 </div>
             </form>
         </div>
@@ -131,8 +131,15 @@
 <script type="text/javascript">
 	export default {
 		name: 'consult',
-		data() {
-            return{ title: 'Test form' }
-        }
+		data: function() {
+            return {
+             title: "学员信息",
+             FirstName: "姓",
+             LastName: "名",
+             Email: "年龄",
+             Phone: "联系电话",
+             Continue: "提交"
+            }
+        },
 	}
 </script>
