@@ -19,6 +19,8 @@ import page4 from '../pages/activeManage/page4.vue'
 import page5 from '../pages/activeManage/page5.vue'
 import userprofile from '../pages/userprofile/userprofile.vue'
 
+import consult from '../pages/desktop/consult.vue'
+
 if (!window.VueRouter) Vue.use(VueRouter);
 
 const routes = [{
@@ -81,6 +83,10 @@ const routes = [{
             { path: 'step3', component: step3 },
             { path: 'step4', component: step4 }
         ]
+    },
+    {
+        path: '/consult',
+        component: consult
     },
 
 ];
