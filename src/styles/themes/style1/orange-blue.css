@@ -4377,7 +4377,7 @@ body.sidebar-icons #wrapper #page-wrapper {
     font-size: 18px;
 }
 
-.sidebarCollapsed .navbar-static-side #side-menu li a span.menu-title {
+.sidebarCollapsed .navbar-static-side #side-menu>ul>li>a>span.menu-title {
     position: absolute;
     top: 0;
     left: 55px;

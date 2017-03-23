@@ -17,6 +17,7 @@ import page2 from '../pages/activeManage/page2.vue'
 import page3 from '../pages/activeManage/page3.vue'
 import page4 from '../pages/activeManage/page4.vue'
 import page5 from '../pages/activeManage/page5.vue'
+import userprofile from '../pages/userprofile/userprofile.vue'
 
 import consult from '../pages/desktop/consult.vue'
 
@@ -72,6 +73,16 @@ const routes = [{
     }, {
         path: '/studentlist',
         component: studentlist
+    },{
+        path: '/userprofile',
+        component: userprofile,
+        children: [
+            { path: '', component: step1 },
+            { path: 'step1', component: step1 },
+            { path: 'step2', component: step2 },
+            { path: 'step3', component: step3 },
+            { path: 'step4', component: step4 }
+        ]
     },
     {
         path: '/consult',
