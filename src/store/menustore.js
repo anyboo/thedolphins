@@ -9,7 +9,11 @@ export default [{
     menu: [{
         menuTitle: "咨询",
         menuIcon: "fa-envelope-o",
-        to: "xxxx"
+            menuName: "menu1",
+        menu: [
+            { menuTitle: "新建咨询", menuIcon: "fa-envelope-o", to:"/consult" },
+            { menuTitle: "咨询记录", menuIcon: "fa-envelope-o", to:"/desktop" },
+        ]
     }, {
         menuTitle: "报名",
         menuIcon: "fa-envelope-o",
