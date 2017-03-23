@@ -4,8 +4,7 @@
             <bt-menu>
                 <li class="user-panel">
                     <div class="thumb">
-                        <!--<img src="" alt="" class="img-circle" />-->
-                        <span class="badge badge-yellow">鑫 </span>
+                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/oliveirasimoes/128.jpg"" alt="" class="img-circle" />
                     </div>
                     <div class="info">
                         <p>林祖鑫</p>

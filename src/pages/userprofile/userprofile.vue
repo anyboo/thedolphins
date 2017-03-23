@@ -20,7 +20,6 @@
 import langConfig from '~/lang';
 import userprofile from '~/store/userprofile';
 
-
 export default {
     name: 'BtUser',
     data() {

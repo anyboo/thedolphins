@@ -68,7 +68,6 @@ export default {
             return Object.values(data).map(item => {
                 if (typeof(item) == "object") {
                     if (item.tag) {
-                        console.log(item);
                         let tdObject = {};
                         tdObject.props = item.props;
                         return this.createElement(tag, [this.createElement(item.tag, tdObject)]);

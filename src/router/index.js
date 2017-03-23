@@ -77,11 +77,11 @@ const routes = [{
         path: '/userprofile',
         component: userprofile,
         children: [
-            { path: '', component: step1 },
-            { path: 'step1', component: step1 },
+            { path: '', component: step2 },
+            { path: 'step1', component: step2 },
             { path: 'step2', component: step2 },
-            { path: 'step3', component: step3 },
-            { path: 'step4', component: step4 }
+            { path: 'step3', component: step2 },
+            { path: 'step4', component: step2 }
         ]
     },
     {
