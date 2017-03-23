@@ -1,7 +1,7 @@
 export default [{
     menuTitle: "桌面",
     menuIcon: "fa-envelope-o",
-    to: "desktop"
+    to: "/desktop"
 }, {
     menuTitle: "前台业务",
     menuIcon: "fa-envelope-o",
@@ -9,11 +9,11 @@ export default [{
     menu: [{
         menuTitle: "咨询",
         menuIcon: "fa-envelope-o",
-        to: "xxxx"
+        to: "/xxxx"
     }, {
         menuTitle: "报名",
         menuIcon: "fa-envelope-o",
-        to: "student"
+        to: "/student"
     }]
 }, {
     menuTitle: "教务教学",
@@ -22,11 +22,11 @@ export default [{
     menu: [{
         menuTitle: "课程设置",
         menuIcon: "fa-envelope-o",
-        to: "class"
+        to: "/class"
     },{
         menuTitle: "老师管理",
         menuIcon: "fa-envelope-o",
-        to: "userprofile"
+        to: "/userprofile"
     }]
 }, {
     menuTitle: "菜单1",

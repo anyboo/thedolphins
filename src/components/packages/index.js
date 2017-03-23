@@ -8,6 +8,9 @@ import Menu from './menu';
 import MenuItem from './menu-item';
 import SidebarMenu from './sidebar-menu';
 import Tabs from './tabs';
+import Table from './table';
+import Label from './label';
+import RenderHello from './renderhello';
 
 const components = [
 	Design,
@@ -19,7 +22,10 @@ const components = [
 	SidebarMenu,
 	Menu,
 	MenuItem,
-	Tabs
+	Tabs,
+	Table,
+	Label,
+	RenderHello
 ];
 
 const install = function(Vue, opts = {}) {
@@ -43,5 +49,8 @@ export default {
 	SidebarMenu,
 	Menu,
 	MenuItem,
-	Tabs
+	Tabs,
+	Table,
+	Label,
+	RenderHello
 }
