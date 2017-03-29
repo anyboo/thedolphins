@@ -1695,7 +1695,7 @@ hr {
 
 .profile .user-info {
     padding: 15px;
-    background: url('http://swlabs.co/madmin/code/images/gallery/13.jpg');
+   /* background: url('http://swlabs.co/madmin/code/images/gallery/13.jpg');*/
     color: #888;
 }
 
@@ -7319,7 +7319,6 @@ a.list-group-item.active > .badge,
 }
 
 .panel > .panel-heading {
-    font-size: 18px;
     padding: 7px 15px;
     border-top-right-radius: 0 !important;
     border-top-left-radius: 0 !important;

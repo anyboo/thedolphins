@@ -18,6 +18,8 @@ import page3 from '../pages/activeManage/page3.vue'
 import page4 from '../pages/activeManage/page4.vue'
 import page5 from '../pages/activeManage/page5.vue'
 import userprofile from '../pages/userprofile/userprofile.vue'
+import techermanage from '../pages/techermanage/techermanage.vue'
+import coursemanage from '../pages/coursemanage/coursemanage.vue'
 
 import consult from '../pages/desktop/consult.vue'
 
@@ -73,6 +75,12 @@ const routes = [{
     }, {
         path: '/studentlist',
         component: studentlist
+    },{
+        path: '/techermanage',
+        component: techermanage
+    },{
+        path: '/coursemanage',
+        component: coursemanage
     },{
         path: '/userprofile',
         component: userprofile,

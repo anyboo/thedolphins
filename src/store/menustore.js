@@ -26,11 +26,11 @@ export default [{
     menu: [{
         menuTitle: "课程设置",
         menuIcon: "fa-envelope-o",
-        to: "/class"
+        to: "/coursemanage"
     },{
         menuTitle: "老师管理",
         menuIcon: "fa-envelope-o",
-        to: "/userprofile"
+        to: "/techermanage"
     }]
 }, {
     menuTitle: "菜单1",
