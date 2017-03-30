@@ -11,6 +11,8 @@ import Tabs from './tabs';
 import Table from './table';
 import Label from './label';
 import RenderHello from './renderhello';
+import Portlet from './portlet';
+import Modals from './modals';
 
 const components = [
 	Design,
@@ -25,8 +27,10 @@ const components = [
 	Tabs,
 	Table,
 	Label,
-	RenderHello
-];
+	RenderHello,
+	Portlet,
+	Modals
+]
 
 const install = function(Vue, opts = {}) {
   /* istanbul ignore if */
@@ -52,5 +56,7 @@ export default {
 	Tabs,
 	Table,
 	Label,
-	RenderHello
+	RenderHello,
+	Portlet,
+	Modals
 }
