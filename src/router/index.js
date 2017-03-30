@@ -20,6 +20,7 @@ import page5 from '../pages/activeManage/page5.vue'
 import userprofile from '../pages/userprofile/userprofile.vue'
 
 import consult from '../pages/desktop/consult.vue'
+import consult_search from '../pages/desktop/consult_search.vue'
 
 if (!window.VueRouter) Vue.use(VueRouter);
 
@@ -88,6 +89,10 @@ const routes = [{
         path: '/consult',
         component: consult
     },
+    {
+        path:'/consult_search',
+        component: consult_search
+    }
 
 ];
 const router = new VueRouter({
