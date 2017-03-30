@@ -1,8 +1,8 @@
 <template>
     <div :class="{ sidebarCollapsed:isSidebarCollapsed }">
-        <bt-topbar v-on:sidebarCollapsed="sidebarCollapsed"/>
+        <bt-topbar v-on:sidebarCollapsed="sidebarCollapsed" />
         <div id="wrapper">
-            <bt-sidebar-menu :menu-store="menuStore"/>
+            <bt-sidebar-menu :menu-store="menuStore" />
             <div id="page-wrapper">
                 <bt-breadcrumb>
                     <bt-breadcrumb-item>首页</bt-breadcrumb-item>
@@ -10,13 +10,27 @@
                     <bt-breadcrumb-item>报名</bt-breadcrumb-item>
                 </bt-breadcrumb>
                 <div class="page-content">
-                    <router-view></router-view>
+                    <transition name="slide-fade">
+                        <router-view></router-view>
+                    </transition>
                 </div>
             </div>
         </div>
         <bt-footer/>
     </div>
 </template>
+<style>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</style>
 <script>
 import langConfig from './lang';
 import menuStore from '~/store/menustore';
@@ -58,7 +72,7 @@ export default {
         switchLang(lang) {
             this.$router.push(lang);
         },
-        sidebarCollapsed(){
+        sidebarCollapsed() {
             this.isSidebarCollapsed = !this.isSidebarCollapsed;
         },
         handleSelect(index) {

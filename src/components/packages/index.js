@@ -13,50 +13,52 @@ import Label from './label';
 import RenderHello from './renderhello';
 import Portlet from './portlet';
 import Modals from './modals';
+import Form from './form';
 
 const components = [
-	Design,
-	Hello,
-	Breadcrumb,
-	BreadcrumbItem,
-	Topbar,
-	Footer,
-	SidebarMenu,
-	Menu,
-	MenuItem,
-	Tabs,
-	Table,
-	Label,
-	RenderHello,
-	Portlet,
-	Modals
-]
+    Design,
+    Hello,
+    Breadcrumb,
+    BreadcrumbItem,
+    Topbar,
+    Footer,
+    SidebarMenu,
+    Menu,
+    MenuItem,
+    Tabs,
+    Table,
+    Label,
+    RenderHello,
+    Portlet,
+    Modals,
+    Form
+];
 
-const install = function(Vue, opts = {}) {
-  /* istanbul ignore if */
-  if (install.installed) return;
+const install = function(Vue) {
+    if (install.installed) return;
 
-  components.map(component => {
-    Vue.component(component.name, component);
-  });
+    components.map(component => {
+        Vue.component(component.name, component);
+    });
 };
 
 export default {
-	version: '1.0.1',
-	install,
-	Design,
-	Hello,
-	Breadcrumb,
-	BreadcrumbItem,
-	Topbar,
-	Footer,
-	SidebarMenu,
-	Menu,
-	MenuItem,
-	Tabs,
-	Table,
-	Label,
-	RenderHello,
-	Portlet,
-	Modals
-}
+    version: '1.0.1',
+    install,
+    Design,
+    Hello,
+    Breadcrumb,
+    BreadcrumbItem,
+    Topbar,
+    Footer,
+    SidebarMenu,
+    Menu,
+    MenuItem,
+    Tabs,
+    Table,
+    Label,
+    RenderHello,
+    Portlet,
+    Modals,
+    Form
+};

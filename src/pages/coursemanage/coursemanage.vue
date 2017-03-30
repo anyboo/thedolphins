@@ -386,37 +386,7 @@
             </div>
         </div>
         <bt-modals :modals-active="showModals" modalsTitle="添加课程" @close="handClose">
-            <div class="form-horizontal">
-                <div class="form-body pal">
-                    <div class="form-group">
-                        <label for="inputName" class="col-md-3 control-label">Name</label>
-                        <div class="col-md-9">
-                            <div class="input-icon right"><i class="fa fa-user"></i>
-                                <input id="inputName" type="text" placeholder="" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-md-3 control-label">Password</label>
-                        <div class="col-md-9">
-                            <div class="input-icon right"><i class="fa fa-lock"></i>
-                                <input id="inputPassword" type="text" placeholder="" class="form-control">
-                            </div><span class="help-block mbn"><a href="#"><small>Forgot password?</small></a></span>
-                        </div>
-                    </div>
-                    <div class="form-group mbn">
-                        <div class="col-md-offset-3 col-md-6">
-                            <div class="checkbox">
-                                <label class="">
-                                    <div class="icheckbox_minimal-grey" style="position: relative;">
-                                        <input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
-                                        <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                    </div>&nbsp; K eep me logged in</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <bt-form :item-data="modalsdata" />
         </bt-modals>
     </div>
 </template>
@@ -424,12 +394,15 @@
 import langConfig from '~/lang';
 import coursemanage from '~/store/coursemanage.js';
 
+console.log("coursemanage", coursemanage);
+
 export default {
     name: 'BtCourseManage',
     data() {
         return {
             langConfig,
             showModals: false,
+            modalsdata: coursemanage.coursemanage
         };
     },
     methods: {
