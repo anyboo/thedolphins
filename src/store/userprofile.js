@@ -43,7 +43,21 @@ export default {
             tag: 'bt-label',
             props: {
                 'label-text': "sdfsd",
-                'label-style': "success"
+                'label-style': "yellow"
+            }
+        },
+    }, {
+        wer: {
+            text: "wwwww",
+            attrs:{
+                width: "50%"
+            }
+        },
+        wers: {
+            tag: 'bt-label',
+            props: {
+                'label-text': "sdfsd",
+                'label-style': "yellow"
             }
         },
     }]

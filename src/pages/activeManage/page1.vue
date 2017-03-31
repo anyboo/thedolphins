@@ -45,12 +45,5 @@ export default {
 }
 </script>
 <style>
-.page1 .btn-group {
-    margin: 10px 0;
-}
 
-.btn-group button {
-    margin-right: 10px;
-    padding: 10px 25px;
-}
 </style>

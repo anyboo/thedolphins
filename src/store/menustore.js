@@ -33,7 +33,7 @@ export default [{
         to: "/techermanage"
     }]
 }, {
-    menuTitle: "菜单1",
+    menuTitle: "菜单2",
     menuIcon: "fa-envelope-o",
     menuName: "menu1",
     menu: [
