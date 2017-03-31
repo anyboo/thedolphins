@@ -6,8 +6,11 @@ export default {
         placeholder: '课程',
         align: 'right',
         fieldColumn: true,
-        type: 'input',
+        type: 'dropdown-select',
         required: true,
+        props: {
+            applend: true
+        }
     }, {
         name: 'name',
         label: '课程名称',

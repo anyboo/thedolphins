@@ -5,7 +5,7 @@ import router from './router';
 //import VueI18n from 'vue-i18n';
 import Element from 'element-ui';
 //bullstech 控件
-import BtCom from './components/packages';
+import BtCom from './components/src';
 
 //import enLocale from 'element-ui/lib/locale/lang/en';
 //import zhLocale from 'element-ui/lib/locale/lang/zh-CN';

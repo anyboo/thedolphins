@@ -17,6 +17,9 @@
                     <input :id="itemData.name" :name="itemData.name" type="number" :placeholder="itemData.placeholder" class="form-control">
                 </div>
             </template>
+            <template v-else-if="itemData.type==='dropdown-select'">
+                <bt-dropdown-select :applend="itemData.props?itemData.props.applend:false" />
+            </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
                     <input :id="itemData.name" :minlength="itemData.minlength" :maxlength="itemData.maxlength" :name="itemData.name" type="text" :placeholder="itemData.placeholder" class="form-control invalid" :class="required=itemData.required" @blur="handleBlur" v-model:value="curValue">
