@@ -6,7 +6,6 @@ import router from './router';
 import Element from 'element-ui';
 //bullstech 控件
 import BtCom from './components/packages';
-import VueValidator from 'vue-validator';
 
 //import enLocale from 'element-ui/lib/locale/lang/en';
 //import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
@@ -20,7 +19,6 @@ Vue.use(VueResouse);
 //Vue.use(VueI18n);
 Vue.use(Element);
 Vue.use(BtCom);
-Vue.use(VueValidator);
 
 Vue.config.lang = 'zh-cn';
 //Vue.locale('zh-cn', zhLocale);
