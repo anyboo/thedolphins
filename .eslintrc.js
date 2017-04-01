@@ -13,6 +13,7 @@ module.exports = {
             "error",
             4
         ],
+        "no-console": "off",
         "linebreak-style": [
             "error",
             "unix"
