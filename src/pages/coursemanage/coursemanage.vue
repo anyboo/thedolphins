@@ -54,32 +54,23 @@
                 <div class="row mtl">
                     <div class="col-xs-12 col-sm-4 col-md-2">
                         <div class="panel panel-orange">
+                           <div class="ribbon-wrapper">
+                                <div class="ribbon-inner">Hot</div>
+                            </div>
                             <div class="panel-heading">
                                 <h3 class="panel-title text-center">初级班</h3>
                             </div>
                             <div class="panel-body pan text-center">
                                 <div class="the-price">
-                                    <h2>100000</h2><small>课时制(14000课时)</small>
+                                    <h2>$10000</h2>
                                 </div>
                                 <table class="table mbn">
                                     <tbody>
                                         <tr>
-                                            <td>1 Account</td>
+                                            <td>课时制</td>
                                         </tr>
                                         <tr class="active">
-                                            <td>1 Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>100MB Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
+                                            <td>14000课时</td>
                                         </tr>
                                     </tbody>
                                 </table>

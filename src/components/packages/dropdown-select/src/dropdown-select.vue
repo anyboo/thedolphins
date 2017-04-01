@@ -62,6 +62,19 @@ export default {
         },
     },
     methods: {
+        operationGet() {
+            var vm = this;
+            var page = vm.currentPage - 1;
+            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize;
+            vm.$http.get(apiUrlGet)
+                .then((response) => {
+                    vm.tableData = response.data.data;
+                    vm.total = response.data.count;
+                })
+                .catch(function(response) {
+                    console.log(response)
+                })
+        },
         handleApplend() {
             if (this.eventSelect.length == 0) {
 
