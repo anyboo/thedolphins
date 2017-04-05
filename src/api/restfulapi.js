@@ -4,23 +4,16 @@ import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
 
-function httpGetApi(model, fields) {
+function httpGetFieldsApi(model, fields) {
     let apiUrlGet = urlUtil.getUrlField(model, fields);
-    console.log(apiUrlGet);
     return Vue.http.get(apiUrlGet);
-    /*.then((response) => {
-            return new Promise(function(resolve, reject) {
-                resolve(response);
-            });
-        })
-        .catch(function(response) {
-            return new Promise(function(resolve, reject) {
-                reject(response);
-            });
-        });
-        */
 }
 
+function httpGetApi(model) {
+    let apiUrlGet = urlUtil.getUrl(model);
+    return Vue.http.get(apiUrlGet);
+}
 export default {
-    httpGetApi
+    httpGetApi,
+    httpGetFieldsApi
 };
