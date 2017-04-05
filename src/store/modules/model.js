@@ -26,12 +26,11 @@ const actions = {
             record.quantity++;
         }
     },
-    [types.GET_API]({ commit }, { tableName }) {
+    [types.GET_API]({ commit }, tableName) {
         return new Promise(resolve => {
             restfulapi.httpGetApi(tableName)
                 .then(response => {
-                    console.log(response);
-                    commit(types.GET_API, response);
+                    commit(types.GET_API, {tableName, response});
                     resolve();
                 })
                 .catch(function(response) {
@@ -42,9 +41,8 @@ const actions = {
 };
 // mutations
 const mutations = {
-    [types.GET_API](state, { response }) {
-        console.info(response);
-        state.push(response.data);
+    [types.GET_API](state, {tableName, response}) {
+        state.models[tableName] = response.data;
     },
 };
 

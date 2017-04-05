@@ -44,7 +44,6 @@ describe('restfulapi httpGetFieldsApi接口单元测试', function() {
     });
 
     it('retfulapi httpGetFieldsApi接口测试', function() {
-        console.info(responsedata);
         expect(responsedata.status).toEqual(200);
     });
 });
