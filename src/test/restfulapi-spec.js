@@ -71,3 +71,29 @@ describe('restfulapi httpGetApi接口单元测试', function() {
         expect(responsedata.status).toEqual(200);
     });
 });
+/*
+describe('restfulapi httpAppendApi接口单元测试', function() {
+    var model = 'test';
+    var responsedata = null;
+    beforeEach(function(done) {
+        let form = { 'ss': 'testAdd' };
+        restfulapi.httpAppendApi(model,form)
+            .then((response) => {
+                responsedata = response;
+                done();
+            })
+            .catch(function(response) {
+                responsedata = response;
+                done();
+            });
+    });
+
+    afterEach(function() {
+
+    });
+
+    it('retfulapi httpAppendApi测试', function() {
+        expect(responsedata.status).toEqual(200);
+    });
+});
+*/

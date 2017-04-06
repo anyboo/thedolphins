@@ -8,12 +8,12 @@
                 <ul class="dropdown-menu inner selectpicker" role="menu">
                     <li v-if="applend">
                         <div class="input-group">
-                            <input type="text" placeholder="新增" v-model.trim="inputValue" class="form-control" @focus="handleFocus" @blur="handleBlur">
+                            <input type="text" placeholder="新增" @input="handleInput($event.target.value)" class="form-control" @focus="handleFocus" @blur="handleBlur">
                             <span class="input-group-addon"><i class="fa fa-plus" @click="handleApplend"></i></span>
                         </div>
                     </li>
-                    <template v-for="item in eventSelect">
-                        <bt-dropdown-select-item :item="item" @selected="handleSelected" />
+                    <template v-for="item in modelData">
+                        <bt-dropdown-select-item :item="lodash.get(item, tableLabel)" :item-id="lodash.get(item, tableId)" @selected="handleSelected" />
                     </template>
                 </ul>
             </div>
@@ -23,11 +23,13 @@
 <script>
 import langConfig from '~/lang';
 import BtDropdownSelectItem from './dropdown-select-item.vue';
+import * as types from '~/store/mutation-types';
+import lodash from 'lodash';
 
 export default {
     name: 'BtDropdownSelect',
     components: {
-        "bt-dropdown-select-item": BtDropdownSelectItem
+        'bt-dropdown-select-item': BtDropdownSelectItem
     },
     data() {
         return {
@@ -35,12 +37,16 @@ export default {
             menuOpen: false,
             menuEnter: false,
             menuFocus: false,
-            inputValue: "",
-            selectValue: "",
-            numbers: ["1", "12", "3", "4", "5"]
+            inputValue: '',
+            selectValue: '',
+            lodash: lodash,
+            modelData: {},
         };
     },
-    props: ["applend", "tableName", "tableLabel", "tableid"],
+    props: ['applend', 'tableName', 'tableLabel', 'tableId'],
+    beforeMount() {
+        this.operationGet();
+    },
     computed: {
         menuShow() {
             if (this.menuOpen) {
@@ -51,36 +57,44 @@ export default {
             return this.menuOpen;
         },
         eventSelect() {
-            let value = this.inputValue;
-            return this.numbers.filter(function(number) {
-                let result = true;
-                if (value !== "") {
-                    result = (number.indexOf(value) != -1);
-                }
-                return result;
-            });
+            let vm = this;
+            let value = vm.inputValue;
+            vm.$store.commit(types.GET_CURRENT_API, vm.tableName);
+            let filterData = {};
+            if (vm.$store.getters.getCurrentModel[vm.tableName]) {
+                let data = vm.$store.getters.getCurrentModel[vm.tableName].data;
+                filterData = lodash.filter(data, o => {
+                    let result = true;
+                    if (value !== '') {
+                        result = (o[vm.tableLabel].indexOf(value) != -1);
+                    }
+                    return result;
+                });
+            }
+            this.modelData = filterData;
+            return filterData;
         },
     },
     methods: {
         operationGet() {
             var vm = this;
-            var page = vm.currentPage - 1;
-            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize;
-            vm.$http.get(apiUrlGet)
-                .then((response) => {
-                    vm.tableData = response.data.data;
-                    vm.total = response.data.count;
-                })
-                .catch(function(response) {
-                    console.log(response)
-                })
+            vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
+                this.eventSelect;
+            });
         },
         handleApplend() {
             if (this.eventSelect.length == 0) {
-
+                let value = this.inputValue;
+                console.info(value);
             }
         },
+        handleInput(value) {
+            console.info(value);
+            this.inputValue = value;
+            this.eventSelect;
+        },
         handleSelected(value) {
+            console.info(value);
             this.selectValue = value;
         },
         handleBlur() {

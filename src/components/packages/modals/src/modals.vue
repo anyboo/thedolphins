@@ -25,7 +25,7 @@ import langConfig from '~/lang';
 
 export default {
     name: 'BtModals',
-    props: ["modalsTitle", "modalsActive"],
+    props: ['modalsTitle', 'modalsActive'],
     data() {
         return {
             langConfig
@@ -40,7 +40,6 @@ export default {
             this.handClose();
         },
         handClose() {
-            console.log("wer ");
             this.isActive = false;
             this.$emit('close');
         }

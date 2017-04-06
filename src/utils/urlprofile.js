@@ -4,6 +4,11 @@ function getUrl(model) {
     return apiUrl + model + '/';
 }
 
+function getUrlById(model,id) {
+    return apiUrl + model + '/'+id;
+}
+
+
 function getUrlField(model, fields) {
     return apiUrl + model + '/?fields=' + encodeURIComponent(fields.join());
 }
@@ -11,5 +16,6 @@ function getUrlField(model, fields) {
 export default {
     getUrl,
     getUrlField,
-    apiUrl
+    getUrlById,
+    apiUrl,
 };

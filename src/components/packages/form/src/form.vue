@@ -14,9 +14,9 @@ import BtFormItem from './form-item.vue';
 export default {
     name: 'BtForm',
     components: {
-        "bt-form-item": BtFormItem
+        'bt-form-item': BtFormItem
     },
-    props: ["itemData"],
+    props: ['itemData'],
     data() {
         return {
             langConfig,

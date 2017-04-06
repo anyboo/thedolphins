@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "element-ui": "^1.1.2",
+    "lodash": "^4.17.4",
     "vue": "^2.1.8"
   },
   "engines": {

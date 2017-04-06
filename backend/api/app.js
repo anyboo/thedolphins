@@ -6,11 +6,11 @@ var route = require('koa-route');
 var cors = require('koa-cors');
 var koa = require('koa');
 var path = require('path');
-var app = module.exports = koa();//kk/ Logger
+var app = module.exports = koa(); //kk/ Logger
 app.use(logger());
 app.use(cors());
 app.use(route.post('/upload', control.upload));
-app.use(route.get('/api/:name',control.all));
+app.use(route.get('/api/:name', control.all));
 app.use(route.get('/api/:name/:id', control.fetch));
 app.use(route.post('/api/:name', control.add));
 app.use(route.put('/api/:name/:id', control.modify));
@@ -28,6 +28,6 @@ app.use(serve(path.join(__dirname, 'public')));
 app.use(compress());
 
 if (!module.parent) {
-  app.listen(9999);
-  console.log('listening on port 9999');
+    app.listen(9999);
+    console.log('listening on port 9999');
 }

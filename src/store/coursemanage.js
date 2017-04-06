@@ -9,7 +9,10 @@ export default {
         type: 'dropdown-select',
         required: true,
         props: {
-            applend: true
+            applend: true,
+            tableName:'test',
+            tableLabel:'ss',
+            tableId:'_id'
         }
     }, {
         name: 'name',

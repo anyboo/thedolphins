@@ -11,7 +11,7 @@ import langConfig from '~/lang';
 
 export default {
     name: 'BtDropdownSelectItem',
-    props: ["item"],
+    props: ['item','itemId'],
     data() {
         return {
             langConfig,
@@ -24,19 +24,19 @@ export default {
         },
         handleClick() {
             this.itemSelect = !this.itemSelect;
-            let value = "";
+            let value = '';
             if (this.itemSelect) {
                 value = this.item;
                 let uid = this._uid;
                 this.$parent.$children.forEach(child => {
                     if (child._uid !== uid) {
-                        if (typeof(child.handChange) == "function")
+                        if (typeof(child.handChange) == 'function')
                             child.handChange();
                     }
                 });
             }
 
-            this.$emit("selected", value);
+            this.$emit('selected', value);
         }
     },
     computed: {},

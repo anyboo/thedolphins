@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResouse from 'vue-resource';
 import App from './app.vue';
 import router from './router';
-import store from './store';
+import store from './store/';
 //import VueI18n from 'vue-i18n';
 import Element from 'element-ui';
 import BtCom from './components/src';

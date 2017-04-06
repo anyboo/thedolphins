@@ -18,7 +18,7 @@
                 </div>
             </template>
             <template v-else-if="itemData.type==='dropdown-select'">
-                <bt-dropdown-select :applend="itemData.props?itemData.props.applend:false" />
+                <bt-dropdown-select :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" />
             </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
@@ -42,29 +42,32 @@ import schema from 'async-validator';
 
 export default {
     name: 'BtFormItem',
-    props: ["itemData"],
+    props: ['itemData'],
     data() {
         return {
             langConfig,
             'stateError': false,
-            curValue: ""
+            curValue: ''
         };
     },
     methods: {
         handleBlur() {
             this.validate(this.curValue);
         },
-        handleErrors(errors, fields) {
+        handleErrors( /*errors, fields*/ ) {
             this.stateError = true;
         },
+        getItemData(name, defvalue) {
+            return this.itemData.props ? this.itemData.props[name] : defvalue;
+        },
         validate(value) {
-            var fieldName = this.itemData.name;
+            //var fieldName = this.itemData.name;
             var descriptor = {
                 fieldName: {
-                    type: "string",
+                    type: 'string',
                     required: this.itemData.required
                 }
-            }
+            };
             var validator = new schema(descriptor);
             validator.validate({
                 fieldName: value
@@ -76,6 +79,8 @@ export default {
             });
         }
     },
-    computed: {},
+    computed: {
+
+    },
 };
 </script>
