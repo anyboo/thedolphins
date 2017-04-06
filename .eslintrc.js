@@ -2,11 +2,16 @@ module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "jasmine": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["jasmine","html"],
+    "extends": ["eslint:recommended","plugin:jasmine/recommended"],
     "parserOptions": {
         "sourceType": "module"
+    },
+    "settings": {
+        "html/html-extensions": [".html", ".vue"],  
     },
     "rules": {
         "indent": [

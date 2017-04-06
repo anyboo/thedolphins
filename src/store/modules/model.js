@@ -1,32 +1,20 @@
-import shop from '../../api/shop';
+import restfulapi from '../../api/restfulapi';
 import * as types from '../mutation-types';
 
 const state = {
+    models: {},
     added: [],
     checkoutStatus: null
 };
 
 // getters
 const getters = {
-    checkoutStatus: state => state.checkoutStatus
+
 };
 
 // actions
 const actions = {
-    checkout({ commit, state }, products) {
-        const savedCartItems = [...state.added];
-        commit(types.CHECKOUT_REQUEST);
-        shop.buyProducts(
-            products,
-            () => commit(types.CHECKOUT_SUCCESS),
-            () => commit(types.CHECKOUT_FAILURE, { savedCartItems })
-        );
-    }
-};
-
-// mutations
-const mutations = {
-    [types.ADD_TO_CART](state, { id }) {
+    [types.APPEND_API](state, { id }) {
         state.lastCheckout = null;
         const record = state.added.find(p => p.id === id);
         if (!record) {
@@ -38,22 +26,24 @@ const mutations = {
             record.quantity++;
         }
     },
-
-    [types.CHECKOUT_REQUEST](state) {
-        // clear cart
-        state.added = [];
-        state.checkoutStatus = null;
+    [types.GET_API]({ commit }, tableName) {
+        return new Promise(resolve => {
+            restfulapi.httpGetApi(tableName)
+                .then(response => {
+                    commit(types.GET_API, {tableName, response});
+                    resolve();
+                })
+                .catch(function(response) {
+                    console.log(response);
+                });
+        });
     },
-
-    [types.CHECKOUT_SUCCESS](state) {
-        state.checkoutStatus = 'successful';
+};
+// mutations
+const mutations = {
+    [types.GET_API](state, {tableName, response}) {
+        state.models[tableName] = response.data;
     },
-
-    [types.CHECKOUT_FAILURE](state, { savedCartItems }) {
-        // rollback to the cart saved before sending the request
-        state.added = savedCartItems;
-        state.checkoutStatus = 'failed';
-    }
 };
 
 export default {
