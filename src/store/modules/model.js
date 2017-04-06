@@ -27,11 +27,10 @@ const actions = {
                 });
         });
     },
-    [types.APPEND_API]({ commit }, tableName, form) {
+    [types.APPEND_API]({ commit }, obj) {
         return new Promise(resolve => {
-            restfulapi.httpAppendApi(tableName, form)
-                .then((response) => {
-                    console.info(response);
+            restfulapi.httpAppendApi(obj)
+                .then(() => {
                     //commit(types.APPEND_API, { tableName, response });
                     resolve();
                 })
@@ -40,11 +39,10 @@ const actions = {
                 });
         });
     },
-    [types.EDIT_API]({ commit }, tableName, id, form) {
+    [types.EDIT_API]({ commit }, obj) {
         return new Promise(resolve => {
-            restfulapi.httpEditApi(tableName, id, form)
-                .then((response) => {
-                    console.info(response);
+            restfulapi.httpEditApi(obj)
+                .then(() => {
                     //commit(types.APPEND_API, { tableName, response });
                     resolve();
                 })
@@ -53,9 +51,9 @@ const actions = {
                 });
         });
     },
-    [types.DELETE_API]({ commit }, tableName, id) {
+    [types.DELETE_API]({ commit }, obj) {
         return new Promise(resolve => {
-            restfulapi.httpDeleteApi(tableName, id)
+            restfulapi.httpDeleteApi(obj)
                 .then(() => {
                     //commit(types.APPEND_API, { tableName, response });
                     resolve();

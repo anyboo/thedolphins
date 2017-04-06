@@ -4,8 +4,8 @@ function getUrl(model) {
     return apiUrl + model + '/';
 }
 
-function getUrlById(model,id) {
-    return apiUrl + model + '/'+id;
+function getUrlById(model, id) {
+    return apiUrl + model + '/' + id;
 }
 
 

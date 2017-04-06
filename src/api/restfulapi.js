@@ -14,17 +14,17 @@ function httpGetApi(model) {
     return Vue.http.get(apiUrl);
 }
 
-function httpAppendApi(model, form) {
+function httpAppendApi({ model, form }) {
     let apiUrl = urlUtil.getUrl(model);
     return Vue.http.post(apiUrl, form);
 }
 
-function httpEditApi(model, id, form) {
+function httpEditApi({ model, id, form }) {
     let apiUrl = urlUtil.getUrlById(model, id);
     return Vue.http.put(apiUrl, form);
 }
 
-function httpDeleteApi(model, id) {
+function httpDeleteApi({ model, id }) {
     let apiUrl = urlUtil.getUrlById(model, id);
     return Vue.http.delete(apiUrl);
 }

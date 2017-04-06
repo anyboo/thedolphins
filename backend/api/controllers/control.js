@@ -78,7 +78,7 @@ module.exports.modify = function* modify(name, id, next) {
     var data = yield parse(this, {
         limit: '1kb'
     });
-
+    
     var model = yield wrap(db.get(name)).find({ '_id': monk.id(id) });
 
     if (model.length === 0) {
