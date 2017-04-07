@@ -1,6 +1,6 @@
 <template>
     <div class="form-horizontal">
-        <div class="form-body pal">
+        <div class="form-body pal" ref="formitem">
             <template v-for="item in itemData">
                 <bt-form-item :item-data="item" />
             </template>
@@ -10,6 +10,7 @@
 <script>
 import langConfig from '~/lang';
 import BtFormItem from './form-item.vue';
+import lodash from 'lodash';
 
 export default {
     name: 'BtForm',
@@ -22,7 +23,15 @@ export default {
             langConfig,
         };
     },
-    methods: {},
+    methods: {
+        getForm() {
+            let formValue = {};
+            lodash.forEach(this.$children, obj => {
+                formValue[obj.curKey] = obj.curValue;
+            });
+            return formValue;
+        }
+    },
     computed: {},
 };
 </script>

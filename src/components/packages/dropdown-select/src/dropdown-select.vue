@@ -110,6 +110,8 @@ export default {
         handleSelected({value,key}) {
             this.selectValue = value;
             this.dropdownValue = key;
+            console.log(key);
+            this.$emit('input', key);
         },
         handleBlur() {
             this.menuFocus = false;

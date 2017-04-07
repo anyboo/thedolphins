@@ -3,22 +3,22 @@
         <label :for="itemData.name" class="col-md-3 control-label">{{ itemData.label }} <span v-if="itemData.required" class="require">*</span> </label>
         <div class="col-md-9">
             <template v-if="itemData.type==='textarea'">
-                <textarea :id="itemData.name" :name="itemData.name" rows="8" class="form-control" style="resize:vertical;"></textarea>
+                <textarea :id="itemData.name" :name="itemData.name" rows="8" class="form-control" style="resize:vertical;" v-model="curValue"></textarea>
             </template>
             <template v-else-if="itemData.type==='radio'">
                 <template v-for="radioitem in itemData.data">
                     <label class="radio-inline">
-                        <input type="radio" :id="itemData.name" :name="itemData.name" :value="radioitem.value">&nbsp;{{ radioitem.label }}
+                        <input type="radio" :id="itemData.name" :name="itemData.name" :value="radioitem.value" v-model="curValue">&nbsp;{{ radioitem.label }}
                     </label>
                 </template>
             </template>
             <template v-else-if="itemData.type==='number'">
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
-                    <input :id="itemData.name" :name="itemData.name" type="number" :placeholder="itemData.placeholder" class="form-control">
+                    <input :id="itemData.name" :name="itemData.name" type="number" :placeholder="itemData.placeholder" class="form-control" v-model:value="curValue">
                 </div>
             </template>
             <template v-else-if="itemData.type==='dropdown-select'">
-                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" />
+                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue"/>
             </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
@@ -47,7 +47,8 @@ export default {
         return {
             langConfig,
             'stateError': false,
-            curValue: ''
+            curValue: '',
+            curKey: this.itemData.name
         };
     },
     methods: {

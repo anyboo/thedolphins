@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-actions none-bg">
                             <div class="col-md-offset-3 col-md-9">
-                                <button class="btn btn-primary" @click="handShowModals"> <i class="fa fa-upload mrs"></i>添加</button>
+                                <button class="btn btn-primary" @click="handleShowModals"> <i class="fa fa-upload mrs"></i>添加</button>
                                 <button class="btn btn-primary"> <i class="fa fa-edit mrs"></i>搜索 </button>
                                 <button class="btn btn-primary"> <i class="fa fa-trash-o mrs"></i>重置</button>
                             </div>
@@ -265,8 +265,8 @@
                 </div>
             </div>
         </div>
-        <bt-modals :modals-active="showModals" modalsTitle="添加课程" @close="handClose">
-            <bt-form :item-data="modalsdata" />
+        <bt-modals :modals-active="showModals" modalsTitle="添加课程" @close="handleClose" @save="handleSave">
+            <bt-form :item-data="modalsdata" ref="modalform" />
         </bt-modals>
     </div>
 </template>
@@ -274,7 +274,7 @@
 import langConfig from '~/lang';
 import coursemanage from '~/store/coursemanage.js';
 
-console.log("coursemanage", coursemanage);
+console.log('coursemanage', coursemanage);
 
 export default {
     name: 'BtCourseManage',
@@ -286,10 +286,15 @@ export default {
         };
     },
     methods: {
-        handClose() {
+        handleClose() {
             this.showModals = false;
         },
-        handShowModals() {
+        handleSave() {
+            let modalform = this.$refs.modalform;
+            console.log(modalform.getForm());
+            this.showModals = false;
+        },
+        handleShowModals() {
             this.showModals = true;
             return false;
         }
