@@ -18,7 +18,7 @@
                 </div>
             </template>
             <template v-else-if="itemData.type==='dropdown-select'">
-                <bt-dropdown-select :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" />
+                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" />
             </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>

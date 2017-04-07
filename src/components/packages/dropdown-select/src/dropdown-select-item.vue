@@ -25,8 +25,10 @@ export default {
         handleClick() {
             this.itemSelect = !this.itemSelect;
             let value = '';
+            let key = '';
             if (this.itemSelect) {
                 value = this.item;
+                key  = this.itemId;
                 let uid = this._uid;
                 this.$parent.$children.forEach(child => {
                     if (child._uid !== uid) {
@@ -36,7 +38,7 @@ export default {
                 });
             }
 
-            this.$emit('selected', value);
+            this.$emit('selected', {'value':value,'key':key});
         }
     },
     computed: {},

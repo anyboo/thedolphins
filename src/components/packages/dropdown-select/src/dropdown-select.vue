@@ -1,5 +1,6 @@
 <template>
     <div>
+        <input type="hidden" :value="dropdownValue" :name="name" :id="name" />
         <div class="btn-group bootstrap-select show-tick form-control" :class="{open:menuShow}" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
             <button type="button" class="btn dropdown-toggle selectpicker btn-white" @focus="handleFocus" @blur="handleBlur">
                 <span class="filter-option pull-left">{{ selectValue }} </span>&nbsp;<span class="caret"></span>
@@ -8,7 +9,7 @@
                 <ul class="dropdown-menu inner selectpicker" role="menu">
                     <li v-if="applend">
                         <div class="input-group">
-                            <input type="text" placeholder="新增" @input="handleInput($event.target.value)" class="form-control" @focus="handleFocus" @blur="handleBlur">
+                            <input type="text" :value="inputValue" placeholder="新增" @input="handleInput($event.target.value)" class="form-control" @focus="handleFocus" @blur="handleBlur">
                             <span class="input-group-addon"><i class="fa fa-plus" @click="handleApplend"></i></span>
                         </div>
                     </li>
@@ -34,16 +35,17 @@ export default {
     data() {
         return {
             langConfig,
-            menuOpen: false,
-            menuEnter: false,
-            menuFocus: false,
-            inputValue: '',
-            selectValue: '',
-            lodash: lodash,
-            modelData: {},
+            menuOpen: false, //焦点控制是否隐藏下拉
+            menuEnter: false, //焦点控制是否隐藏下拉
+            menuFocus: false, //焦点控制是否隐藏下拉
+            inputValue: '', //搜索框的值
+            selectValue: '', //选择框的值
+            lodash: lodash, //lodash对象
+            modelData: {}, //模型数据
+            dropdownValue: '' //下拉组件值
         };
     },
-    props: ['applend', 'tableName', 'tableLabel', 'tableId'],
+    props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId'],
     beforeMount() {
         this.operationGet();
     },
@@ -65,8 +67,12 @@ export default {
                 let data = vm.$store.getters.getCurrentModel[vm.tableName].data;
                 filterData = lodash.filter(data, o => {
                     let result = true;
-                    if (value !== '') {
-                        result = (o[vm.tableLabel].indexOf(value) != -1);
+                    if (o[vm.tableLabel]) {
+                        if (value !== '') {
+                            result = (o[vm.tableLabel].indexOf(value) != -1);
+                        }
+                    } else {
+                        result = false;
                     }
                     return result;
                 });
@@ -77,25 +83,33 @@ export default {
     },
     methods: {
         operationGet() {
-            var vm = this;
+            let vm = this;
             vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
                 this.eventSelect;
             });
         },
         handleApplend() {
-            if (this.eventSelect.length == 0) {
-                let value = this.inputValue;
-                console.info(value);
+            let vm = this;
+            let value = vm.inputValue;
+            if (vm.eventSelect.length == 0 && value.length > 0) {
+                let form = {};
+                form[vm.tableLabel] = value;
+                vm.$store.dispatch(types.APPEND_API, {
+                    'model': vm.tableName,
+                    'form': form
+                }).then(() => {
+                    vm.inputValue = '';
+                    vm.operationGet();
+                });
             }
         },
         handleInput(value) {
-            console.info(value);
             this.inputValue = value;
             this.eventSelect;
         },
-        handleSelected(value) {
-            console.info(value);
+        handleSelected({value,key}) {
             this.selectValue = value;
+            this.dropdownValue = key;
         },
         handleBlur() {
             this.menuFocus = false;
