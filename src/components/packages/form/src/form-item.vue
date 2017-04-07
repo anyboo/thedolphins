@@ -18,7 +18,7 @@
                 </div>
             </template>
             <template v-else-if="itemData.type==='dropdown-select'">
-                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue"/>
+                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue" />
             </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
@@ -46,14 +46,14 @@ export default {
     data() {
         return {
             langConfig,
-            'stateError': false,
+            stateError: false,
             curValue: '',
             curKey: this.itemData.name
         };
     },
     methods: {
         handleBlur() {
-            this.validate(this.curValue);
+            this.validate();
         },
         handleErrors( /*errors, fields*/ ) {
             this.stateError = true;
@@ -61,15 +61,16 @@ export default {
         getItemData(name, defvalue) {
             return this.itemData.props ? this.itemData.props[name] : defvalue;
         },
-        validate(value) {
+        validate() {
             //var fieldName = this.itemData.name;
-            var descriptor = {
+            let value = this.curValue;
+            let descriptor = {
                 fieldName: {
                     type: 'string',
                     required: this.itemData.required
                 }
             };
-            var validator = new schema(descriptor);
+            let validator = new schema(descriptor);
             validator.validate({
                 fieldName: value
             }, (errors, fields) => {

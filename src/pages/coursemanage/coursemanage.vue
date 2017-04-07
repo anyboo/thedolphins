@@ -54,7 +54,7 @@
                 <div class="row mtl">
                     <div class="col-xs-12 col-sm-4 col-md-2">
                         <div class="panel panel-orange">
-                           <div class="ribbon-wrapper">
+                            <div class="ribbon-wrapper">
                                 <div class="ribbon-inner">Hot</div>
                             </div>
                             <div class="panel-heading">
@@ -273,8 +273,8 @@
 <script>
 import langConfig from '~/lang';
 import coursemanage from '~/store/coursemanage.js';
-
-console.log('coursemanage', coursemanage);
+import * as types from '~/store/mutation-types';
+import lodash from 'lodash';
 
 export default {
     name: 'BtCourseManage',
@@ -282,17 +282,65 @@ export default {
         return {
             langConfig,
             showModals: false,
-            modalsdata: coursemanage.coursemanage
+            modalsdata: coursemanage.coursemanage,
+            tableName: 'coursemanage'
         };
     },
+    computed: {
+        menuShow() {
+            if (this.menuOpen) {
+                this.menuOpen = this.menuFocus || this.menuEnter;
+            } else {
+                this.menuOpen = this.menuFocus && this.menuEnter;
+            }
+            return this.menuOpen;
+        },
+        eventData() {
+            let vm = this;
+
+            vm.$store.commit(types.GET_CURRENT_API, vm.tableName);
+            let filterData = {};
+            if (vm.$store.getters.getCurrentModel[vm.tableName]) {
+                let data = vm.$store.getters.getCurrentModel[vm.tableName].data;
+                filterData = lodash.filter(data, o => {
+                    let result = true;
+                    if (o[vm.tableLabel]) {
+                        result = true;
+                    } else {
+                        result = false;
+                    }
+                    return result;
+                });
+            }
+            this.modelData = filterData;
+            return filterData;
+        },
+    },
     methods: {
+        beforeMount() {
+            this.operationGet();
+        },
+        operationGet() {
+            let vm = this;
+            vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
+                this.eventData;
+            });
+        },
         handleClose() {
             this.showModals = false;
         },
         handleSave() {
-            let modalform = this.$refs.modalform;
-            console.log(modalform.getForm());
-            this.showModals = false;
+            let vm = this;
+            let modalform = vm.$refs.modalform;
+            let modalformValue = modalform.getForm();
+            if (modalformValue.validate) {
+                vm.$store.dispatch(types.APPEND_API, {
+                    'model': 'coursemanage',
+                    'form': modalformValue.form
+                }).then(() => {
+                    vm.showModals = false;
+                });
+            }
         },
         handleShowModals() {
             this.showModals = true;

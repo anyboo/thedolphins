@@ -7,11 +7,11 @@ export default {
         align: 'right',
         fieldColumn: true,
         type: 'dropdown-select',
-        required: true,
+        /*required: true,*/
         props: {
             applend: true,
-            tableName:'test',
-            tableLabel:'ss',
+            tableName:'courseclass',
+            tableLabel:'className',
             tableId:'_id'
         }
     }, {

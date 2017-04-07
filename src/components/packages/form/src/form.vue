@@ -25,11 +25,20 @@ export default {
     },
     methods: {
         getForm() {
+            let validate = true;
             let formValue = {};
             lodash.forEach(this.$children, obj => {
-                formValue[obj.curKey] = obj.curValue;
+                obj.validate();
+                if (obj.stateError) {
+                    validate = false;
+                } else {
+                    formValue[obj.curKey] = obj.curValue;
+                }
             });
-            return formValue;
+            return {
+                'validate': validate,
+                'form': formValue
+            };
         }
     },
     computed: {},

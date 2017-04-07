@@ -36,11 +36,9 @@ export default {
     },
     methods: {
         handleSave() {
-            this.isActive = false;
             this.$emit('save');
         },
         handleClose() {
-            this.isActive = false;
             this.$emit('close');
         }
     }
