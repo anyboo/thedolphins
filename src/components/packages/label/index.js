@@ -1,8 +1,8 @@
-import Btlabel from './src/label.vue';
+import Btlabel from './src/label.vue'
 
 /* istanbul ignore next */
 Btlabel.install = function(Vue) {
-  Vue.component(Btlabel.name, Btlabel);
-};
+  Vue.component(Btlabel.name, Btlabel)
+}
 
-export default Btlabel;
+export default Btlabel

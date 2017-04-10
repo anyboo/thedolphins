@@ -1,5 +1,5 @@
 <template>
-    <li><a href="#">Extras</a>&nbsp&nbsp<i class="fa fa-angle-right"></i>&nbsp&nbsp</li>
+    <li><a href="#">Extras</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
 </template>
 <script>
 export default {

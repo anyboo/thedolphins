@@ -1,4 +1,4 @@
-import BtPanel from './src/portlet.vue'
+import BtPanel from './src/panel.vue'
 
 /* istanbul ignore next */
 BtPanel.install = function(Vue) {

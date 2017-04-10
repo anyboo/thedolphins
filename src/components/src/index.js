@@ -15,6 +15,7 @@ import Portlet from '../packages/portlet'
 import Modals from '../packages/modals'
 import Form from '../packages/form'
 import DropDownSelect from '../packages/dropdown-select'
+import Panel from '../packages/panel'
 
 const components = [
     Design,
@@ -33,7 +34,8 @@ const components = [
     Portlet,
     Modals,
     Form,
-    DropDownSelect
+    DropDownSelect,
+    Panel
 ]
 
 const install = function(Vue) {
@@ -63,5 +65,6 @@ export default {
     Portlet,
     Modals,
     Form,
-    DropDownSelect
+    DropDownSelect,
+    Panel
 }

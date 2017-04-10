@@ -11,21 +11,21 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import BtTabPane from './tab-pane.vue';
+import langConfig from '~/lang'
+import BtTabPane from './tab-pane.vue'
 
 export default {
     name: 'BtTabs',
-    props: ["tabs"],
+    props: ['tabs'],
     data() {
         return {
             langConfig
-        };
+        }
     },
     components: {
-        "bt-tab-pane": BtTabPane
+        'bt-tab-pane': BtTabPane
     },
     methods: {},
     computed: {},
-};
+}
 </script>

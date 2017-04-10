@@ -53,70 +53,10 @@
                 <h2>跳舞</h2>
                 <div class="row mtl">
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-orange">
-                            <div class="ribbon-wrapper">
-                                <div class="ribbon-inner">Hot</div>
-                            </div>
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">初级班</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h2>$10000</h2>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>课时制</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>14000课时</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-orange btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-violet">
-                            <div class="ribbon-wrapper">
-                                <div class="ribbon-inner">Hot</div>
-                            </div>
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">Silver</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h1>$20<span class="subscript">/month</span></h1><small>1 month FREE trial</small>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>2 Account</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>5 Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>200MB Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-violet btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" panel-style="violet" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
                         <div class="panel panel-green">

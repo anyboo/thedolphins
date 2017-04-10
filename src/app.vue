@@ -38,7 +38,7 @@
 import langConfig from './lang'
 import menuStore from '~/store/menustore'
 import Vue from 'vue'
-console.log(menuStore)
+
 export default {
     name: 'app',
 
