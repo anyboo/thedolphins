@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body pan text-center">
             <div class="the-price">
-                <h2>$10000</h2>
+                <h2>¥10000</h2>
             </div>
             <table class="table mbn">
                 <tbody>

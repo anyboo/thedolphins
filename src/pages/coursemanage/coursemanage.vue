@@ -59,148 +59,16 @@
                         <bt-panel panel-text="wer" panel-style="violet" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">Gold</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h1>$35<span class="subscript">/month</span></h1><small>1 month FREE trial</small>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>5 Account</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>20 Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>300K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>500MB Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-green btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" panel-style="green" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-blue">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">Diamond</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h1>$99<span class="subscript">/month</span></h1><small>1 month FREE trial</small>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>Unlimited Account</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Unlimited Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3000K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Unlimited Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-blue btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" panel-style="blue" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">Gold</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h1>$35<span class="subscript">/month</span></h1><small>1 month FREE trial</small>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>5 Account</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>20 Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>300K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>500MB Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-yellow btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" panel-style="yellow" />
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-2">
-                        <div class="panel panel-pink">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">Diamond</h3>
-                            </div>
-                            <div class="panel-body pan text-center">
-                                <div class="the-price">
-                                    <h1>$99<span class="subscript">/month</span></h1><small>1 month FREE trial</small>
-                                </div>
-                                <table class="table mbn">
-                                    <tbody>
-                                        <tr>
-                                            <td>Unlimited Account</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Unlimited Project</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3000K API Access</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Unlimited Storage</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Custom Cloud Services</td>
-                                        </tr>
-                                        <tr class="active">
-                                            <td>Weekly Reports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-pink btn-block">Sign Up</a>
-                            </div>
-                        </div>
+                        <bt-panel panel-text="wer" panel-style="pink" />
                     </div>
                 </div>
             </div>
@@ -223,7 +91,7 @@ export default {
             langConfig,
             showModals: false,
             modalsdata: coursemanage.coursemanage,
-            tableName: 'coursemanage'
+            tableName: ['coursemanage','courseclass']
         }
     },
     computed: {
@@ -256,13 +124,13 @@ export default {
             return filterData
         },
     },
+    beforeMount() {
+        this.operationGet()
+    },
     methods: {
-        beforeMount() {
-            this.operationGet()
-        },
         operationGet() {
             let vm = this
-            vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
+            vm.$store.dispatch(types.GET_ARRAY_API, vm.tableName).then(() => {
                 this.eventData
             })
         },
