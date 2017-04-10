@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <div class="text-center mbl"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/oliveirasimoes/128.jpg" style="border: 5px solid #fff box-shadow: 0 2px 3px rgba(0,0,0,0.25)" class="img-circle" />
+                        <div class="text-center mbl"><img src="src/128.png" style="border: 5px solid #fff box-shadow: 0 2px 3px rgba(0,0,0,0.25)" class="img-circle" />
                         </div>
                     </div>
                     <bt-table :table-header-data="tableHeadData" :table-data="tableData" />

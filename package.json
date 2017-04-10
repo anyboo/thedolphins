@@ -44,6 +44,7 @@
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "vue-html-loader": "^1.2.4",
     "vue-i18n": "^6.0.0-alpha.3",
     "vue-loader": "^10.0.0",
     "vue-resource": "^1.2.1",
