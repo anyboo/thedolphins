@@ -24,7 +24,7 @@
                                     <label for="inputEmail" class="col-md-3 control-lmabel">课程
                                     </label>
                                     <div class="col-md-9 gallery-pages">
-                                        <ul style="float: left;" class="list-filter list-unstyled">
+                                        <ul style="float: left" class="list-filter list-unstyled">
                                             <li data-filter="all" class="filter active">全部</li>
                                             <li data-filter=".development" class="filter">音乐</li>
                                             <li data-filter=".design" class="filter">钢琴</li>
@@ -169,15 +169,15 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import userprofile from '~/store/userprofile';
+import langConfig from '~/lang'
+//import userprofile from '~/store/userprofile'
 
 export default {
     name: 'BtTecherManage',
     data() {
         return {
             langConfig,
-        };
+        }
     }
-};
+}
 </script>

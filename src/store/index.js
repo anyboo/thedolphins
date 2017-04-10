@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-//import * as actions from './actions';
-//import * as getters from './getters';
-import model from './modules/model';
+import Vue from 'vue'
+import Vuex from 'vuex'
+//import * as actions from './actions'
+//import * as getters from './getters'
+import model from './modules/model'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
     //actions,
@@ -12,4 +12,4 @@ export default new Vuex.Store({
     modules: {
         models: model
     }
-});
+})

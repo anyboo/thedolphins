@@ -296,7 +296,7 @@
                         </ul>
                     </li>
                     <li class="dropdown topbar-user">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">林祖鑫</span>&nbsp;<span class="caret"></span>
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/assets/48.png" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">林祖鑫</span>&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a>
@@ -396,14 +396,14 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtTopbar',
     data() {
         return {
             langConfig
-        };
+        }
     },
     methods: {
         sidebarCollapsed: function() {
@@ -411,5 +411,5 @@ export default {
         }
     },
     computed: {},
-};
+}
 </script>

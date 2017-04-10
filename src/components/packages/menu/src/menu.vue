@@ -7,7 +7,7 @@
 export default {
     name: 'BtMenu',
     componentName: 'BtMenu',
-    props: ['navlevel', 'collapse', "menuname"],
+    props: ['navlevel', 'collapse', 'menuname'],
     data() {
         return {
             classObject: {
@@ -15,12 +15,12 @@ export default {
                 'nav-third-level ': (this.navlevel == "2"),
                 'collapse': this.collapse
             }
-        };
+        }
     },
     methods: {
         menuChanged(isActive) {
-            this.classObject.collapse = !isActive;
+            this.classObject.collapse = !isActive
         }
     }
-};
+}
 </script>

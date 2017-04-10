@@ -11,34 +11,34 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtPortlet',
-    props: ["portletTitle", "portletTools", "portletActive"],
+    props: ['portletTitle', 'portletTools', 'portletActive'],
     data() {
         return {
             langConfig,
             isActive: this.portletActive,
             classtool: this.GetToolUpDown()
-        };
+        }
     },
     computed: {
 
     },
     methods: {
         GetToolUpDown() {
-            let classtool = 'fa-chevron-down';
+            let classtool = 'fa-chevron-down'
             if (this.isActive) {
-                classtool = 'fa-chevron-up';
+                classtool = 'fa-chevron-up'
             }
-            return classtool;
+            return classtool
         },
         handClick() {
-            this.isActive = !this.isActive;
-            this.classtool = this.GetToolUpDown();
+            this.isActive = !this.isActive
+            this.classtool = this.GetToolUpDown()
 
         }
     }
-};
+}
 </script>

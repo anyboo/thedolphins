@@ -2,26 +2,26 @@
     <span :class="styleName">{{ labelText }}</span>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtLabel',
-    props: ["labelStyle", "labelText", "lableBadge"],
+    props: ['labelStyle', 'labelText', 'lableBadge'],
     data() {
         return {
             langConfig
-        };
+        }
     },
     computed: {
         styleName() {
-            var styleName = "label-primary";
+            var styleName = 'abel-primary'
             if (this.lableBadge) {
-                styleName = "badge badge-" + this.labelStyle;
+                styleName = 'badge badge-' + this.labelStyle
             } else {
-                styleName = "label label-" + this.labelStyle;
+                styleName = 'label label-' + this.labelStyle
             }
-            return styleName;
+            return styleName
         }
     }
-};
+}
 </script>

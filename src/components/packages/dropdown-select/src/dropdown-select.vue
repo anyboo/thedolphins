@@ -3,7 +3,7 @@
         <input type="hidden" :value="dropdownValue" :name="name" :id="name" />
         <div class="btn-group bootstrap-select show-tick form-control" :class="{open:menuShow}" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
             <button type="button" class="btn dropdown-toggle selectpicker btn-white" @focus="handleFocus" @blur="handleBlur">
-                <span class="filter-option pull-left">{{ selectValue }} </span>&nbsp;<span class="caret"></span>
+                <span class="filter-option pull-left">{{ selectValue }} </span>&nbsp<span class="caret"></span>
             </button>
             <div class="dropdown-menu open">
                 <ul class="dropdown-menu inner selectpicker" role="menu">
@@ -22,10 +22,10 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import BtDropdownSelectItem from './dropdown-select-item.vue';
-import * as types from '~/store/mutation-types';
-import lodash from 'lodash';
+import langConfig from '~/lang'
+import BtDropdownSelectItem from './dropdown-select-item.vue'
+import * as types from '~/store/mutation-types'
+import lodash from 'lodash'
 
 export default {
     name: 'BtDropdownSelect',
@@ -43,88 +43,88 @@ export default {
             lodash: lodash, //lodash对象
             modelData: {}, //模型数据
             dropdownValue: '' //下拉组件值
-        };
+        }
     },
     props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId'],
     beforeMount() {
-        this.operationGet();
+        this.operationGet()
     },
     computed: {
         menuShow() {
             if (this.menuOpen) {
-                this.menuOpen = this.menuFocus || this.menuEnter;
+                this.menuOpen = this.menuFocus || this.menuEnter
             } else {
-                this.menuOpen = this.menuFocus && this.menuEnter;
+                this.menuOpen = this.menuFocus && this.menuEnter
             }
-            return this.menuOpen;
+            return this.menuOpen
         },
         eventSelect() {
-            let vm = this;
-            let value = vm.inputValue;
-            vm.$store.commit(types.GET_CURRENT_API, vm.tableName);
-            let filterData = {};
+            let vm = this
+            let value = vm.inputValue
+            vm.$store.commit(types.GET_CURRENT_API, vm.tableName)
+            let filterData = {}
             if (vm.$store.getters.getCurrentModel[vm.tableName]) {
-                let data = vm.$store.getters.getCurrentModel[vm.tableName].data;
+                let data = vm.$store.getters.getCurrentModel[vm.tableName].data
                 filterData = lodash.filter(data, o => {
-                    let result = true;
+                    let result = true
                     if (o[vm.tableLabel]) {
                         if (value !== '') {
-                            result = (o[vm.tableLabel].indexOf(value) != -1);
+                            result = (o[vm.tableLabel].indexOf(value) != -1)
                         }
                     } else {
-                        result = false;
+                        result = false
                     }
-                    return result;
-                });
+                    return result
+                })
             }
-            this.modelData = filterData;
-            return filterData;
+            this.modelData = filterData
+            return filterData
         },
     },
     methods: {
         operationGet() {
-            let vm = this;
+            let vm = this
             vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
-                this.eventSelect;
-            });
+                this.eventSelect
+            })
         },
         handleApplend() {
-            let vm = this;
-            let value = vm.inputValue;
+            let vm = this
+            let value = vm.inputValue
             if (vm.eventSelect.length == 0 && value.length > 0) {
-                let form = {};
-                form[vm.tableLabel] = value;
+                let form = {}
+                form[vm.tableLabel] = value
                 vm.$store.dispatch(types.APPEND_API, {
                     'model': vm.tableName,
                     'form': form
                 }).then(() => {
-                    vm.inputValue = '';
-                    vm.operationGet();
-                });
+                    vm.inputValue = ''
+                    vm.operationGet()
+                })
             }
         },
         handleInput(value) {
-            this.inputValue = value;
-            this.eventSelect;
+            this.inputValue = value
+            this.eventSelect
         },
         handleSelected({value,key}) {
-            this.selectValue = value;
-            this.dropdownValue = key;
-            console.log(key);
-            this.$emit('input', key);
+            this.selectValue = value
+            this.dropdownValue = key
+            console.log(key)
+            this.$emit('input', key)
         },
         handleBlur() {
-            this.menuFocus = false;
+            this.menuFocus = false
         },
         handleFocus() {
-            this.menuFocus = true;
+            this.menuFocus = true
         },
         handleMouseLeave() {
-            this.menuEnter = false;
+            this.menuEnter = false
         },
         handleMouseEnter() {
-            this.menuEnter = true;
+            this.menuEnter = true
         }
     }
-};
+}
 </script>

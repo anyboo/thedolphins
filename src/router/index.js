@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import studentlist from '../pages/student/studentlist.vue'
 import activePublic from '../pages/activePublic/index.vue'
 import step1 from '../pages/activePublic/step1.vue'
@@ -24,7 +24,7 @@ import coursemanage from '../pages/coursemanage/coursemanage.vue'
 import consult from '../pages/desktop/consult.vue'
 import consult_search from '../pages/desktop/consult_search.vue'
 
-if (!window.VueRouter) Vue.use(VueRouter);
+if (!window.VueRouter) Vue.use(VueRouter)
 
 const routes = [{
         path: '/',
@@ -76,13 +76,13 @@ const routes = [{
     }, {
         path: '/studentlist',
         component: studentlist
-    },{
+    }, {
         path: '/techermanage',
         component: techermanage
-    },{
+    }, {
         path: '/coursemanage',
         component: coursemanage
-    },{
+    }, {
         path: '/userprofile',
         component: userprofile,
         children: [
@@ -92,21 +92,19 @@ const routes = [{
             { path: 'step3', component: step2 },
             { path: 'step4', component: step2 }
         ]
-    },
-    {
+    }, {
         path: '/consult',
         component: consult
-    },
-    {
-        path:'/consult_search',
+    }, {
+        path: '/consult_search',
         component: consult_search
     }
 
-];
+]
 const router = new VueRouter({
     mode: 'hash',
     base: __dirname,
     routes
-});
+})
 
-export default router;
+export default router

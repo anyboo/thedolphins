@@ -75,7 +75,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-orange btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-orange btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-violet btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-violet btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-green btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-green btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-blue btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-blue btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-yellow btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-yellow btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="panel-footer pan"><a href="javascript:void(0);" role="button" class="btn btn-pink btn-block">Sign Up</a>
+                            <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-pink btn-block">Sign Up</a>
                             </div>
                         </div>
                     </div>
@@ -271,10 +271,10 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import coursemanage from '~/store/coursemanage.js';
-import * as types from '~/store/mutation-types';
-import lodash from 'lodash';
+import langConfig from '~/lang'
+import coursemanage from '~/store/coursemanage.js'
+import * as types from '~/store/mutation-types'
+import lodash from 'lodash'
 
 export default {
     name: 'BtCourseManage',
@@ -284,68 +284,68 @@ export default {
             showModals: false,
             modalsdata: coursemanage.coursemanage,
             tableName: 'coursemanage'
-        };
+        }
     },
     computed: {
         menuShow() {
             if (this.menuOpen) {
-                this.menuOpen = this.menuFocus || this.menuEnter;
+                this.menuOpen = this.menuFocus || this.menuEnter
             } else {
-                this.menuOpen = this.menuFocus && this.menuEnter;
+                this.menuOpen = this.menuFocus && this.menuEnter
             }
-            return this.menuOpen;
+            return this.menuOpen
         },
         eventData() {
-            let vm = this;
+            let vm = this
 
-            vm.$store.commit(types.GET_CURRENT_API, vm.tableName);
-            let filterData = {};
+            vm.$store.commit(types.GET_CURRENT_API, vm.tableName)
+            let filterData = {}
             if (vm.$store.getters.getCurrentModel[vm.tableName]) {
-                let data = vm.$store.getters.getCurrentModel[vm.tableName].data;
+                let data = vm.$store.getters.getCurrentModel[vm.tableName].data
                 filterData = lodash.filter(data, o => {
-                    let result = true;
+                    let result = true
                     if (o[vm.tableLabel]) {
-                        result = true;
+                        result = true
                     } else {
-                        result = false;
+                        result = false
                     }
-                    return result;
-                });
+                    return result
+                })
             }
-            this.modelData = filterData;
-            return filterData;
+            this.modelData = filterData
+            return filterData
         },
     },
     methods: {
         beforeMount() {
-            this.operationGet();
+            this.operationGet()
         },
         operationGet() {
-            let vm = this;
+            let vm = this
             vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
-                this.eventData;
-            });
+                this.eventData
+            })
         },
         handleClose() {
-            this.showModals = false;
+            this.showModals = false
         },
         handleSave() {
-            let vm = this;
-            let modalform = vm.$refs.modalform;
-            let modalformValue = modalform.getForm();
+            let vm = this
+            let modalform = vm.$refs.modalform
+            let modalformValue = modalform.getForm()
             if (modalformValue.validate) {
                 vm.$store.dispatch(types.APPEND_API, {
                     'model': 'coursemanage',
                     'form': modalformValue.form
                 }).then(() => {
-                    vm.showModals = false;
-                });
+                    vm.showModals = false
+                })
             }
         },
         handleShowModals() {
-            this.showModals = true;
-            return false;
+            this.showModals = true
+            return false
         }
     }
-};
+}
 </script>

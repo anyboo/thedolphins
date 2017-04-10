@@ -31,16 +31,16 @@
     </table>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtTable',
     data() {
         return {
             langConfig
-        };
+        }
     },
     methods: {},
     computed: {},
-};
+}
 </script>

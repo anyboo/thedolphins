@@ -61,4 +61,4 @@ export default {
         fieldColumn: true,
         type: 'textarea'
     }, ]
-};
+}

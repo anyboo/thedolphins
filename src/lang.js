@@ -165,4 +165,4 @@ export default {
             '/en-US': 'OK'
         }
     }
-};
+}

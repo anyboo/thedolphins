@@ -1,6 +1,6 @@
 <template>
     <div v-if="modalsActive">
-        <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="false" class="modal fade in" style="display: block;" @click.self=" handleClose">
+        <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="false" class="modal fade in" style="display: block" @click.self=" handleClose">
             <div class="modal-dialog ">
                 <div class="modal-content ">
                     <div class="modal-header modal-header-primary ">
@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtModals',
@@ -29,18 +29,18 @@ export default {
     data() {
         return {
             langConfig
-        };
+        }
     },
     computed: {
 
     },
     methods: {
         handleSave() {
-            this.$emit('save');
+            this.$emit('save')
         },
         handleClose() {
-            this.$emit('close');
+            this.$emit('close')
         }
     }
-};
+}
 </script>

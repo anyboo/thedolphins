@@ -4,16 +4,16 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtFooter',
     data() {
         return {
             langConfig
-        };
+        }
     },
     methods: {},
     computed: {},
-};
+}
 </script>

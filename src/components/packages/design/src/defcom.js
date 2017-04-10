@@ -1,44 +1,44 @@
 //bullstech 基本数据结构
 class bt_obj {
     constructor(name) { //构造函数
-        this.name = ""; //页面名称
-        this.objectlist = {}; //对象列表
-        this.type = "bt_obj";
+        this.name = "" //页面名称
+        this.objectlist = {} //对象列表
+        this.type = "bt_obj"
     }
 }
 
 //page页面
 class bt_page extend bt_obj {
     constructor() {
-        this.type = "bt_page";
+        this.type = "bt_page"
     }
 }
 
 //row组件
 class bt_row extend bt_obj {
     constructor() {
-        this.type = "bt_row";
+        this.type = "bt_row"
     }
 }
 
 //col组件
 class bt_col extend bt_obj {
     constructor() {
-        this.type = "bt_col";
+        this.type = "bt_col"
     }
 }
 
 //table表格组件
 class bt_table extend bt_obj {
     constructor() {
-        this.type = "bt_table";
+        this.type = "bt_table"
     }
 }
 
 //property属性
 class bt_property extend bt_obj {
     constructor() {
-        this.type = "bt_property";
+        this.type = "bt_property"
     }
 }
 

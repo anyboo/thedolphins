@@ -57,4 +57,4 @@ export default [{
         menuIcon: 'fa-credit-card',
         to: '/coursemanage'
     }]
-}];
+}]

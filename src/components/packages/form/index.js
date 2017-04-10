@@ -1,8 +1,8 @@
-import BtForm from './src/form.vue';
+import BtForm from './src/form.vue'
 
 /* istanbul ignore next */
 BtForm.install = function(Vue) {
-  Vue.component(BtForm.name, BtForm);
-};
+  Vue.component(BtForm.name, BtForm)
+}
 
-export default BtForm;
+export default BtForm

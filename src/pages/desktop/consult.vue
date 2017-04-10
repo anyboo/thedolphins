@@ -46,82 +46,82 @@
                 <div class="panel-heading">{{ title2 }}</div>
                 <div class="panel-body pan">
                     <form action="#">
-                    <div class="form-body pal">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label class=" pts">{{ label1 }}</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="cradio-inline">
-                                        <input id="optionsVisa" type="radio" name="optionsRadios" value="Visa" checked="checked" />&nbsp; {{ source1 }}
-                                    </label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="adio-inline">
-                                        <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp; {{ source2 }}
-                                    </label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="adio-inline">
-                                        <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp; {{ source3 }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label class="pts">{{ label2 }}</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="adio-inline">
-                                        <input id="optionsVisa" type="radio" name="optionsRadios" value="Visa" checked="checked" />&nbsp; {{ method1 }}
-                                    </label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="adio-inline">
-                                        <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp; {{ method2 }}
-                                    </label>
+                        <div class="form-body pal">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class=" pts">{{ label1 }}</label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="cradio-inline">
+                                            <input id="optionsVisa" type="radio" name="optionsRadios" value="Visa" checked="checked" />&nbsp {{ source1 }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="adio-inline">
+                                            <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp {{ source2 }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="adio-inline">
+                                            <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp {{ source3 }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option>{{ subject }}</option>
-                                        <option>{{ subject }}</option>
-                                        <option>{{ subject }}</option>
-                                    </select>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="pts">{{ label2 }}</label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="adio-inline">
+                                            <input id="optionsVisa" type="radio" name="optionsRadios" value="Visa" checked="checked" />&nbsp {{ method1 }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="adio-inline">
+                                            <input id="optionsMasterCard" type="radio" name="optionsRadios" value="MasterCard" />&nbsp {{ method2 }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option>{{ course }}</option>
-                                        <option>{{ course }}</option>
-                                        <option>{{ course }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label>&nbsp;{{ follow }}
+                                    <div class="form-group">
                                         <select class="form-control">
-                                            <option>{{ follow }}</option>
-                                            <option>{{ follow }}</option>
-                                            <option>{{ follow }}</option>
+                                            <option>{{ subject }}</option>
+                                            <option>{{ subject }}</option>
+                                            <option>{{ subject }}</option>
                                         </select>
-                                    </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option>{{ course }}</option>
+                                            <option>{{ course }}</option>
+                                            <option>{{ course }}</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="8" v-bind:placeholder="detail" class="form-control"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>&nbsp{{ follow }}
+                                            <select class="form-control">
+                                                <option>{{ follow }}</option>
+                                                <option>{{ follow }}</option>
+                                                <option>{{ follow }}</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="8" v-bind:placeholder="detail" class="form-control"></textarea>
+                            </div>
                         </div>
                     </form>
                 </div>

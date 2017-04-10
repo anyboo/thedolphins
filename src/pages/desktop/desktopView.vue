@@ -14,7 +14,7 @@
 		name: 'desktop',
 
 		data() {
-			return this;
+			return this
 		},
-	};
+	}
 </script>

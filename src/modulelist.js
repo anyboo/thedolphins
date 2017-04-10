@@ -47,4 +47,4 @@ export default {
         fieldColumn: true,
         select: true
     }, ]
-};
+}

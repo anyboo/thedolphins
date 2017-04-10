@@ -20,9 +20,9 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import modulelist from '~/modulelist.js';
-console.log(modulelist);
+import langConfig from '~/lang'
+import modulelist from '~/modulelist.js'
+console.log(modulelist)
 export default {
     name: 'moduletable',
     props: ['modulename'],
@@ -52,34 +52,34 @@ export default {
                 name: '',
                 date: []
             }
-        };
+        }
     },
     methods: {
         fieldlang(item) {
-            var mlang = this.langConfig[this.modulename];
+            var mlang = this.langConfig[this.modulename]
             if (typeof(mlang) == "undefined") {
-                mlang = item;
+                mlang = item
             } else {
-                var ilang = mlang[item];
+                var ilang = mlang[item]
                 if (typeof(ilang) == "undefined") {
-                    mlang = item;
+                    mlang = item
                 } else {
-                    mlang = ilang[this.lang()];
+                    mlang = ilang[this.lang()]
                 }
             }
-            return mlang;
+            return mlang
         },
     },
     computed: {
         lang() {
-            return '/zh-CN';
+            return '/zh-CN'
         },
         title() {
-            return this.hasEdit ? '编辑' : '新建';
+            return this.hasEdit ? '编辑' : '新建'
         },
         url() {
-            return this.apiUrl + modulename + "/";
+            return this.apiUrl + modulename + "/"
         }
     },
-};
+}
 </script>

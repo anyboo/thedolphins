@@ -52,9 +52,9 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import modulelist from '~/modulelist.js';
-console.log(modulelist);
+import langConfig from '~/lang'
+import modulelist from '~/modulelist.js'
+console.log(modulelist)
 export default {
     name: 'studentlist',
     data() {
@@ -82,29 +82,29 @@ export default {
                 name: '',
                 date: []
             }
-        };
+        }
     },
     computed: {
         lang() {
-            return '/zh-CN';
+            return '/zh-CN'
         },
         title() {
-            return this.hasEdit ? '编辑' : '新建';
+            return this.hasEdit ? '编辑' : '新建'
         }
     },
     mounted: function() {
-        this.operationGet();
+        this.operationGet()
     },
     methods: {
         handleAppend() {
-            this.hasEdit = false;
-            this.form = {};
-            this.dialogFormVisible = true;
+            this.hasEdit = false
+            this.form = {}
+            this.dialogFormVisible = true
         },
         handleEdit(index, row) {
-            this.hasEdit = true;
-            this.form = row;
-            this.dialogFormVisible = true;
+            this.hasEdit = true
+            this.form = row
+            this.dialogFormVisible = true
         },
         handleDelete(index, row) {
             this.$confirm('此操作将永久删除, 是否继续?', '提示', {
@@ -112,84 +112,84 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                let apiUrlDelete = this.apiUrl + row._id;
-                this.operationDelete(apiUrlDelete);
+                let apiUrlDelete = this.apiUrl + row._id
+                this.operationDelete(apiUrlDelete)
                 this.$notify({
                     title: '消息',
                     message: '删除成功',
                     type: 'success'
-                });
+                })
             }).catch(() => {
                 this.$notify({
                     title: '消息',
                     message: '已取消删除',
                     type: 'warning'
-                });
-            });
+                })
+            })
         },
         handleSubmit() {
-            this.dialogFormVisible = false;
+            this.dialogFormVisible = false
             if (this.hasEdit) {
-                let apiUrlPut = this.apiUrl + this.form._id;
-                this.operationEdit(apiUrlPut);
+                let apiUrlPut = this.apiUrl + this.form._id
+                this.operationEdit(apiUrlPut)
                 this.$notify({
                     title: '消息',
                     message: '编辑成功',
                     type: 'success'
-                });
+                })
             } else {
-                this.operationAppend();
+                this.operationAppend()
                 this.$notify({
                     title: '消息',
                     message: '新建成功',
                     type: 'success'
-                });
+                })
             }
         },
         handleSizeChange(val) {
-            this.pageSize = val;
-            this.operationGet();
+            this.pageSize = val
+            this.operationGet()
         },
         handleCurrentChange(val) {
-            this.currentPage = val;
-            this.operationGet();
+            this.currentPage = val
+            this.operationGet()
         },
         operationAppend() {
-            var vm = this;
+            var vm = this
             vm.$http.post(vm.apiUrl, vm.form)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
         },
         operationEdit(apiUrlPut) {
-            var vm = this;
+            var vm = this
             vm.$http.put(apiUrlPut, vm.form)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
 
         },
         operationDelete(apiUrlDelete) {
-            var vm = this;
+            var vm = this
             vm.$http.delete(apiUrlDelete)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
         },
         operationGet() {
-            var vm = this;
-            var page = vm.currentPage - 1;
-            var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize;
+            var vm = this
+            var page = vm.currentPage - 1
+            var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize
             vm.$http.get(apiUrlGet)
                 .then((response) => {
-                    //console.log(response.data);
-                    vm.tableData = response.data.data;
-                    vm.total = response.data.count;
+                    //console.log(response.data)
+                    vm.tableData = response.data.data
+                    vm.total = response.data.count
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
         }
     },
-};
+}
 </script>

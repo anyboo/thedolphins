@@ -1,8 +1,8 @@
-import BtFooter from './src/footer.vue';
+import BtFooter from './src/footer.vue'
 
 /* istanbul ignore next */
 BtFooter.install = function(Vue) {
-  Vue.component(BtFooter.name, BtFooter);
-};
+  Vue.component(BtFooter.name, BtFooter)
+}
 
-export default BtFooter;
+export default BtFooter

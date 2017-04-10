@@ -3,11 +3,11 @@
         <div class="col-lg-12">
             <div class="portlet box">
                 <div class="portlet-body">
-                <el-table :data="tableData" style="width: 100%">
-                	<el-table-column prop="date" label="Date" width="180"></el-table-column>
-                	<el-table-column prop="name" label="Name" width="180"></el-table-column>
-                	<el-table-column prop="address" label="Address" width="180"></el-table-column>
-                </el-table>
+                    <el-table :data="tableData" style="width: 100%">
+                        <el-table-column prop="date" label="Date" width="180"></el-table-column>
+                        <el-table-column prop="name" label="Name" width="180"></el-table-column>
+                        <el-table-column prop="address" label="Address" width="180"></el-table-column>
+                    </el-table>
                     <!-- <table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
                         <thead>
                             <tr>
@@ -34,7 +34,7 @@
                                 <td><span class="label label-sm label-success">Approved</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -49,7 +49,7 @@
                                 <td><span class="label label-sm label-info">Pending</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -64,7 +64,7 @@
                                 <td><span class="label label-sm label-warning">Suspended</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -79,7 +79,7 @@
                                 <td><span class="label label-sm label-danger">Blocked</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                                 <td><span class="label label-sm label-success">Approved</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -109,7 +109,7 @@
                                 <td><span class="label label-sm label-info">Pending</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -124,7 +124,7 @@
                                 <td><span class="label label-sm label-warning">Suspended</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -139,7 +139,7 @@
                                 <td><span class="label label-sm label-danger">Blocked</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -154,7 +154,7 @@
                                 <td><span class="label label-sm label-warning">Suspended</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -169,7 +169,7 @@
                                 <td><span class="label label-sm label-danger">Blocked</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -184,7 +184,7 @@
                                 <td><span class="label label-sm label-success">Approved</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp; Edit
+                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-edit"></i>&nbsp Edit
                                     </button>
                                 </td>
                             </tr>
@@ -204,23 +204,23 @@ export default {
     name: 'consult_search',
     data: function() {
         return {
-        	tableData: [{
-            date: '2016-05-03',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-02',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-04',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }, {
-            date: '2016-05-01',
-            name: 'Tom',
-            address: 'No. 189, Grove St, Los Angeles'
-          }]
+            tableData: [{
+                date: '2016-05-03',
+                name: 'Tom',
+                address: 'No. 189, Grove St, Los Angeles'
+            }, {
+                date: '2016-05-02',
+                name: 'Tom',
+                address: 'No. 189, Grove St, Los Angeles'
+            }, {
+                date: '2016-05-04',
+                name: 'Tom',
+                address: 'No. 189, Grove St, Los Angeles'
+            }, {
+                date: '2016-05-01',
+                name: 'Tom',
+                address: 'No. 189, Grove St, Los Angeles'
+            }]
         }
     },
 }

@@ -53,8 +53,8 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import modulelist from '~/modulelist.js';
+import langConfig from '~/lang'
+import modulelist from '~/modulelist.js'
 
 export default {
     name: 'moduletable',
@@ -79,112 +79,112 @@ export default {
                 name: '',
                 date: []
             }
-        };
+        }
     },
     computed: {
         lang() {
-            return '/zh-CN';
+            return '/zh-CN'
         },
         title() {
-            return this.hasEdit ? '编辑' : '新建';
+            return this.hasEdit ? '编辑' : '新建'
         },
         fieldColumn() {
-            var tablefield = this.modulelist[this.modulename];
-            var fields = [];
+            var tablefield = this.modulelist[this.modulename]
+            var fields = []
             for (var item in tablefield) {
                 if (tablefield[item].fieldColumn) {
-                    fields.push(tablefield[item]);
+                    fields.push(tablefield[item])
                 }
             }
-            return fields;
+            return fields
         },
     },
     watch: {
         modulename(val) {
-            console.log("watch");
-            //this.Initform();
-            this.operationGet();
+            console.log("watch")
+                //this.Initform()
+            this.operationGet()
         },
     },
     mounted() {
-        this.Initform();
-        this.operationGet();
+        this.Initform()
+        this.operationGet()
     },
     methods: {
         fieldType(item, eltype) {
-            var result = false;
+            var result = false
             if (typeof(item[eltype]) == "undefined") {
 
             } else {
-                result = item[eltype];
+                result = item[eltype]
             }
-            return result;
+            return result
         },
         Initform() {
-            var tablefield = this.modulelist[this.modulename];
-            //console.log(this.form);
-            this.form = {};
+            var tablefield = this.modulelist[this.modulename]
+                //console.log(this.form)
+            this.form = {}
             for (var item in tablefield) {
                 if (tablefield[item].fieldColumn) {
                     if (tablefield[item].upload) {
-                        this.uploadfield = tablefield[item].name;
-                        this.form[tablefield[item].name] = [];
+                        this.uploadfield = tablefield[item].name
+                        this.form[tablefield[item].name] = []
                     } else {
-                        this.form[tablefield[item].name] = "";
+                        this.form[tablefield[item].name] = ""
                     }
                 }
             }
         },
         url() {
-            return this.apiUrl + this.modulename + "/";
+            return this.apiUrl + this.modulename + "/"
         },
         fieldlang(item) {
-            var mlang = this.langConfig[this.modulename];
+            var mlang = this.langConfig[this.modulename]
             if (typeof(mlang) == "undefined") {
-                mlang = item;
+                mlang = item
             } else {
-                var ilang = mlang[item];
+                var ilang = mlang[item]
                 if (typeof(ilang) == "undefined") {
-                    mlang = item;
+                    mlang = item
                 } else {
-                    mlang = ilang['/zh-CN'];
+                    mlang = ilang['/zh-CN']
                 }
             }
-            return mlang;
+            return mlang
         },
         handleRemove(file, fileList) {
-            this.form[this.uploadfield] = fileList;
+            this.form[this.uploadfield] = fileList
         },
         handleAvatarScucess(res, file) {
             if (res.success) {
-                this.form[this.uploadfield].push(res);
+                this.form[this.uploadfield].push(res)
             }
         },
         beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isJPG = file.type === 'image/jpeg'
+            const isLt2M = file.size / 1024 / 1024 < 2
 
             if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
+                this.$message.error('上传头像图片只能是 JPG 格式!')
             }
             if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+                this.$message.error('上传头像图片大小不能超过 2MB!')
             }
-            return isJPG && isLt2M;
+            return isJPG && isLt2M
         },
         handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogImageVisible = true;
+            this.dialogImageUrl = file.url
+            this.dialogImageVisible = true
         },
         handleAppend() {
-            this.hasEdit = false;
-            this.Initform();
-            this.dialogFormVisible = true;
+            this.hasEdit = false
+            this.Initform()
+            this.dialogFormVisible = true
         },
         handleEdit(index, row) {
-            this.hasEdit = true;
-            this.form = row;
-            this.dialogFormVisible = true;
+            this.hasEdit = true
+            this.form = row
+            this.dialogFormVisible = true
         },
         handleDelete(index, row) {
             this.$confirm('此操作将永久删除, 是否继续?', '提示', {
@@ -192,83 +192,83 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                let apiUrlDelete = this.url() + row._id;
-                this.operationDelete(apiUrlDelete);
+                let apiUrlDelete = this.url() + row._id
+                this.operationDelete(apiUrlDelete)
                 this.$notify({
                     title: '消息',
                     message: '删除成功',
                     type: 'success'
-                });
+                })
             }).catch(() => {
                 this.$notify({
                     title: '消息',
                     message: '已取消删除',
                     type: 'warning'
-                });
-            });
+                })
+            })
         },
         handleSubmit() {
-            this.dialogFormVisible = false;
+            this.dialogFormVisible = false
             if (this.hasEdit) {
-                let apiUrlPut = this.url() + this.form._id;
-                this.operationEdit(apiUrlPut);
+                let apiUrlPut = this.url() + this.form._id
+                this.operationEdit(apiUrlPut)
                 this.$notify({
                     title: '消息',
                     message: '编辑成功',
                     type: 'success'
-                });
+                })
             } else {
-                this.operationAppend();
+                this.operationAppend()
                 this.$notify({
                     title: '消息',
                     message: '新建成功',
                     type: 'success'
-                });
+                })
             }
         },
         handleSizeChange(val) {
-            this.pageSize = val;
-            this.operationGet();
+            this.pageSize = val
+            this.operationGet()
         },
         handleCurrentChange(val) {
-            this.currentPage = val;
-            this.operationGet();
+            this.currentPage = val
+            this.operationGet()
         },
         operationAppend() {
-            var vm = this;
+            var vm = this
             vm.$http.post(this.url(), vm.form)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
         },
         operationEdit(apiUrlPut) {
-            var vm = this;
+            var vm = this
             vm.$http.put(apiUrlPut, vm.form)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
 
         },
         operationDelete(apiUrlDelete) {
-            var vm = this;
+            var vm = this
             vm.$http.delete(apiUrlDelete)
                 .then((response) => {
-                    vm.operationGet();
-                });
+                    vm.operationGet()
+                })
         },
         operationGet() {
-            var vm = this;
-            var page = vm.currentPage - 1;
-            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize;
+            var vm = this
+            var page = vm.currentPage - 1
+            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize
             vm.$http.get(apiUrlGet)
                 .then((response) => {
-                    vm.tableData = response.data.data;
-                    vm.total = response.data.count;
+                    vm.tableData = response.data.data
+                    vm.total = response.data.count
                 })
                 .catch(function(response) {
                     console.log(response)
                 })
         }
     },
-};
+}
 </script>

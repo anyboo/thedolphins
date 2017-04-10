@@ -32,7 +32,7 @@ import addressData from '../assets/js/addressData.js'
 import store from '~/store.js'
 
 function formatData(data) {
-    var result = [];
+    var result = []
     for (var key in data) {
         result.push({
             value: key
@@ -82,17 +82,17 @@ export default {
     methods: {
         proChange: function(val, oldVal) {
             if (oldVal) {
-                this.form.city = '';
-                this.form.detail = '';
+                this.form.city = ''
+                this.form.detail = ''
             }
-            var data = formatData(addressData[this.form.province]);
-            for (var i = 0; i < data.length; i++) {
-                this.$set(this.citys, i, data[i]);
+            var data = formatData(addressData[this.form.province])
+            for (var i = 0 i < data.length i++) {
+                this.$set(this.citys, i, data[i])
             }
         },
         cityChange: function(val, oldVal) {
             if (oldVal) {
-                this.form.detail = '';
+                this.form.detail = ''
             }
         },
     }
@@ -100,7 +100,6 @@ export default {
 </script>
 <style>
 .address .el-form-item {
-    margin-bottom: 0!important;
-    margin-right: 0!important;
+    margin-bottom: 0!important margin-right: 0!important
 }
 </style>

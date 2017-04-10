@@ -8,9 +8,9 @@
     </div>
 </template>
 <script>
-import langConfig from '~/lang';
-import BtFormItem from './form-item.vue';
-import lodash from 'lodash';
+import langConfig from '~/lang'
+import BtFormItem from './form-item.vue'
+import lodash from 'lodash'
 
 export default {
     name: 'BtForm',
@@ -21,26 +21,26 @@ export default {
     data() {
         return {
             langConfig,
-        };
+        }
     },
     methods: {
         getForm() {
-            let validate = true;
-            let formValue = {};
+            let validate = true
+            let formValue = {}
             lodash.forEach(this.$children, obj => {
-                obj.validate();
+                obj.validate()
                 if (obj.stateError) {
-                    validate = false;
+                    validate = false
                 } else {
-                    formValue[obj.curKey] = obj.curValue;
+                    formValue[obj.curKey] = obj.curValue
                 }
-            });
+            })
             return {
                 'validate': validate,
                 'form': formValue
-            };
+            }
         }
     },
     computed: {},
-};
+}
 </script>

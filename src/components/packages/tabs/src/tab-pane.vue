@@ -6,27 +6,27 @@
     </li>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtTabPane',
-    props: ["tabPaneTitle", "tabPaneIcon", "to", "tabPaneActive"],
+    props: ['tabPaneTitle', 'tabPaneIcon', 'to', 'tabPaneActive'],
     data() {
         return {
             langConfig,
             isActive: this.tabPaneActive
-        };
+        }
     },
     methods: {
-      handClick(){
-        this.isActive = true;
-        this.$parent.$children.forEach(child => {
-                    if (child._uid !== this._uid) {
-                        child.isActive = false;
-                    }
-                });
-      }
+        handClick() {
+            this.isActive = true
+            this.$parent.$children.forEach(child => {
+                if (child._uid !== this._uid) {
+                    child.isActive = false
+                }
+            })
+        }
     },
     computed: {},
-};
+}
 </script>

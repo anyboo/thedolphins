@@ -7,7 +7,7 @@
     </li>
 </template>
 <script>
-import langConfig from '~/lang';
+import langConfig from '~/lang'
 
 export default {
     name: 'BtDropdownSelectItem',
@@ -16,31 +16,31 @@ export default {
         return {
             langConfig,
             itemSelect: false
-        };
+        }
     },
     methods: {
         handChange() {
-            this.itemSelect = false;
+            this.itemSelect = false
         },
         handleClick() {
-            this.itemSelect = !this.itemSelect;
-            let value = '';
-            let key = '';
+            this.itemSelect = !this.itemSelect
+            let value = ''
+            let key = ''
             if (this.itemSelect) {
-                value = this.item;
-                key  = this.itemId;
-                let uid = this._uid;
+                value = this.item
+                key  = this.itemId
+                let uid = this._uid
                 this.$parent.$children.forEach(child => {
                     if (child._uid !== uid) {
                         if (typeof(child.handChange) == 'function')
-                            child.handChange();
+                            child.handChange()
                     }
-                });
+                })
             }
 
-            this.$emit('selected', {'value':value,'key':key});
+            this.$emit('selected', {'value':value,'key':key})
         }
     },
     computed: {},
-};
+}
 </script>
