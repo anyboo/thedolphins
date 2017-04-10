@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import studentlist from '../pages/student/studentlist.vue'
+/*
 import activePublic from '../pages/activePublic/index.vue'
 import step1 from '../pages/activePublic/step1.vue'
 import step2 from '../pages/activePublic/step2.vue'
@@ -17,6 +18,7 @@ import page2 from '../pages/activeManage/page2.vue'
 import page3 from '../pages/activeManage/page3.vue'
 import page4 from '../pages/activeManage/page4.vue'
 import page5 from '../pages/activeManage/page5.vue'
+*/
 import userprofile from '../pages/userprofile/userprofile.vue'
 import techermanage from '../pages/techermanage/techermanage.vue'
 import coursemanage from '../pages/coursemanage/coursemanage.vue'
@@ -26,7 +28,8 @@ import consult_search from '../pages/desktop/consult_search.vue'
 
 if (!window.VueRouter) Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         redirect: '/zh-CN',
         name: 'home'
@@ -36,7 +39,7 @@ const routes = [{
     }, {
         path: '/en-US',
         name: 'en'
-    }, {
+    }, /*{
         path: '/activeManage',
         component: totalpages,
         children: [
@@ -73,7 +76,7 @@ const routes = [{
             { path: 'step3', component: step3 },
             { path: 'step4', component: step4 }
         ]
-    }, {
+    },*/ {
         path: '/studentlist',
         component: studentlist
     }, {
@@ -85,13 +88,13 @@ const routes = [{
     }, {
         path: '/userprofile',
         component: userprofile,
-        children: [
+        /*children: [
             { path: '', component: step2 },
             { path: 'step1', component: step2 },
             { path: 'step2', component: step2 },
             { path: 'step3', component: step2 },
             { path: 'step4', component: step2 }
-        ]
+        ]*/
     }, {
         path: '/consult',
         component: consult

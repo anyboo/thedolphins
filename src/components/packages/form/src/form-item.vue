@@ -8,7 +8,7 @@
             <template v-else-if="itemData.type==='radio'">
                 <template v-for="radioitem in itemData.data">
                     <label class="radio-inline">
-                        <input type="radio" :id="itemData.name" :name="itemData.name" :value="radioitem.value" v-model="curValue">&nbsp{{ radioitem.label }}
+                        <input type="radio" :id="itemData.name" :name="itemData.name" :value="radioitem.value" v-model="curValue">&nbsp; {{ radioitem.label }}
                     </label>
                 </template>
             </template>
@@ -32,8 +32,8 @@
 <style>
 .form-group .radio-inline input[type=radio],
 .form-group .checkbox-inline input[type=checkbox] {
-    position: relative
-    margin-left: 0px
+    position: relative;
+    margin-left: 0px;
 }
 </style>
 <script>

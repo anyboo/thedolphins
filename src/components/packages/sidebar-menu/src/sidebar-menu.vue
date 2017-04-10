@@ -4,7 +4,7 @@
             <bt-menu>
                 <li class="user-panel">
                     <div class="thumb">
-                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/oliveirasimoes/128.jpg" " alt=" " class="img-circle " />
+                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/oliveirasimoes/128.jpg" alt=" " class="img-circle " />
                     </div>
                     <div class="info ">
                         <p>林祖鑫</p>
@@ -43,7 +43,7 @@ import langConfig from '~/lang'
 
 export default {
     name: 'BtSidebarMenu',
-    props: ["menuStore "],
+    props: ['menuStore'],
     data() {
         return {
             langConfig
