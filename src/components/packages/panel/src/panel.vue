@@ -1,25 +1,15 @@
 <template>
     <div :class="styleName">
+        <!--
         <div class="ribbon-wrapper">
             <div class="ribbon-inner">热</div>
         </div>
+        -->
         <div class="panel-heading">
             <h3 class="panel-title text-center">{{ panelText }}</h3>
         </div>
         <div class="panel-body pan text-center">
-            <div class="the-price">
-                <h2>¥10000</h2>
-            </div>
-            <table class="table mbn">
-                <tbody>
-                    <tr>
-                        <td>课时制</td>
-                    </tr>
-                    <tr class="active">
-                        <td>14000课时</td>
-                    </tr>
-                </tbody>
-            </table>
+            <slot></slot>
         </div>
         <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-block" :class="btnStyleName">编辑</a>
         </div>

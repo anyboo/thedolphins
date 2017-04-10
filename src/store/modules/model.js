@@ -37,7 +37,9 @@ const actions = {
         return new Promise(resolve => {
             Promise.all(tableArray)
                 .then(response => {
-                    console.log(lodash.merge(tableName, response))
+                    response.forEach(item=>{
+                        commit(types.GET_API, { 'tableName':item.data.name, 'response':item })
+                    })
                     resolve()
                 })
                 .catch(function(response) {

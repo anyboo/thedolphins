@@ -49,29 +49,32 @@
             </div>
         </div>
         <div id="page-pricing" class="row">
-            <div class="col-md-12">
-                <h2>跳舞</h2>
-                <div class="row mtl">
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" panel-style="violet" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" panel-style="green" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" panel-style="blue" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" panel-style="yellow" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-2">
-                        <bt-panel panel-text="wer" panel-style="pink" />
+            <template v-for="item in courseclass">
+                <div class="col-md-12">
+                    <h2>{{ item.className }}</h2>
+                    <div class="row mtl">
+                        <template v-for="subitem,index in eventSubData(item)">
+                            <div class="col-xs-12 col-sm-4 col-md-2">
+                                <bt-panel :panel-text="subitem.name" :panel-style="getPanelStyle(index)">
+                                    <div class="the-price">
+                                        <h2>¥{{ subitem.price?subitem.price:0 }}</h2>
+                                    </div>
+                                    <table class="table mbn">
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ subitem.classhours ==1 ?'学时制':'学期制' }}</td>
+                                            </tr>
+                                            <tr class="active">
+                                                <td>{{ subitem.price }}课时</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </bt-panel>
+                            </div>
+                        </template>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
         <bt-modals :modals-active="showModals" modalsTitle="添加课程" @close="handleClose" @save="handleSave">
             <bt-form :item-data="modalsdata" ref="modalform" />
@@ -80,7 +83,7 @@
 </template>
 <script>
 import langConfig from '~/lang'
-import coursemanage from '~/store/coursemanage.js'
+import courseManageStore from '~/store/coursemanage.js'
 import * as types from '~/store/mutation-types'
 import lodash from 'lodash'
 
@@ -90,8 +93,11 @@ export default {
         return {
             langConfig,
             showModals: false,
-            modalsdata: coursemanage.coursemanage,
-            tableName: ['coursemanage','courseclass']
+            modalsdata: courseManageStore.coursemanage,
+            tableName: ['coursemanage', 'courseclass'],
+            coursemanage: [],
+            courseclass: [],
+            panelStyle: ['orange', 'violet', 'green', 'blue', 'yellow', 'pink']
         }
     },
     computed: {
@@ -106,28 +112,47 @@ export default {
         eventData() {
             let vm = this
 
-            vm.$store.commit(types.GET_CURRENT_API, vm.tableName)
-            let filterData = {}
-            if (vm.$store.getters.getCurrentModel[vm.tableName]) {
-                let data = vm.$store.getters.getCurrentModel[vm.tableName].data
-                filterData = lodash.filter(data, o => {
-                    let result = true
-                    if (o[vm.tableLabel]) {
-                        result = true
-                    } else {
-                        result = false
-                    }
-                    return result
-                })
+            vm.$store.commit(types.GET_CURRENT_API, 'courseclass')
+
+            let filterData = []
+            if (vm.$store.getters.getCurrentModel['courseclass']) {
+                filterData = vm.$store.getters.getCurrentModel['courseclass'].data
             }
-            this.modelData = filterData
+            this.courseclass = filterData
             return filterData
         },
+
     },
     beforeMount() {
         this.operationGet()
     },
     methods: {
+        getPanelStyle(index) {
+            let indexs = index % 6
+            let value = this.panelStyle[indexs]
+            return value
+        },
+        eventSubData(key) {
+            let vm = this
+
+            vm.$store.commit(types.GET_CURRENT_API, 'coursemanage')
+
+            let filterData = []
+            if (vm.$store.getters.getCurrentModel['coursemanage']) {
+                let data = vm.$store.getters.getCurrentModel['coursemanage'].data
+                filterData = lodash.filter(data, o => {
+                    let result = false
+                    if (key._id == o.category) {
+                        result = true
+                    }
+                    return result
+                })
+            }
+
+            this.coursemanage = filterData
+
+            return filterData
+        },
         operationGet() {
             let vm = this
             vm.$store.dispatch(types.GET_ARRAY_API, vm.tableName).then(() => {
