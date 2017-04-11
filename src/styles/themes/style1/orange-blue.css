@@ -1695,6 +1695,7 @@ hr {
 
 .profile .user-info {
     padding: 15px;
+    padding-bottom: 0px;
    /* background: url('http://swlabs.co/madmin/code/images/gallery/13.jpg');*/
     color: #888;
 }

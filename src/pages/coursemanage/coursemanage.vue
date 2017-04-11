@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="the-price">
+                                    <div>
                                         <h2>¥{{ subitem.price?subitem.price:0 }}</h2>
                                     </div>
                                     <table class="table mbn">
@@ -79,9 +79,14 @@
         </bt-modals>
     </div>
 </template>
+<style>
+.table {
+    margin-top: 0px;
+}
+</style>
 <script>
 import langConfig from '~/lang'
-import courseManageStore from '~/store/coursemanage.js'
+import courseManageStore from '~/store/pages/coursemanage.js'
 import * as types from '~/store/mutation-types'
 import lodash from 'lodash'
 
@@ -95,8 +100,7 @@ export default {
             tableName: ['coursemanage', 'courseclass'],
             coursemanage: [],
             courseclass: [],
-            courseAllclass
-: [],
+            courseAllclass: [],
             panelStyle: ['orange', 'violet', 'green', 'blue', 'yellow', 'pink'],
             modalsType: types.APPEND_API,
             formData: {},
@@ -155,7 +159,7 @@ export default {
                     let classActive = this.classActive.trim()
 
                     if (classActive.length > 0) {
-                        result = (o._id == classActive)||showAll
+                        result = (o._id == classActive) || showAll
                     } else {
                         result = true
                     }
