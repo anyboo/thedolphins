@@ -42,10 +42,10 @@ export default {
             selectValue: '', //选择框的值
             lodash: lodash, //lodash对象
             modelData: {}, //模型数据
-            dropdownValue: '' //下拉组件值
+            dropdownValue: this.value //下拉组件值
         }
     },
-    props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId'],
+    props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId', 'value'],
     beforeMount() {
         this.operationGet()
     },
@@ -82,10 +82,21 @@ export default {
         },
     },
     methods: {
+        getSelectValue() {
+            let vm = this
+            vm.modelData.forEach(item => {
+                if (item[vm.tableId] == this.value) {
+                    vm.selectValue = item[vm.tableLabel]
+                    return false
+                }
+            })
+
+        },
         operationGet() {
             let vm = this
             vm.$store.dispatch(types.GET_API, vm.tableName).then(() => {
                 this.eventSelect
+                this.getSelectValue()
             })
         },
         handleApplend() {
@@ -107,7 +118,10 @@ export default {
             this.inputValue = value
             this.eventSelect
         },
-        handleSelected({value,key}) {
+        handleSelected({
+            value,
+            key
+        }) {
             this.selectValue = value
             this.dropdownValue = key
             console.log(key)

@@ -23,7 +23,10 @@ function httpEditApi({ model, id, form }) {
     let apiUrl = urlUtil.getUrlById(model, id)
     return Vue.http.put(apiUrl, form)
 }
-
+function httpGetIdApi({ model, id }) {
+    let apiUrl = urlUtil.getUrlById(model, id)
+    return Vue.http.get(apiUrl)
+}
 function httpDeleteApi({ model, id }) {
     let apiUrl = urlUtil.getUrlById(model, id)
     return Vue.http.delete(apiUrl)
@@ -33,5 +36,6 @@ export default {
     httpGetFieldsApi,
     httpAppendApi,
     httpEditApi,
-    httpDeleteApi
+    httpDeleteApi,
+    httpGetIdApi
 }

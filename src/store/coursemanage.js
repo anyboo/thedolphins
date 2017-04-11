@@ -35,7 +35,7 @@ export default {
         type: 'radio',
         data: [
             { label: '学时制', value: '1' },
-            { label: '学期制', value: '1' }
+            { label: '学期制', value: '2' }
         ]
     }, {
         name: 'price',

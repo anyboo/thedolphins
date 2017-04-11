@@ -2,7 +2,7 @@
     <div class="form-horizontal">
         <div class="form-body pal" ref="formitem">
             <template v-for="item in itemData">
-                <bt-form-item :item-data="item" />
+                <bt-form-item :item-data="item" :value-data="getValue(item.name)" />
             </template>
         </div>
     </div>
@@ -17,13 +17,20 @@ export default {
     components: {
         'bt-form-item': BtFormItem
     },
-    props: ['itemData'],
+    props: ['itemData', 'formData'],
     data() {
         return {
             langConfig,
         }
     },
     methods: {
+        getValue(name) {
+            let value = ''
+            if (this.formData.length == 1) {
+                value = this.formData[0][name]
+            }
+            return value
+        },
         getForm() {
             let validate = true
             let formValue = {}

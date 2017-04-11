@@ -130,21 +130,21 @@ export default {
                         this.uploadfield = tablefield[item].name
                         this.form[tablefield[item].name] = []
                     } else {
-                        this.form[tablefield[item].name] = ""
+                        this.form[tablefield[item].name] = ''
                     }
                 }
             }
         },
         url() {
-            return this.apiUrl + this.modulename + "/"
+            return this.apiUrl + this.modulename + '/'
         },
         fieldlang(item) {
             var mlang = this.langConfig[this.modulename]
-            if (typeof(mlang) == "undefined") {
+            if (typeof(mlang) == 'undefined') {
                 mlang = item
             } else {
                 var ilang = mlang[item]
-                if (typeof(ilang) == "undefined") {
+                if (typeof(ilang) == 'undefined') {
                     mlang = item
                 } else {
                     mlang = ilang['/zh-CN']

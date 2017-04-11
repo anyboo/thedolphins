@@ -1,3 +1,7 @@
+import 'element-ui/lib/theme-default/index.css'
+import './styles/index.css'
+import './styles/btindex.css'
+
 import Vue from 'vue'
 import VueResouse from 'vue-resource'
 import App from './app.vue'
@@ -7,9 +11,7 @@ import store from './store/'
 import Element from 'element-ui'
 import BtCom from './components/src'
 
-import 'element-ui/lib/theme-default/index.css'
-import './styles/index.css'
-import './styles/btindex.css'
+
 //require('es6-promise').polyfill()
 
 

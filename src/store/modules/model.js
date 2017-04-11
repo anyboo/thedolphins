@@ -1,6 +1,5 @@
 import restfulapi from '../../api/restfulapi'
 import * as types from '../mutation-types'
-import lodash from 'lodash'
 
 const state = {
     models: {},
@@ -41,6 +40,17 @@ const actions = {
                         commit(types.GET_API, { 'tableName':item.data.name, 'response':item })
                     })
                     resolve()
+                })
+                .catch(function(response) {
+                    console.info(response)
+                })
+        })
+    },
+    [types.GET_ID_API]({ commit }, obj) {
+        return new Promise(resolve => {
+            restfulapi.httpGetIdApi(obj)
+                .then(response => {
+                    resolve(response)
                 })
                 .catch(function(response) {
                     console.info(response)

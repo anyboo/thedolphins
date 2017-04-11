@@ -5,22 +5,35 @@
             <div class="ribbon-inner">热</div>
         </div>
         -->
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">{{ panelText }}</h3>
+        <div class="panel-heading clearfix">
+              <slot name="head"></slot>
         </div>
         <div class="panel-body pan text-center">
             <slot></slot>
         </div>
-        <div class="panel-footer pan"><a href="javascript:void(0)" role="button" class="btn btn-block" :class="btnStyleName">编辑</a>
+        <div class="panel-footer pan">
+            <slot name="footer"></slot>
         </div>
     </div>
 </template>
+<style>
+.panel > .panel-heading {
+    font-size: 18px;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-color: #e5e5e5 !important;
+    color: #00ff00;
+}
+.panel > .panel-heading .toolbars a:link {
+     color: #cccccc;
+}
+</style>
 <script>
 import langConfig from '~/lang'
 
 export default {
     name: 'BtPanel',
-    props: ['panelStyle', 'panelText'],
+    props: ['panelStyle'],
     data() {
         return {
             langConfig
@@ -32,13 +45,6 @@ export default {
             var styleName = 'panel panel-orange'
             if (this.panelStyle) {
                 styleName = 'panel panel-' + this.panelStyle
-            }
-            return styleName
-        },
-        btnStyleName() {
-            var styleName = 'btn-orange'
-            if (this.panelStyle) {
-                styleName = 'btn-' + this.panelStyle
             }
             return styleName
         }

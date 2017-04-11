@@ -42,12 +42,12 @@ import schema from 'async-validator'
 
 export default {
     name: 'BtFormItem',
-    props: ['itemData'],
+    props: ['itemData','valueData'],
     data() {
         return {
             langConfig,
             stateError: false,
-            curValue: '',
+            curValue: this.valueData,
             curKey: this.itemData.name
         }
     },
