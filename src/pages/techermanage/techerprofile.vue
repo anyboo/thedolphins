@@ -16,7 +16,7 @@
                     <bt-table :table-header-data="tableHeadData" :table-data="tableData" />
                 </div>
                 <div class="col-md-9">
-                    <bt-tabs :tabs="tabs" />
+                    <bt-tabs :tabs="tabs" :tabs-data="formData" />
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@ export default {
             }, {
                 title: '带班信息',
                 icon: 'fa-edit',
-                to: '/techerprofile/' + key + '/classinfo'
+                to: '/techerprofile/' + key + '/class'
             }, {
                 title: '排课信息',
                 icon: 'fa-edit',
@@ -132,24 +132,16 @@ export default {
             }).then((data) => {
                 vm.formData = data.data
                 vm.tableData.push({
-                    'label': '入职时间',
-                    'birthday': vm.getDateTime(vm.formData[0].joinday)
-                })
-                vm.tableData.push({
-                    'label': '生日',
-                    'birthday': vm.getDateTime(vm.formData[0].birthday)
-                })
-                vm.tableData.push({
                     'label': '电话',
                     'birthday': vm.formData[0].phone
                 })
                 vm.tableData.push({
-                    'label': '邮件',
-                    'birthday': vm.formData[0].email
-                })
-                vm.tableData.push({
                     'label': '性别',
                     'birthday': vm.getSex(vm.formData[0].sex)
+                })
+                vm.tableData.push({
+                    'label': '邮件',
+                    'birthday': vm.formData[0].email
                 })
                 vm.tableData.push({
                     label: {
@@ -165,6 +157,14 @@ export default {
                             'label-style': 'yellow'
                         }
                     }
+                })
+                vm.tableData.push({
+                    'label': '生日日期',
+                    'birthday': vm.getDateTime(vm.formData[0].birthday)
+                })
+                vm.tableData.push({
+                    'label': '入职日期',
+                    'birthday': vm.getDateTime(vm.formData[0].joinday)
                 })
             })
         }

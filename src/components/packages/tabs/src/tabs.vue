@@ -5,7 +5,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active">
-                <router-view></router-view>
+                <router-view :tabs-data="tabsData"></router-view>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@ import BtTabPane from './tab-pane.vue'
 
 export default {
     name: 'BtTabs',
-    props: ['tabs'],
+    props: ['tabs', 'tabsData'],
     data() {
         return {
             langConfig

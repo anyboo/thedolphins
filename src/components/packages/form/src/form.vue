@@ -1,8 +1,8 @@
 <template>
     <div class="form-horizontal">
         <div class="form-body pal" ref="formitem">
-            <template v-for="item in itemData">
-                <bt-form-item :item-data="item" :value-data="getValue(item.name)" />
+            <template v-for="item in getFormDataLocal">
+                <bt-form-item :item-data="item.item" :value-data="item.name" />
             </template>
         </div>
     </div>
@@ -23,10 +23,11 @@ export default {
             langConfig,
         }
     },
+
     methods: {
         getValue(name) {
             let value = ''
-            if (this.formData.length == 1) {
+            if (this.formData && this.formData.length == 1) {
                 value = this.formData[0][name]
             }
             return value
@@ -48,6 +49,18 @@ export default {
             }
         }
     },
-    computed: {},
+    computed: {
+        getFormDataLocal() {
+            let formDataLocal = []
+            this.itemData.forEach(item => {
+                formDataLocal.push({
+                    'item': item,
+                    'name': this.getValue(item.name)
+                })
+            })
+            console.log(formDataLocal)
+            return formDataLocal
+        },
+    },
 }
 </script>

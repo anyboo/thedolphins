@@ -36,8 +36,8 @@ const actions = {
         return new Promise(resolve => {
             Promise.all(tableArray)
                 .then(response => {
-                    response.forEach(item=>{
-                        commit(types.GET_API, { 'tableName':item.data.name, 'response':item })
+                    response.forEach(item => {
+                        commit(types.GET_API, { 'tableName': item.data.name, 'response': item })
                     })
                     resolve()
                 })
@@ -47,9 +47,11 @@ const actions = {
         })
     },
     [types.GET_ID_API]({ commit }, obj) {
+        let id = obj.id
         return new Promise(resolve => {
             restfulapi.httpGetIdApi(obj)
                 .then(response => {
+                    commit(types.GET_API, { id, response })
                     resolve(response)
                 })
                 .catch(function(response) {

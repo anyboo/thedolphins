@@ -46,6 +46,14 @@ export default {
         }
     },
     props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId', 'value'],
+    watch: {
+        value: {
+            handler: function() {
+                this.getSelectValue()
+            },
+            deep: true
+        }
+    },
     beforeMount() {
         this.operationGet()
     },

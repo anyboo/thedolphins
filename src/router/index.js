@@ -23,6 +23,10 @@ import userprofile from '../pages/userprofile/userprofile.vue'
 */
 import techermanage from '../pages/techermanage/techermanage.vue'
 import techerprofile from '../pages/techermanage/techerprofile.vue'
+import techerinfo from '../pages/techermanage/techerinfo.vue'
+import techerclass from '../pages/techermanage/techerclass.vue'
+import techerschedule from '../pages/techermanage/techerschedule.vue'
+
 import coursemanage from '../pages/coursemanage/coursemanage.vue'
 
 import consult from '../pages/desktop/consult.vue'
@@ -92,13 +96,13 @@ const routes = [
     }, {
         path: '/techerprofile/:id',
         component: techerprofile,
-        /*children: [
-            { path: '', component: step2 },
-            { path: 'step1', component: step2 },
-            { path: 'step2', component: step2 },
-            { path: 'step3', component: step2 },
-            { path: 'step4', component: step2 }
-        ]*/
+        children: [
+            { path: '', redirect: 'info' },
+            { path: 'ss', redirect: 'info' },
+            { path: 'info', component: techerinfo },
+            { path: 'class', component: techerclass },
+            { path: 'schedule', component: techerschedule },
+        ]
     }, {
         path: '/consult',
         component: consult

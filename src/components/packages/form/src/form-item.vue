@@ -55,6 +55,15 @@ export default {
             curKey: this.itemData.name
         }
     },
+    watch: {
+        valueData: {
+            handler: function(newValue) {
+                this.curValue = newValue
+                console.log(this.curValue)
+            },
+            deep: true
+        }
+    },
     methods: {
         handleBlur() {
             this.validate()
