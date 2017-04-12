@@ -10,7 +10,7 @@
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-icon"><i class="fa fa-user"></i>
-                                        <input id="inputClass" type="text" placeholder="老师姓名" class="form-control" v-model.lazy="inputClass" @handleChange="handleChange($event.target.value)" />
+                                        <input id="inputClass" type="text" placeholder="姓名或手机号码" class="form-control" v-model.lazy="inputClass" @handleChange="handleChange($event.target.value)" />
                                     </div>
                                 </div>
                             </div>
@@ -38,30 +38,36 @@
             </div>
         </div>
         <div class="row mbl">
-            <div class="col-md-3">
-                <div class="panel  panel-default">
-                    <div class="profile">
-                        <div class="user-info">
-                            <div style="margin-bottom: 15px" class="row">
-                                <div class="col-xs-12 col-sm-8">
-                                    <h2>程玲</h2>
-                                    <p><strong>电话:</strong>18960828505 </p>
-                                    <p><strong>教学理念:</strong> 快乐学习</p>
-                                    <p><strong class="mrs">课程:</strong><span class="label label-green mrs">吉他</span><span class="label label-green mrs">钢琴</span><span class="label label-green mrs">美术</span>
-                                    </p>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 text-center">
-                                    <figure><img src="/assets/128.png" alt="" style="display: inline-block" class="img-responsive img-circle" />
-                                        <div>
-                                            <h3><strong>3</strong>班级</h3>
-                                        </div>
-                                    </figure>
+            <template v-for="subitem,index in eventSubData()">
+                <div class="col-md-3">
+                    <div class="panel  panel-default">
+                        <div class="profile">
+                            <div class="user-info" @click="handlelink(subitem._id)">
+                                <div class="row">
+                                    <div class="closebtn">
+                                        <a href="javascript:void(0)" @click="handleDelete(subitem._id)" class="panel-link"><i class="fa fa-times"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 text-center">
+                                        <figure>
+                                            <div class="thumbtecher"><img src="/assets/128.png" alt="" style="display: inline-block" class="img-responsive img-circle" /></div>
+                                            <div>
+                                                <h4>{{ subitem.name }}</h4>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <p><strong>电话:</strong>{{ subitem.phone }} </p>
+                                        <p><strong>邮箱:</strong>{{ subitem.email }} </p>
+                                        <p><strong>生日:</strong> {{ getDateTime(subitem.birthday) }}</p>
+                                        <p><strong class="mrs">课程:</strong><span class="label label-green mrs">{{ getClassName(subitem.category) }}</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
         <el-pagination layout="total, sizes, prev, pager, next, jumper" :total="total" class="pagination" :current-page="currentPage" :page-size="pageSize" @size-change="handleSizeChange" @current-change="handleCurrentChange">
         </el-pagination>
@@ -70,11 +76,32 @@
         </bt-modals>
     </div>
 </template>
+<style>
+.closebtn {
+    float: right;
+    margin-right: 20px;
+}
+
+.thumbtecher {
+    border: 5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: block;
+}
+
+.img-circle {
+    border-radius: 50% !important
+}
+
+.user-info {
+    cursor: pointer;
+}
+</style>
 <script>
 import langConfig from '~/lang'
 import techerManageStore from '~/store/pages/techermanage.js'
 import * as types from '~/store/mutation-types'
 import lodash from 'lodash'
+import moment from 'moment'
 
 export default {
     name: 'BtTecherManage',
@@ -82,8 +109,8 @@ export default {
         return {
             langConfig,
             showModals: false,
-            modalsdata: techerManageStore.coursemanage,
-            tableName: ['coursemanage', 'courseclass'],
+            modalsdata: techerManageStore.techermanage,
+            tableName: ['techermanage', 'courseclass'],
             coursemanage: [],
             courseclass: [],
             courseAllclass: [],
@@ -107,11 +134,11 @@ export default {
             return this.menuOpen
         },
         modalsTitle() {
-            let title = '添加课程'
+            let title = '添加老师'
             if (this.modalsType == types.APPEND_API) {
-                title = '添加课程'
+                title = '添加老师'
             } else {
-                title = '编辑课程'
+                title = '编辑老师'
             }
             return title
         },
@@ -121,6 +148,14 @@ export default {
         this.operationGet()
     },
     methods: {
+        handleSizeChange(val) {
+            this.pageSize = val
+            this.operationGet()
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val
+            this.operationGet()
+        },
         btnStyleName(index) {
             var styleName = 'btn-orange'
             if (this.panelStyle) {
@@ -133,7 +168,25 @@ export default {
             let value = this.panelStyle[indexs]
             return value
         },
-
+        getClassName(id) {
+            let name = ''
+            this.courseAllclass.every(o => {
+                if (o._id == id) {
+                    name = o.className
+                    return false
+                }
+                return true
+            })
+            return name
+        },
+        getDateTime(value) {
+            let datetime = ''
+            let m = moment(value)
+            if (m.isValid()) {
+                datetime = m.format('YYYY/MM/DD')
+            }
+            return datetime
+        },
         eventData(showAll = false) {
             let vm = this
 
@@ -160,27 +213,42 @@ export default {
             this.courseclass = filterData
             return filterData
         },
-        eventSubData(key) {
+        eventSubData() {
             let vm = this
 
-            vm.$store.commit(types.GET_CURRENT_API, 'coursemanage')
+            vm.$store.commit(types.GET_CURRENT_API, 'techermanage')
 
             let filterData = []
-            if (vm.$store.getters.getCurrentModel['coursemanage']) {
-                let data = vm.$store.getters.getCurrentModel['coursemanage'].data
+            if (vm.$store.getters.getCurrentModel['techermanage']) {
+                let data = vm.$store.getters.getCurrentModel['techermanage'].data
+
+                let count = 0
+                let start = (this.currentPage - 1) * this.pageSize
+                let end = this.pageSize * this.currentPage
+
                 filterData = lodash.filter(data, o => {
                     let result = false
                     let className = this.inputClass.trim()
-                    if (key._id == o.category) {
+                    if (this.classActive == o.category || this.classActive == '') {
                         if (className.length > 0) {
-                            result = (o.name.indexOf(className) != -1)
+                            result = (o.name.indexOf(className) != -1 || o.phone.indexOf(className) != -1)
                         } else {
                             result = true
                         }
                     }
+                    if (result) {
+                        if (start <= count && count < end) {
+                            result = true
+                        } else {
+                            result = false
+                        }
+
+                        count++
+                    }
 
                     return result
                 })
+                this.total = count
             }
             this.coursemanage = filterData
 
@@ -192,34 +260,40 @@ export default {
                 this.eventData()
             })
         },
+        handlelink(value) {
+            this.$router.push('/techerprofile/' + value)
+        },
         handleClass(value) {
             this.classActive = value
             this.eventData()
+            this.eventSubData()
         },
         handleClear() {
             this.inputClass = ''
             this.classActive = ''
             this.eventData()
+            this.eventSubData()
         },
         handleChange(value) {
             this.inputClass = value
             this.eventData()
+            this.eventSubData()
         },
         handleDelete(id) {
             let vm = this
-            this.$confirm('课程删除操作, 是否继续?', '提示', {
+            this.$confirm('老师删除操作, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
                 vm.$store.dispatch(types.DELETE_API, {
-                    'model': 'coursemanage',
+                    'model': 'techermanage',
                     'id': id,
                 }).then(() => {
                     this.operationGet()
                     this.$notify({
                         title: '成功',
-                        message: '课程删除成功!',
+                        message: '老师删除成功!',
                         type: 'success'
                     })
                 })
@@ -233,15 +307,16 @@ export default {
             let modalform = vm.$refs.modalform
             let modalformValue = modalform.getForm()
             let id = modalform.getValue('_id')
+            console.log(modalform)
             if (modalformValue.validate) {
                 if (this.modalsType == types.APPEND_API) {
                     vm.$store.dispatch(types.APPEND_API, {
-                        'model': 'coursemanage',
+                        'model': 'techermanage',
                         'form': modalformValue.form
                     }).then(() => {
                         this.$notify({
                             title: '成功',
-                            message: '课程新建成功',
+                            message: '老师新建成功',
                             type: 'success'
                         })
                         this.operationGet()
@@ -249,13 +324,13 @@ export default {
                     })
                 } else {
                     vm.$store.dispatch(types.EDIT_API, {
-                        'model': 'coursemanage',
+                        'model': 'techermanage',
                         'id': id,
                         'form': modalformValue.form,
                     }).then(() => {
                         this.$notify({
                             title: '成功',
-                            message: '课程修改成功!',
+                            message: '老师修改成功!',
                             type: 'success'
                         })
                         this.operationGet()
@@ -273,7 +348,7 @@ export default {
         editShowModals(key) {
             let vm = this
             vm.$store.dispatch(types.GET_ID_API, {
-                'model': 'coursemanage',
+                'model': 'techermanage',
                 'id': key
             }).then((data) => {
                 this.formData = data.data

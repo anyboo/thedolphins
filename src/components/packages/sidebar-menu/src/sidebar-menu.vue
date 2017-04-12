@@ -4,7 +4,7 @@
             <bt-menu>
                 <li class="user-panel">
                     <div class="thumb">
-                        <img src="assets/128.png" alt="" class="img-circle" />
+                        <img src="/assets/128.png" alt="" class="img-circle" />
                     </div>
                     <div class="info">
                         <p>林祖鑫</p>

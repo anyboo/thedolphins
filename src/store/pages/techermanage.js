@@ -1,5 +1,46 @@
 export default {
     techermanage: [{
+        name: 'name',
+        label: '姓名',
+        desc: '老师姓名',
+        align: 'right',
+        fieldColumn: true,
+        type: 'input',
+        placeholder: '课程必须输入2到20个字符.',
+        required: true,
+        invalid: true,
+        minlength: 2,
+        maxlength: 20
+    }, {
+        name: 'phone',
+        label: '电话',
+        desc: '电话',
+        placeholder: '请输入电话号码',
+        align: 'right',
+        fieldColumn: true,
+        type: 'input',
+        required: true,
+        invalid: true,
+    }, {
+        name: 'sex',
+        label: '性别',
+        desc: '性别',
+        align: 'right',
+        fieldColumn: true,
+        type: 'radio',
+        data: [
+            { label: '男', value: '1' },
+            { label: '女', value: '2' }
+        ]
+    }, {
+        name: 'email',
+        label: '邮箱',
+        desc: '邮箱',
+        placeholder: '请输入邮箱',
+        align: 'right',
+        fieldColumn: true,
+        type: 'input'
+    }, {
         name: 'category',
         label: '课程大类',
         desc: '课程大类',
@@ -10,55 +51,25 @@ export default {
         /*required: true,*/
         props: {
             applend: true,
-            tableName:'courseclass',
-            tableLabel:'className',
-            tableId:'_id'
+            tableName: 'courseclass',
+            tableLabel: 'className',
+            tableId: '_id'
         }
     }, {
-        name: 'name',
-        label: '老师',
-        desc: '课程名称',
+        name: 'birthday',
+        label: '生日日期',
+        desc: '生日日期',
+        placeholder: '选择生日日期',
         align: 'right',
         fieldColumn: true,
-        type: 'input',
-        placeholder: '课程必须输入2到20个字符.',
-        required: true,
-        invalid: true,
-        minlength: 2,
-        maxlength: 20
+        type: 'date'
     }, {
-        name: 'charge',
-        label: '收费方式',
-        desc: '收费方式',
+        name: 'joinday',
+        label: '入职日期',
+        desc: '入职日期',
+        placeholder: '选择入职日期',
         align: 'right',
         fieldColumn: true,
-        type: 'radio',
-        data: [
-            { label: '学时制', value: '1' },
-            { label: '学期制', value: '2' }
-        ]
-    }, {
-        name: 'price',
-        label: '总价',
-        desc: '总价',
-        placeholder: '请输入数字',
-        align: 'right',
-        fieldColumn: true,
-        type: 'number'
-    }, {
-        name: 'classhours',
-        label: '课时',
-        desc: '总价',
-        align: 'right',
-        placeholder: '请输入数字',
-        fieldColumn: true,
-        type: 'number'
-    }, {
-        name: 'desc',
-        label: '课程简绍',
-        desc: '课程简绍',
-        align: 'right',
-        fieldColumn: true,
-        type: 'textarea'
-    }, ]
+        type: 'date'
+    }]
 }

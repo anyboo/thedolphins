@@ -20,6 +20,10 @@
             <template v-else-if="itemData.type==='dropdown-select'">
                 <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue" />
             </template>
+            <template v-else-if="itemData.type==='date'">
+                <el-date-picker v-model="curValue" type="date" :placeholder="itemData.placeholder" format="yyyy-MM-dd">
+                </el-date-picker>
+            </template>
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
                     <input :id="itemData.name" :minlength="itemData.minlength" :maxlength="itemData.maxlength" :name="itemData.name" type="text" :placeholder="itemData.placeholder" class="form-control invalid" :class="required=itemData.required" @blur="handleBlur" v-model:value="curValue">
@@ -42,7 +46,7 @@ import schema from 'async-validator'
 
 export default {
     name: 'BtFormItem',
-    props: ['itemData','valueData'],
+    props: ['itemData', 'valueData'],
     data() {
         return {
             langConfig,
@@ -68,6 +72,19 @@ export default {
                 fieldName: {
                     type: 'string',
                     required: this.itemData.required
+                }
+            }
+            if (this.itemData.type === 'date') {
+                let dateValue = new Date(value)
+                value = dateValue.getTime()
+                if (isNaN(value)) {
+                    value = 0
+                }
+                descriptor = {
+                    fieldName: {
+                        type: 'number',
+                        required: this.itemData.required
+                    }
                 }
             }
             let validator = new schema(descriptor)

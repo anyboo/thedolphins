@@ -124,8 +124,9 @@ export default {
         }) {
             this.selectValue = value
             this.dropdownValue = key
-            console.log(key)
             this.$emit('input', key)
+            this.menuFocus = false
+            this.menuEnter = false
         },
         handleBlur() {
             this.menuFocus = false
