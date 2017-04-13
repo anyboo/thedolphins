@@ -46,5 +46,16 @@ export default {
         desc: '区域',
         fieldColumn: true,
         select: true
-    }, ]
+    }, ],
+    classroom: [{
+        name: 'name',
+        desc: ' 教室名称',
+        fieldColumn: true,
+        input: true
+    }, {
+        name: 'maxpeople',
+        desc: '最大人数',
+        fieldColumn: true,
+        input: true
+    } ]
 }

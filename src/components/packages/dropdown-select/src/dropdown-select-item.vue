@@ -11,7 +11,7 @@ import langConfig from '~/lang'
 
 export default {
     name: 'BtDropdownSelectItem',
-    props: ['item','itemId'],
+    props: ['item', 'itemId'],
     data() {
         return {
             langConfig,
@@ -28,7 +28,7 @@ export default {
             let key = ''
             if (this.itemSelect) {
                 value = this.item
-                key  = this.itemId
+                key = this.itemId
                 let uid = this._uid
                 this.$parent.$children.forEach(child => {
                     if (child._uid !== uid) {
@@ -38,7 +38,10 @@ export default {
                 })
             }
 
-            this.$emit('selected', {'value':value,'key':key})
+            this.$emit('selected', {
+                'value': value,
+                'key': key
+            })
         }
     },
     computed: {},

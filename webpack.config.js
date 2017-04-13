@@ -88,5 +88,5 @@ module.exports = (options = {}) => ({
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }
     },
-    devtool: options.dev ? '#eval-source-map' : '#source-map'
+    devtool: options.dev ? 'module-source-map' : '#source-map'
 })

@@ -10,9 +10,9 @@ export default {
         /*required: true,*/
         props: {
             applend: true,
-            tableName:'courseclass',
-            tableLabel:'className',
-            tableId:'_id'
+            tableName: 'courseclass',
+            tableLabel: 'className',
+            tableId: '_id'
         }
     }, {
         name: 'name',
@@ -33,6 +33,7 @@ export default {
         align: 'right',
         fieldColumn: true,
         type: 'radio',
+        defvalue: '1',
         data: [
             { label: '学时制', value: '1' },
             { label: '学期制', value: '2' }

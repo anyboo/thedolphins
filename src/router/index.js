@@ -27,6 +27,9 @@ import techerinfo from '../pages/techermanage/techerinfo.vue'
 import techerclass from '../pages/techermanage/techerclass.vue'
 import techerschedule from '../pages/techermanage/techerschedule.vue'
 
+import classroom from '../pages/classroom/classroom.vue'
+import glassmanage from '../pages/glassmanage/glassmanage.vue'
+
 import coursemanage from '../pages/coursemanage/coursemanage.vue'
 
 import consult from '../pages/desktop/consult.vue'
@@ -90,6 +93,9 @@ const routes = [
     }, {
         path: '/techermanage',
         component: techermanage
+    },{
+        path: '/classroom',
+        component: classroom
     }, {
         path: '/coursemanage',
         component: coursemanage
@@ -103,6 +109,9 @@ const routes = [
             { path: 'class', component: techerclass },
             { path: 'schedule', component: techerschedule },
         ]
+    } ,{
+        path: '/glassmanage',
+        component: glassmanage
     }, {
         path: '/consult',
         component: consult

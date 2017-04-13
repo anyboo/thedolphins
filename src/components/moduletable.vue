@@ -100,9 +100,9 @@ export default {
         },
     },
     watch: {
-        modulename(val) {
-            console.log("watch")
-                //this.Initform()
+        modulename() {
+            //console.log("watch")
+            //this.Initform()
             this.operationGet()
         },
     },
@@ -113,9 +113,7 @@ export default {
     methods: {
         fieldType(item, eltype) {
             var result = false
-            if (typeof(item[eltype]) == "undefined") {
-
-            } else {
+            if (item[eltype]) {
                 result = item[eltype]
             }
             return result
@@ -155,7 +153,7 @@ export default {
         handleRemove(file, fileList) {
             this.form[this.uploadfield] = fileList
         },
-        handleAvatarScucess(res, file) {
+        handleAvatarScucess(res) {
             if (res.success) {
                 this.form[this.uploadfield].push(res)
             }
@@ -237,14 +235,14 @@ export default {
         operationAppend() {
             var vm = this
             vm.$http.post(this.url(), vm.form)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
         },
         operationEdit(apiUrlPut) {
             var vm = this
             vm.$http.put(apiUrlPut, vm.form)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
 
@@ -252,14 +250,14 @@ export default {
         operationDelete(apiUrlDelete) {
             var vm = this
             vm.$http.delete(apiUrlDelete)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
         },
         operationGet() {
             var vm = this
             var page = vm.currentPage - 1
-            var apiUrlGet = this.url() + "?page=" + page + "&prepage=" + vm.pageSize
+            var apiUrlGet = this.url() + '?page=' + page + '&prepage=' + vm.pageSize
             vm.$http.get(apiUrlGet)
                 .then((response) => {
                     vm.tableData = response.data.data

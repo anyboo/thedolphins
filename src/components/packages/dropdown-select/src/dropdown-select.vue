@@ -19,6 +19,11 @@
                 </ul>
             </div>
         </div>
+        <template v-for="item in info">
+            <div v-if="infoShow">
+                {{ getInfo(item) }}
+            </div>
+        </template>
     </div>
 </template>
 <script>
@@ -42,22 +47,37 @@ export default {
             selectValue: '', //选择框的值
             lodash: lodash, //lodash对象
             modelData: {}, //模型数据
-            dropdownValue: this.value //下拉组件值
+            dropdownValue: this.value, //下拉组件值
         }
     },
-    props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId', 'value'],
+    props: ['applend', 'name', 'tableName', 'tableLabel', 'tableId', 'value', 'filterValue', 'filterId', 'info'],
     watch: {
         value: {
             handler: function() {
                 this.getSelectValue()
             },
             deep: true
-        }
+        },
+        filterValue: {
+            handler: function() {
+                this.selectValue = ''
+                this.dropdownValue = ''
+                this.$emit('input', '')
+                this.eventSelect
+                lodash.forEach(this.$children, obj => {
+                    obj.handChange()
+                })
+            },
+            deep: true
+        },
     },
     beforeMount() {
         this.operationGet()
     },
     computed: {
+        infoShow(){
+            return this.dropdownValue&&this.dropdownValue.length>0
+        },
         menuShow() {
             if (this.menuOpen) {
                 this.menuOpen = this.menuFocus || this.menuEnter
@@ -79,6 +99,9 @@ export default {
                         if (value !== '') {
                             result = (o[vm.tableLabel].indexOf(value) != -1)
                         }
+                        if (vm.filterId) {
+                            result = (o[vm.filterId] == vm.filterValue)
+                        }
                     } else {
                         result = false
                     }
@@ -90,6 +113,26 @@ export default {
         },
     },
     methods: {
+        getInfo(item) {
+            let info = ''
+            info += item.label
+            info += ':'
+            info += this.getInfoValue(item.field)
+            return info
+        },
+        getInfoValue(key) {
+            let vm = this
+            let value = ''
+            if (vm.modelData) {
+                vm.modelData.forEach(item => {
+                    if (item[vm.tableId] == this.value) {
+                        value = item[key]
+                        return false
+                    }
+                })
+            }
+            return value
+        },
         getSelectValue() {
             let vm = this
             vm.modelData.forEach(item => {
@@ -98,7 +141,6 @@ export default {
                     return false
                 }
             })
-
         },
         operationGet() {
             let vm = this

@@ -2,7 +2,7 @@
     <div class="form-horizontal">
         <div class="form-body pal" ref="formitem">
             <template v-for="item in getFormDataLocal">
-                <bt-form-item :item-data="item.item" :value-data="item.name" />
+                <bt-form-item :item-data="item.item" :value-data="item.value" @dropdownchange="handleChange"/>
             </template>
         </div>
     </div>
@@ -25,10 +25,12 @@ export default {
     },
 
     methods: {
-        getValue(name) {
+        getValue(item,name) {
             let value = ''
             if (this.formData && this.formData.length == 1) {
                 value = this.formData[0][name]
+            }else{
+                value = item.defvalue
             }
             return value
         },
@@ -47,6 +49,11 @@ export default {
                 'validate': validate,
                 'form': formValue
             }
+        },
+        handleChange(name,value){
+            lodash.forEach(this.$children, obj => {
+                obj.filterAction(name,value)
+            })
         }
     },
     computed: {
@@ -55,10 +62,9 @@ export default {
             this.itemData.forEach(item => {
                 formDataLocal.push({
                     'item': item,
-                    'name': this.getValue(item.name)
+                    'value': this.getValue(item,item.name)
                 })
             })
-            console.log(formDataLocal)
             return formDataLocal
         },
     },

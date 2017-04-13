@@ -28,6 +28,7 @@ export default {
         align: 'right',
         fieldColumn: true,
         type: 'radio',
+        defvalue: '1',
         data: [
             { label: '男', value: '1' },
             { label: '女', value: '2' }

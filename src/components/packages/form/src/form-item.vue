@@ -18,7 +18,7 @@
                 </div>
             </template>
             <template v-else-if="itemData.type==='dropdown-select'">
-                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue" />
+                <bt-dropdown-select :name="itemData.name" :applend="getItemData('applend',false)" :table-name="getItemData('tableName')" :table-label="getItemData('tableLabel')" :table-id="getItemData('tableId')" v-model="curValue" :filter-value="filterValue" :filter-id="getItemData('filter')" :info="getItemData('info',[])" />
             </template>
             <template v-else-if="itemData.type==='date'">
                 <el-date-picker v-model="curValue" type="date" :placeholder="itemData.placeholder" format="yyyy-MM-dd">
@@ -27,7 +27,7 @@
             <template v-else>
                 <div class="input-icon" :class="itemData.align"><i class="fa" :class="itemData.icon"></i>
                     <input :id="itemData.name" :minlength="itemData.minlength" :maxlength="itemData.maxlength" :name="itemData.name" type="text" :placeholder="itemData.placeholder" class="form-control invalid" :class="required=itemData.required" @blur="handleBlur" v-model:value="curValue">
-                    <em v-if="stateError" for="username1" class="invalid" style="display: block">Please enter at least 2 characters</em>
+                    <em v-if="stateError" for="username1" class="invalid" style="display: block">{{ itemData.placeholder }}</em>
                 </div>
             </template>
         </div>
@@ -52,14 +52,22 @@ export default {
             langConfig,
             stateError: false,
             curValue: this.valueData,
-            curKey: this.itemData.name
+            curKey: this.itemData.name,
+            filterValue: ''
         }
     },
     watch: {
         valueData: {
             handler: function(newValue) {
                 this.curValue = newValue
-                console.log(this.curValue)
+            },
+            deep: true
+        },
+        curValue: {
+            handler: function(newValue) {
+                if (this.itemData.type === 'dropdown-select') {
+                    this.$emit('dropdownchange', this.itemData.name, newValue)
+                }
             },
             deep: true
         }
@@ -73,6 +81,11 @@ export default {
         },
         getItemData(name, defvalue) {
             return this.itemData.props ? this.itemData.props[name] : defvalue
+        },
+        filterAction(name, value) {
+            if (this.getItemData('filter') == name) {
+                this.filterValue = value
+            }
         },
         validate() {
             //var fieldName = this.itemData.name

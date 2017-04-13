@@ -2,20 +2,20 @@
     <div>
         <div class="row">
             <div class="col-lg-12">
-                <bt-portlet portlet-title="老师面板" :portlet-tools="true" :portlet-active="true">
+                <bt-portlet portlet-title="班级面板" :portlet-tools="true" :portlet-active="true">
                     <div class="form-horizontal">
                         <div class="form-body pal">
                             <div class="form-group">
-                                <label for="inputClass" class="col-md-3 control-label">老师姓名
+                                <label for="inputClass" class="col-md-3 control-label">班级名称
                                 </label>
                                 <div class="col-md-9">
                                     <div class="input-icon"><i class="fa fa-user"></i>
-                                        <input id="inputClass" type="text" placeholder="姓名或手机号码" class="form-control" v-model.lazy="inputClass" @change="handleChange($event.target.value)" />
+                                        <input id="inputClass" type="text" placeholder="班级名称" class="form-control" v-model.lazy="inputClass" @change="handleChange($event.target.value)" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail" class="col-md-3 control-label">课程
+                                <label for="inputEmail" class="col-md-3 control-label">班级状态
                                 </label>
                                 <div class="col-md-9 gallery-pages">
                                     <ul class="list-filter list-unstyled">
@@ -98,18 +98,18 @@
 </style>
 <script>
 import langConfig from '~/lang'
-import techerManageStore from '~/store/pages/techermanage.js'
+import glassManageStore from '~/store/pages/glassmanage.js'
 import * as types from '~/store/mutation-types'
 import lodash from 'lodash'
 import moment from 'moment'
 
 export default {
-    name: 'BtTecherManage',
+    name: 'BtGlassManage',
     data() {
         return {
             langConfig,
             showModals: false,
-            modalsdata: techerManageStore.techermanage,
+            modalsdata: glassManageStore.glassmanage,
             tableName: ['techermanage', 'courseclass'],
             coursemanage: [],
             courseclass: [],
@@ -122,6 +122,7 @@ export default {
             total: 0,
             currentPage: 1,
             pageSize: 10,
+            title:'班级'
         }
     },
     computed: {
@@ -134,11 +135,11 @@ export default {
             return this.menuOpen
         },
         modalsTitle() {
-            let title = '添加老师'
+            let title = '添加'+this.title
             if (this.modalsType == types.APPEND_API) {
-                title = '添加老师'
+                title = '添加'+this.title
             } else {
-                title = '编辑老师'
+                title = '编辑'+this.title
             }
             return title
         },
@@ -216,12 +217,12 @@ export default {
         eventSubData() {
             let vm = this
 
-            vm.$store.commit(types.GET_CURRENT_API, 'techermanage')
+            vm.$store.commit(types.GET_CURRENT_API, 'glassmanage')
 
             let filterData = []
-            if (vm.$store.getters.getCurrentModel['techermanage']) {
-                let data = vm.$store.getters.getCurrentModel['techermanage'].data
-
+            if (vm.$store.getters.getCurrentModel['glassmanage']) {
+                filterData = vm.$store.getters.getCurrentModel['glassmanage'].data
+/*
                 let count = 0
                 let start = (this.currentPage - 1) * this.pageSize
                 let end = this.pageSize * this.currentPage
@@ -248,7 +249,9 @@ export default {
 
                     return result
                 })
+
                 this.total = count
+                 */
             }
             this.coursemanage = filterData
 
@@ -281,19 +284,19 @@ export default {
         },
         handleDelete(id) {
             let vm = this
-            this.$confirm('老师删除操作, 是否继续?', '提示', {
+            this.$confirm('班级删除操作, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
                 vm.$store.dispatch(types.DELETE_API, {
-                    'model': 'techermanage',
+                    'model': 'glassmanage',
                     'id': id,
                 }).then(() => {
                     this.operationGet()
                     this.$notify({
                         title: '成功',
-                        message: '老师删除成功!',
+                        message: '班级删除成功!',
                         type: 'success'
                     })
                 })
@@ -309,16 +312,16 @@ export default {
             let modalform = vm.$refs.modalform
             let modalformValue = modalform.getForm()
             let id = modalform.getValue('_id')
-            console.log(modalform)
+            console.log(modalformValue)
             if (modalformValue.validate) {
                 if (this.modalsType == types.APPEND_API) {
                     vm.$store.dispatch(types.APPEND_API, {
-                        'model': 'techermanage',
+                        'model': 'glassmanage',
                         'form': modalformValue.form
                     }).then(() => {
                         this.$notify({
                             title: '成功',
-                            message: '老师新建成功',
+                            message: '班级新建成功',
                             type: 'success'
                         })
                         this.operationGet()
@@ -326,13 +329,13 @@ export default {
                     })
                 } else {
                     vm.$store.dispatch(types.EDIT_API, {
-                        'model': 'techermanage',
+                        'model': 'glassmanage',
                         'id': id,
                         'form': modalformValue.form,
                     }).then(() => {
                         this.$notify({
                             title: '成功',
-                            message: '老师修改成功!',
+                            message: '班级修改成功!',
                             type: 'success'
                         })
                         this.operationGet()
@@ -350,7 +353,7 @@ export default {
         editShowModals(key) {
             let vm = this
             vm.$store.dispatch(types.GET_ID_API, {
-                'model': 'techermanage',
+                'model': 'glassmanage',
                 'id': key
             }).then((data) => {
                 this.formData = data.data

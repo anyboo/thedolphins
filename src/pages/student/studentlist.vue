@@ -157,14 +157,14 @@ export default {
         operationAppend() {
             var vm = this
             vm.$http.post(vm.apiUrl, vm.form)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
         },
         operationEdit(apiUrlPut) {
             var vm = this
             vm.$http.put(apiUrlPut, vm.form)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
 
@@ -172,14 +172,14 @@ export default {
         operationDelete(apiUrlDelete) {
             var vm = this
             vm.$http.delete(apiUrlDelete)
-                .then((response) => {
+                .then(() => {
                     vm.operationGet()
                 })
         },
         operationGet() {
             var vm = this
             var page = vm.currentPage - 1
-            var apiUrlGet = vm.apiUrl + "?page=" + page + "&prepage=" + vm.pageSize
+            var apiUrlGet = vm.apiUrl + '?page=' + page + '&prepage=' + vm.pageSize
             vm.$http.get(apiUrlGet)
                 .then((response) => {
                     //console.log(response.data)

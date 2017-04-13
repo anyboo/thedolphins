@@ -2,7 +2,7 @@ export default {
     tabs: [{
         title: '老师信息',
         icon: 'fa-edit',
-        to: '/userprofile/step2'
+        to: '/techerprofile/step2'
     }, {
         title: '带班信息',
         icon: 'fa-edit',

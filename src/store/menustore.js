@@ -30,7 +30,7 @@ export default [{
     }, {
         menuTitle: '班级管理',
         menuIcon: 'fa-group',
-        to: '/techermanage'
+        to: '/glassmanage'
     }, {
         menuTitle: '学员管理',
         menuIcon: 'fa-user',
@@ -38,7 +38,7 @@ export default [{
     }, {
         menuTitle: '教室管理',
         menuIcon: 'fa-sitemap',
-        to: '/techermanage'
+        to: '/classroom'
     }, {
         menuTitle: '老师管理',
         menuIcon: 'fa-male',
