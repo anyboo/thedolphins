@@ -19,5 +19,13 @@ export default {
         align: 'right',
         fieldColumn: true,
         type: 'number'
-    } ]
+    } , {
+        name: 'minpeople',
+        label: '最小人数',
+        desc: '最大小人数',
+        placeholder: '请输入数字',
+        align: 'right',
+        fieldColumn: true,
+        type: 'number'
+    }]
 }

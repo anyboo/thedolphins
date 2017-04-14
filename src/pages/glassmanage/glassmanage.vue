@@ -20,8 +20,8 @@
                                 <div class="col-md-9 gallery-pages">
                                     <ul class="list-filter list-unstyled">
                                         <li @click="handleClass('')" class="filter" :class="{'active':classActive==''}">全部</li>
-                                        <template v-for="item in courseAllclass">
-                                            <li @click="handleClass(item._id)" class="filter" :class="{'active':classActive==item._id}">{{ item.className }}</li>
+                                        <template v-for="item in glassClass">
+                                            <li @click="handleClass(item.value)" class="filter" :class="{'active':classActive==item.value}">{{ item.label }}</li>
                                         </template>
                                     </ul>
                                 </div>
@@ -110,8 +110,8 @@ export default {
             langConfig,
             showModals: false,
             modalsdata: glassManageStore.glassmanage,
-            tableName: ['techermanage', 'courseclass'],
-            coursemanage: [],
+            tableName: ['glassmanage', 'courseclass'],
+            glassmanage: [],
             courseclass: [],
             courseAllclass: [],
             panelStyle: ['orange', 'violet', 'green', 'blue', 'yellow', 'pink'],
@@ -122,7 +122,7 @@ export default {
             total: 0,
             currentPage: 1,
             pageSize: 10,
-            title:'班级'
+            title: '班级'
         }
     },
     computed: {
@@ -135,14 +135,17 @@ export default {
             return this.menuOpen
         },
         modalsTitle() {
-            let title = '添加'+this.title
+            let title = '添加' + this.title
             if (this.modalsType == types.APPEND_API) {
-                title = '添加'+this.title
+                title = '添加' + this.title
             } else {
-                title = '编辑'+this.title
+                title = '编辑' + this.title
             }
             return title
         },
+        glassClass() {
+            return glassManageStore.glassstatus
+        }
 
     },
     beforeMount() {
@@ -221,8 +224,8 @@ export default {
 
             let filterData = []
             if (vm.$store.getters.getCurrentModel['glassmanage']) {
-                filterData = vm.$store.getters.getCurrentModel['glassmanage'].data
-/*
+                let data = vm.$store.getters.getCurrentModel['glassmanage'].data
+
                 let count = 0
                 let start = (this.currentPage - 1) * this.pageSize
                 let end = this.pageSize * this.currentPage
@@ -230,9 +233,9 @@ export default {
                 filterData = lodash.filter(data, o => {
                     let result = false
                     let className = this.inputClass.trim()
-                    if (this.classActive == o.category || this.classActive == '') {
+                    if (this.classActive == o.status || this.classActive == '') {
                         if (className.length > 0) {
-                            result = (o.name.indexOf(className) != -1 || o.phone.indexOf(className) != -1)
+                            result = (o.name.indexOf(className) != -1 )
                         } else {
                             result = true
                         }
@@ -243,17 +246,14 @@ export default {
                         } else {
                             result = false
                         }
-
                         count++
                     }
-
+                    
                     return result
                 })
-
                 this.total = count
-                 */
             }
-            this.coursemanage = filterData
+            this.glassmanage = filterData
 
             return filterData
         },
@@ -261,6 +261,7 @@ export default {
             let vm = this
             vm.$store.dispatch(types.GET_ARRAY_API, vm.tableName).then(() => {
                 this.eventData()
+                this.eventSubData()
             })
         },
         handlelink(value) {
@@ -300,7 +301,7 @@ export default {
                         type: 'success'
                     })
                 })
-            }).cancel(()=>{
+            }).cancel(() => {
 
             })
         },

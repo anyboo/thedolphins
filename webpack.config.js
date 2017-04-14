@@ -3,6 +3,7 @@ const {
 } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const url = require('url')
 const publicPath = ''
 
@@ -36,17 +37,26 @@ module.exports = (options = {}) => ({
                 }]
             }, {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
-            /*{
-              test: /favicon\.png$/,
-              use: [{
-                loader: 'file-loader',
-                options: {
-                  name: '[name].[ext]?[hash]'
-                }
-              }]
-            },*/
+            /*
+                       {
+                           test: /\.css$/,
+                           //loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                           use: ['style-loader', 'css-loader', 'postcss-loader']
+                       },
+                      {
+                         test: /favicon\.png$/,
+                         use: [{
+                           loader: 'file-loader',
+                           options: {
+                             name: '[name].[ext]?[hash]'
+                           }
+                         }]
+                       },*/
             {
                 test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
                 exclude: /favicon\.png$/,
@@ -65,7 +75,8 @@ module.exports = (options = {}) => ({
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }),
+        new ExtractTextPlugin('styles.css')
     ],
     resolve: {
         alias: {
