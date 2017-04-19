@@ -1,4 +1,43 @@
 export default [{
+    menuTitle: '设计',
+    menuIcon: 'fa-columns',
+    to: '/layout'
+}, {
+    menuTitle: '设计库',
+    menuIcon: 'fa-gear',
+    menuName: 'menu1',
+    menu: [{
+        menuTitle: '基础布局控件库',
+        menuIcon: 'fa-credit-card',
+        menuName: 'menu1',
+        menu: [{
+            menuTitle: '12布局控件',
+            menuIcon: 'fa-puzzle-piece',
+            component: 'bt-layout',
+            componentdata: '12'
+        }, {
+            menuTitle: '6 6布局控件',
+            menuIcon: 'fa-puzzle-piece',
+            component: 'bt-layout',
+            componentdata: '6 6'
+        }, {
+            menuTitle: '8 4布局控件',
+            menuIcon: 'fa-puzzle-piece',
+            component: 'bt-layout',
+            componentdata: '8 4'
+        }, {
+            menuTitle: '4 4 4布局控件',
+            menuIcon: 'fa-puzzle-piece',
+            component: 'bt-layout',
+            componentdata: '4 4 4'
+        }, {
+            menuTitle: '2 6 4布局控件',
+            menuIcon: 'fa-puzzle-piece',
+            component: 'bt-layout',
+            componentdata: '2 6 4'
+        }]
+    }]
+}, {
     menuTitle: '桌面',
     menuIcon: 'fa-windows',
     to: '/desktop'

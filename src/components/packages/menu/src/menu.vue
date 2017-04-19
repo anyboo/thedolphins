@@ -11,8 +11,8 @@ export default {
     data() {
         return {
             classObject: {
-                'nav-second-level ': (this.navlevel == "1"),
-                'nav-third-level ': (this.navlevel == "2"),
+                'nav-second-level ': (this.navlevel == '1'),
+                'nav-third-level ': (this.navlevel == '2'),
                 'collapse': this.collapse
             }
         }

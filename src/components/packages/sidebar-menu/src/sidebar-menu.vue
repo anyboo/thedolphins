@@ -27,7 +27,7 @@
                             <bt-menu-item v-for="(menuItem1, index1) in menuItem.menu" :to="menuItem1.to" :menu-name="menuItem1.menuName" :menu-title="menuItem1.menuTitle" :menu-icon="menuItem1.menuIcon">
                                 <template v-if="menuItem1.menu">
                                     <bt-menu navlevel="2" collapse="true">
-                                        <bt-menu-item v-for="(menuItem2, index2) in menuItem1.menu" :to="menuItem2.to" :menu-name="menuItem2.menuName" :menu-title="menuItem2.menuTitle" :menu-icon="menuItem2.menuIcon" />
+                                        <bt-menu-item v-for="(menuItem2, index2) in menuItem1.menu" :to="menuItem2.to" :menu-name="menuItem2.menuName" :menu-title="menuItem2.menuTitle" :menu-icon="menuItem2.menuIcon" :draggable="menuItem2.component?true:false" :component="menuItem2.component" :component-data="menuItem2.componentdata"/>
                                     </bt-menu>
                                 </template>
                             </bt-menu-item>

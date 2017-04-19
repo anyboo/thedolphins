@@ -40,6 +40,23 @@
         <bt-modals :modals-active="showModals" :modalsTitle="modalsTitle" @close="handleClose" @save="handleSave">
             <bt-form :item-data="modalsdata" ref="modalform" :form-data="formData" />
         </bt-modals>
+        <div id="main">
+            <h1>Vue Dragable For</h1>
+            <div class="drag">
+                <h2>Draggable</h2>
+                <draggable :list="list" class="dragArea">
+                    <div v-for="element in list">{{element.name}}</div>
+                </draggable>
+            </div>
+            <div class="normal">
+                <h2>Normal v-for</h2>
+                <div class="dragArea">
+                    <div v-for="element in list">{{element.name}}</div>
+                </div>
+            </div>
+            <button @click="add">Add</button>
+            <button @click="replace">Replace</button>
+        </div>
     </div>
 </template>
 <style>
@@ -48,6 +65,7 @@
 }
 </style>
 <script>
+import draggable from 'vuedraggable'
 import langConfig from '~/lang'
 import classroomStore from '~/store/pages/classroom.js'
 import * as types from '~/store/mutation-types'
@@ -67,8 +85,17 @@ export default {
             inputClass: '',
             classActive: '',
             tableData: [],
-
+            list: [{
+                name: "John"
+            }, {
+                name: "Joao"
+            }, {
+                name: "Jean"
+            }]
         }
+    },
+    components: {
+        draggable,
     },
     computed: {
         menuShow() {
@@ -103,6 +130,16 @@ export default {
         this.operationGet()
     },
     methods: {
+        add: function() {
+            this.list.push({
+                name: 'Juan'
+            });
+        },
+        replace: function() {
+            this.list = [{
+                name: 'Edgard'
+            }]
+        },
         btnStyleName(index) {
             var styleName = 'btn-orange'
             if (this.panelStyle) {

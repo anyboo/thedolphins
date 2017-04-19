@@ -34,6 +34,7 @@ import coursemanage from '../pages/coursemanage/coursemanage.vue'
 
 import consult from '../pages/desktop/consult.vue'
 import consult_search from '../pages/desktop/consult_search.vue'
+import layout from '../pages/layout/layout.vue'
 
 if (!window.VueRouter) Vue.use(VueRouter)
 
@@ -99,6 +100,9 @@ const routes = [
     }, {
         path: '/coursemanage',
         component: coursemanage
+    },{
+        path: '/layout',
+        component: layout
     }, {
         path: '/techerprofile/:id',
         component: techerprofile,

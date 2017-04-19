@@ -17,6 +17,8 @@ import Form from '../packages/form'
 import DropDownSelect from '../packages/dropdown-select'
 import Panel from '../packages/panel'
 import ModuleTable from '../packages/moduletable'
+import Component from '../packages/component'
+import Layout from '../packages/layout'
 
 const components = [
     Design,
@@ -37,7 +39,11 @@ const components = [
     Form,
     DropDownSelect,
     Panel,
-    ModuleTable
+    ModuleTable,
+    Component,
+    Layout.Layout,
+    Layout.Row,
+    Layout.Col
 ]
 
 const install = function(Vue) {
@@ -69,5 +75,7 @@ export default {
     Form,
     DropDownSelect,
     Panel,
-    ModuleTable
+    ModuleTable,
+    Component,
+    Layout
 }

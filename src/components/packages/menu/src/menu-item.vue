@@ -1,6 +1,6 @@
 <template>
     <li :class="{ active: isActive }">
-        <a @click="handleClick">
+        <a @click="handleClick" :draggable="draggable" :data-component="component" :data-componentdata="componentData" @dragstart="dragstart($event)">
             <i class="fa " :class="menuIcon">
             <div class="icon-bg bg-orange"/>
             </i>
@@ -14,13 +14,17 @@
 export default {
     name: 'BtMenuItem',
     componentName: 'BtMenuItem',
-    props: ['menuName', 'menuTitle', 'menuIcon', 'to'],
+    props: ['menuName', 'menuTitle', 'menuIcon', 'to','draggable','component','componentData'],
     data() {
         return {
             isActive: false
         }
     },
     methods: {
+        dragstart(ev){
+            ev.dataTransfer.setData('componentdata', ev.target.dataset.componentdata)
+            ev.dataTransfer.setData('component',ev.target.dataset.component)
+        },
         handChange() {
             this.isActive = false
             var obj = this.getSlots()
