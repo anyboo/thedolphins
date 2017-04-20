@@ -19,6 +19,8 @@ import Panel from '../packages/panel'
 import ModuleTable from '../packages/moduletable'
 import Component from '../packages/component'
 import Layout from '../packages/layout'
+import Drag from '../packages/drag'
+import Drop from '../packages/drop'
 
 const components = [
     Design,
@@ -43,7 +45,9 @@ const components = [
     Component,
     Layout.Layout,
     Layout.Row,
-    Layout.Col
+    Layout.Col,
+    Drag,
+    Drop
 ]
 
 const install = function(Vue) {
@@ -77,5 +81,7 @@ export default {
     Panel,
     ModuleTable,
     Component,
-    Layout
+    Layout,
+    Drag,
+    Drop
 }

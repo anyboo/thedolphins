@@ -1,9 +1,11 @@
 <template>
-    <bt-row>
-        <template v-for="item in colArray">
-            <bt-col :class="colClass(item)"> </bt-col>
-        </template>
-    </bt-row>
+    <bt-drag :draggable="draggable" :component="componentData.component" :component-id="componentData.id" :component-data="componentData.componentdata" :component-name="componentData.name">
+        <bt-row>
+            <template v-for="item,index in colArray">
+                <bt-col :class="colClass(item)" :component-id="getComponentId+index"> </bt-col>
+            </template>
+        </bt-row>
+    </bt-drag>
 </template>
 <script>
 import langConfig from '~/lang'
@@ -14,7 +16,8 @@ export default {
     props: ['colNum', 'componentData'],
     data() {
         return {
-            langConfig
+            langConfig,
+            draggable: true
         }
     },
     methods: {
@@ -24,7 +27,8 @@ export default {
     },
     computed: {
         colArray() {
-            let col = this.colNum || this.componentData
+            let colvalue = this.componentData ? this.componentData.componentdata : 12
+            let col = this.colNum || colvalue
             let num = lodash(col).trim()
             let numArray = num.split(' ')
             let numcount = lodash.reduce(numArray,
@@ -35,6 +39,9 @@ export default {
                 numArray = [12]
             }
             return numArray
+        },
+        getComponentId() {
+            return this.componentData ? this.componentData.id : 0
         }
     },
 }

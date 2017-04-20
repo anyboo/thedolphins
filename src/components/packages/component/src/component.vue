@@ -1,5 +1,5 @@
 <template>
-    <component v-bind:is="componentName" :component-data="componentData">{{ componentData }}</component>
+    <component v-bind:is="componentName" :component-data="componentData"></component>
 </template>
 <script>
 import langConfig from '~/lang'

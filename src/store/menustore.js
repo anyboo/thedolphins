@@ -38,6 +38,16 @@ export default [{
         }]
     }]
 }, {
+    menuTitle: '元素库',
+    menuIcon: 'fa-gear',
+    menuName: 'menu1',
+    menu: [{
+        menuTitle: '元素列表',
+        menuIcon: 'fa-credit-card',
+    }],
+    menutree: true
+
+}, {
     menuTitle: '桌面',
     menuIcon: 'fa-windows',
     to: '/desktop'

@@ -1,47 +1,30 @@
 <template>
-    <div class="bt-col" :class="{'dragenter':dragenterclass}" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)">
-        <template v-for="item in allComponents">
-            <bt-component :component-name="item.component" :component-data="item.componentdata" />
+    <bt-drop class="bt-col" :pid="componentId">
+        <template v-for="item in getDesignStore">
+            <bt-component :component-name="item.component" :component-data="item" />
         </template>
-    </div>
+    </bt-drop>
 </template>
 <script>
 import langConfig from '~/lang'
 
 export default {
     name: 'BtCol',
+    props: ['componentId'],
     data() {
         return {
             langConfig,
-            allComponents: [], 
+            allComponents: [],
             dragenterclass: false,
         }
     },
     methods: {
-        allowDrop(ev) {
-            ev.preventDefault()
-        },
-        dragleave(ev) {
-            if (ev.target.className.indexOf('bt-col') != -1) {
-                this.dragenterclass = false
-            }
-            return true
-        },
-        dragenter(ev) {
-            if (ev.target.className.indexOf('bt-col') != -1) {
-                this.dragenterclass = true
-            }
-            return true
-        },
-        drop(ev) {
-            let componentinfo = {}
-            componentinfo.component = ev.dataTransfer.getData('component')
-            componentinfo.componentdata = ev.dataTransfer.getData('componentdata')
-            this.dragenterclass = false
-            this.allComponents.push(componentinfo)
-            ev.preventDefault()
-        },
+
     },
-    computed: {},
+    computed: {
+        getDesignStore() {
+            return this.$store.state.design.filter(designitem => designitem.pid == this.componentId)
+        }
+    },
 }
 </script>

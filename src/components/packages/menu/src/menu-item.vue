@@ -1,11 +1,13 @@
 <template>
     <li :class="{ active: isActive }">
-        <a @click="handleClick" :draggable="draggable" :data-component="component" :data-componentdata="componentData" @dragstart="dragstart($event)">
-            <i class="fa " :class="menuIcon">
-            <div class="icon-bg bg-orange"/>
-            </i>
-            <span class="menu-title">{{ menuTitle }}</span>
-            <span v-if="menuName" class="fa arrow"></span>
+        <a @click="handleClick">
+            <bt-drag :draggable="draggable" :component="component" :component-id="0" :component-data="componentData" :component-name="menuTitle">
+                <i class="fa" :class="menuIcon">
+                     <div class="icon-bg bg-orange"/>
+              </i>
+                <span class="menu-title">{{ menuTitle }}</span>
+                <span v-if="menuName" class="fa arrow"></span>
+            </bt-drag>
         </a>
         <slot></slot>
     </li>
@@ -14,17 +16,13 @@
 export default {
     name: 'BtMenuItem',
     componentName: 'BtMenuItem',
-    props: ['menuName', 'menuTitle', 'menuIcon', 'to','draggable','component','componentData'],
+    props: ['menuName', 'menuTitle', 'menuIcon', 'to', 'draggable', 'component', 'componentData'],
     data() {
         return {
             isActive: false
         }
     },
     methods: {
-        dragstart(ev){
-            ev.dataTransfer.setData('componentdata', ev.target.dataset.componentdata)
-            ev.dataTransfer.setData('component',ev.target.dataset.component)
-        },
         handChange() {
             this.isActive = false
             var obj = this.getSlots()

@@ -21,14 +21,17 @@
                     </div>
                     <div class="clearfix"></div>
                 </li>
-                <bt-menu-item v-for="(menuItem, index) in menuStore" :to="menuItem.to" :menu-name="menuItem.menuName"  :menu-title="menuItem.menuTitle" :menu-icon="menuItem.menuIcon">
+                <bt-menu-item v-for="(menuItem, index) in menuStore" :to="menuItem.to" :menu-name="menuItem.menuName" :menu-title="menuItem.menuTitle" :menu-icon="menuItem.menuIcon">
                     <template v-if="menuItem.menu">
                         <bt-menu navlevel="1" collapse="true">
                             <bt-menu-item v-for="(menuItem1, index1) in menuItem.menu" :to="menuItem1.to" :menu-name="menuItem1.menuName" :menu-title="menuItem1.menuTitle" :menu-icon="menuItem1.menuIcon">
                                 <template v-if="menuItem1.menu">
                                     <bt-menu navlevel="2" collapse="true">
-                                        <bt-menu-item v-for="(menuItem2, index2) in menuItem1.menu" :to="menuItem2.to" :menu-name="menuItem2.menuName" :menu-title="menuItem2.menuTitle" :menu-icon="menuItem2.menuIcon" :draggable="menuItem2.component?true:false" :component="menuItem2.component" :component-data="menuItem2.componentdata"/>
+                                        <bt-menu-item v-for="(menuItem2, index2) in menuItem1.menu" :to="menuItem2.to" :menu-name="menuItem2.menuName" :menu-title="menuItem2.menuTitle" :menu-icon="menuItem2.menuIcon" :draggable="menuItem2.component?true:false" :component="menuItem2.component" :component-data="menuItem2.componentdata" />
                                     </bt-menu>
+                                </template>
+                                <template v-if="menuItem.menutree">
+                                    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
                                 </template>
                             </bt-menu-item>
                         </bt-menu>
@@ -46,10 +49,53 @@ export default {
     props: ['menuStore'],
     data() {
         return {
-            langConfig
+            langConfig,
+            data: [{
+                label: '一级 1',
+                children: [{
+                    label: '二级 1-1',
+                    children: [{
+                        label: '三级 1-1-1'
+                    }]
+                }]
+            }, {
+                label: '一级 2',
+                children: [{
+                    label: '二级 2-1',
+                    children: [{
+                        label: '三级 2-1-1'
+                    }]
+                }, {
+                    label: '二级 2-2',
+                    children: [{
+                        label: '三级 2-2-1'
+                    }]
+                }]
+            }, {
+                label: '一级 3',
+                children: [{
+                    label: '二级 3-1',
+                    children: [{
+                        label: '三级 3-1-1'
+                    }]
+                }, {
+                    label: '二级 3-2',
+                    children: [{
+                        label: '三级 3-2-1'
+                    }]
+                }]
+            }],
+            defaultProps: {
+                children: 'children',
+                label: 'label'
+            }
         }
     },
-    methods: {},
+    methods: {
+        handleNodeClick(data) {
+            console.log(data)
+        },
+    },
     computed: {},
 }
 </script>

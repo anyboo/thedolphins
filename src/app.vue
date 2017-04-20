@@ -56,7 +56,7 @@ export default {
             if (this.$route.path === '/en-US') {
                 Vue.config.lang = '/en-US'
             }
-            return Vue.config.lang//this.$route.path
+            return Vue.config.lang //this.$route.path
         }
     },
     watch: {

@@ -1,9 +1,9 @@
 <template>
-    <div class="demo" :class="{'dragenter':dragenterclass}" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)">
-        <template v-for="item in allComponents">
-            <bt-component :component-name="item.component" :component-data="item.componentdata" />
+    <bt-drop class="demo">
+        <template v-for="item in getDesignStore">
+            <bt-component :component-name="item.component" :component-data="item" />
         </template>
-    </div>
+    </bt-drop>
 </template>
 <style>
 .demo {
@@ -77,7 +77,7 @@
 }
 
 .dragenter {
-    border: 1px dashed #ff0000 ;
+    border: 1px dashed #ff0000;
 }
 
 .dragenter:after {
@@ -91,37 +91,16 @@ export default {
     name: 'BtLayoutPage',
     data() {
         return {
-            langConfig,
-            allComponents: [],
-            dragenterclass: false,
+            langConfig
         }
     },
-
     methods: {
-        allowDrop(ev) {
-            ev.preventDefault()
-        },
-        dragleave(ev) {
-            if (ev.target.className.indexOf('demo') != -1) {
-                this.dragenterclass = false
-            }
-            return true
-        },
-        dragenter(ev) {
-            if (ev.target.className.indexOf('demo') != -1) {
-                this.dragenterclass = true
-            }
-            return true
-        },
-        drop(ev) {
-            let componentinfo = {}
-            componentinfo.component = ev.dataTransfer.getData('component')
-            componentinfo.componentdata = ev.dataTransfer.getData('componentdata')
-            this.dragenterclass = false
-            this.allComponents.push(componentinfo)
-            ev.preventDefault()
-        },
+
     },
-    computed: {},
+    computed: {
+        getDesignStore() {
+            return this.$store.state.design.filter(designitem => designitem.pid == 0)
+        }
+    },
 }
 </script>
