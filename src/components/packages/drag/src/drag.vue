@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" :draggable="draggable" @dragstart="dragstart($event)">
+    <div :id="getPid" :draggable="draggable" @dragstart="dragstart($event)" >
         <slot></slot>
     </div>
 </template>
@@ -19,6 +19,12 @@ export default {
     methods: {
         dragstart(ev) {
             if (ev.target.id == this.getPid) {
+                this.$store.commit('componentStatusChange', {
+                    'id': 0,
+                    'status': [{
+                        'active': true
+                    }]
+                })
                 ev.dataTransfer.setData('id', this.componentId)
                 ev.dataTransfer.setData('name', this.componentName)
                 ev.dataTransfer.setData('componentdata', this.componentData)
@@ -33,7 +39,8 @@ export default {
                 pid = -1
             }
             return 'pid' + pid
-        }
+        },
+       
     }
 }
 </script>

@@ -1,62 +1,120 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col-lg-12">
-                <bt-portlet portlet-title="教室面板" :portlet-tools="true" :portlet-active="true">
-                    <div class="form-horizontal">
-                        <div class="form-body pal">
+    <div class="row">
+        <div class="col-lg-12">
+            <nav role="navigation" class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </button><a href="#" class="navbar-brand">Brand</a>
+                    </div>
+                    <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Link</a>
+                            </li>
+                            <li><a href="#">Link</a>
+                            </li>
+                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a>
+                                    </li>
+                                    <li><a href="#">Another action</a>
+                                    </li>
+                                    <li><a href="#">Something else here</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form role="search" class="navbar-form navbar-left">
                             <div class="form-group">
-                                <label for="inputClass" class="col-md-3 control-label">教室名称
-                                </label>
-                                <div class="col-md-9">
-                                    <div class="input-icon"><i class="fa fa-user"></i>
-                                        <input id="inputClass" type="text" placeholder="教室名称" class="form-control" v-model.lazy="inputClass" @change="handleChange($event.target.value)">
-                                    </div>
+                                <input type="text" placeholder="Search" class="form-control">
+                            </div>&nbsp;
+                            <button type="submit" class="btn btn-green">Submit</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Link</a>
+                            </li>
+                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a>
+                                    </li>
+                                    <li><a href="#">Another action</a>
+                                    </li>
+                                    <li><a href="#">Something else here</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <bt-portlet portlet-title="教室面板" :portlet-tools="true" :portlet-active="true">
+                <div class="form-horizontal">
+                    <div class="form-body pal">
+                        <div class="form-group">
+                            <label for="inputClass" class="col-md-3 control-label">教室名称
+                            </label>
+                            <div class="col-md-9">
+                                <div class="input-icon"><i class="fa fa-user"></i>
+                                    <input id="inputClass" type="text" placeholder="教室名称" class="form-control" v-model.lazy="inputClass" @change="handleChange($event.target.value)">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions none-bg">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button class="btn btn-primary" @click="handleShowModals"> <i class="fa fa-upload mrs"></i>添加</button>
-                                <button class="btn btn-primary" @click="handleClear"> <i class="fa fa-trash-o mrs"></i>搜索重置</button>
-                            </div>
+                    </div>
+                    <div class="form-actions none-bg">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-primary" @click="handleShowModals"> <i class="fa fa-upload mrs"></i>添加</button>
+                            <button class="btn btn-primary" @click="handleClear"> <i class="fa fa-trash-o mrs"></i>搜索重置</button>
                         </div>
                     </div>
-                </bt-portlet>
-            </div>
-        </div>
-        <el-table :data="tableData" row-key="_id" class="table" stripe border>
-            <el-table-column type="index" width="50"></el-table-column>
-            <template v-for="item in fieldColumn">
-                <el-table-column :prop="item.name" :label="item.desc"></el-table-column>
-            </template>
-            <el-table-column label="操作" width="160">
-                <template scope="scope">
-                    <el-button size="small" @click="editShowModals(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <bt-modals :modals-active="showModals" :modalsTitle="modalsTitle" @close="handleClose" @save="handleSave">
-            <bt-form :item-data="modalsdata" ref="modalform" :form-data="formData" />
-        </bt-modals>
-        <div id="main">
-            <h1>Vue Dragable For</h1>
-            <div class="drag">
-                <h2>Draggable</h2>
-                <draggable :list="list" class="dragArea">
-                    <div v-for="element in list">{{element.name}}</div>
-                </draggable>
-            </div>
-            <div class="normal">
-                <h2>Normal v-for</h2>
-                <div class="dragArea">
-                    <div v-for="element in list">{{element.name}}</div>
                 </div>
-            </div>
-            <button @click="add">Add</button>
-            <button @click="replace">Replace</button>
+            </bt-portlet>
         </div>
+    </div>
+    <el-table :data="tableData" row-key="_id" class="table" stripe border>
+        <el-table-column type="index" width="50"></el-table-column>
+        <template v-for="item in fieldColumn">
+            <el-table-column :prop="item.name" :label="item.desc"></el-table-column>
+        </template>
+        <el-table-column label="操作" width="160">
+            <template scope="scope">
+                <el-button size="small" @click="editShowModals(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <bt-modals :modals-active="showModals" :modalsTitle="modalsTitle" @close="handleClose" @save="handleSave">
+        <bt-form :item-data="modalsdata" ref="modalform" :form-data="formData" />
+    </bt-modals>
+    <div id="main">
+        <h1>Vue Dragable For</h1>
+        <div class="drag">
+            <h2>Draggable</h2>
+            <draggable :list="list" class="dragArea">
+                <div v-for="element in list">{{element.name}}</div>
+            </draggable>
+        </div>
+        <div class="normal">
+            <h2>Normal v-for</h2>
+            <div class="dragArea">
+                <div v-for="element in list">{{element.name}}</div>
+            </div>
+        </div>
+        <button @click="add">Add</button>
+        <button @click="replace">Replace</button>
+    </div>
     </div>
 </template>
 <style>

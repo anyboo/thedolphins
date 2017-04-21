@@ -1,6 +1,6 @@
 <template>
     <bt-drag :draggable="draggable" :component="componentData.component" :component-id="componentData.id" :component-data="componentData.componentdata" :component-name="componentData.name">
-        <bt-row>
+        <bt-row :row-id='getComponentId'>
             <template v-for="item,index in colArray">
                 <bt-col :class="colClass(item)" :component-id="getComponentId+index"> </bt-col>
             </template>
@@ -17,7 +17,8 @@ export default {
     data() {
         return {
             langConfig,
-            draggable: true
+            draggable: true,
+            active: false
         }
     },
     methods: {

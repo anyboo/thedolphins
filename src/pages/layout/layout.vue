@@ -1,5 +1,5 @@
 <template>
-    <bt-drop class="demo">
+    <bt-drop class="demo" :class="getComponentActive">
         <template v-for="item in getDesignStore">
             <bt-component :component-name="item.component" :component-data="item" />
         </template>
@@ -83,6 +83,16 @@
 .dragenter:after {
     border: 1px dashed #ff0000 !important;
 }
+
+.bt-row.active {
+    border: 1px dashed #0000ff !important;
+}
+.bt-col.active {
+    border: 1px dashed #ff0000 !important;
+}
+.bt-row.haveactive {
+    border: 1px dashed #ff00ff !important;
+}
 </style>
 <script>
 import langConfig from '~/lang'
@@ -100,6 +110,17 @@ export default {
     computed: {
         getDesignStore() {
             return this.$store.state.design.filter(designitem => designitem.pid == 0)
+        },
+        getComponentActive() {
+            let item = this.$store.state.design.find(designitem => designitem.dragenter == true)
+            let classobj = {'dragenter': false}
+            if (item) {
+                classobj = {
+                    'dragenter': true
+                }
+            }
+            console.log('getComponentActive',item)
+            return classobj
         }
     },
 }

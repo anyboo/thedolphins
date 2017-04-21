@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" :class="{'dragenter':dragenterclass}" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)">
+    <div :id="getPid" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)" @click="handleClick($event)" :class="getComponentActive">
         <slot></slot>
     </div>
 </template>
@@ -18,23 +18,28 @@ export default {
     data() {
         return {
             langConfig,
-            dragenterclass: false
         }
     },
     methods: {
         allowDrop(ev) {
             ev.preventDefault()
         },
-        dragleave(ev) {
+        changeDragenter(ev, status) {
             if (ev.target.id == this.getPid) {
-                this.dragenterclass = false
+                this.$store.commit('componentStatusChange', {
+                    'id': this.pid,
+                    'status': {
+                        'dragenter': status
+                    }
+                })
             }
+        },
+        dragleave(ev) {
+            this.changeDragenter(ev, false)
             return true
         },
         dragenter(ev) {
-            if (ev.target.id == this.getPid) {
-                this.dragenterclass = true
-            }
+            this.changeDragenter(ev, true)
             return true
         },
         drop(ev) {
@@ -48,7 +53,6 @@ export default {
                 let id = ev.dataTransfer.getData('id')
                 let copy = ev.dataTransfer.effectAllowed
 
-                console.log(copy)
                 if (id == 0) {
                     this.$store.state.designitem.id = maxid
                     this.$store.state.designitem.name = ev.dataTransfer.getData('name')
@@ -70,9 +74,14 @@ export default {
                         'maxid': maxid
                     })
                 }
-                this.dragenterclass = false
+                this.changeDragenter(ev, false)
                 ev.preventDefault()
             }
+        },
+        handleClick() {
+            this.$store.commit('componentColChange', {
+                'id': this.pid,
+            })
         },
     },
     computed: {
@@ -82,6 +91,17 @@ export default {
                 pid = -1
             }
             return 'pid' + pid
+        },
+        getComponentActive() {
+            let classobj = {
+                'active': false
+            }
+            if (this.$store.state.dragenterCol == this.pid) {
+                classobj = {
+                    'active': true
+                }
+            }
+            return classobj
         }
     }
 }
