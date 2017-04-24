@@ -1,7 +1,7 @@
 <template>
-    <<div class="row">
+    <div class="row">
         <div class="col-md-8">
-            <bt-droplist componentClass="demo" :component-id="0"/>
+            <bt-droplist componentClass="demo" :component-id="0" />
         </div>
         <div class="col-md-4">
             <div class="panel panel-violet">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 <style>
 .demo {
@@ -137,8 +137,8 @@ export default {
 
     },
     computed: {
-   
-    
+
+
     },
 }
 </script>
