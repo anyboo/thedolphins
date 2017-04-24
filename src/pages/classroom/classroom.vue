@@ -48,7 +48,6 @@
 }
 </style>
 <script>
-import draggable from 'vuedraggable'
 import langConfig from '~/lang'
 import classroomStore from '~/store/pages/classroom.js'
 import * as types from '~/store/mutation-types'
@@ -69,9 +68,6 @@ export default {
             classActive: '',
             tableData: []
         }
-    },
-    components: {
-        draggable,
     },
     computed: {
         menuShow() {
