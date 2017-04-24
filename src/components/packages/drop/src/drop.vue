@@ -33,14 +33,15 @@ export default {
             classlist.forEach(item => {
                 result[item] = true
             })
-            let dragenterClassTemp = this.dragenterClass
-            if (!dragenterClassTemp) {
-                dragenterClassTemp = this.getComponentActive()
-            } else {
-                dragenterClassTemp = {
-                    'dragenter': dragenterClassTemp
-                }
-            }
+            let dragenterClassTemp = this.getComponentActive()
+                //let dragenterClassTemp = this.dragenterClass
+                //if (!dragenterClassTemp) {
+                //    dragenterClassTemp = this.getComponentActive()
+                //} else {
+                //    dragenterClassTemp = {
+                //       'dragenter': dragenterClassTemp
+                //   }
+                //}
             result = lodash.merge(result, dragenterClassTemp)
             return result
         },

@@ -1,7 +1,9 @@
 <template>
     <bt-drop :componentClass="getProps('componentClass', '')" :pid="getProps('componentId',0)">
         <template v-for="item in getDesignStore()">
-            <bt-component :component-name="item.component" :component-data="item" />
+            <bt-drag :draggable="draggable" :component="item.component" :component-id="item.id" :component-data="item.componentdata" :component-name="item.name">
+                <bt-component :component-name="item.component" :component-data="item" />
+            </bt-drag>
         </template>
     </bt-drop>
 </template>
@@ -14,10 +16,11 @@ export default {
     data() {
         return {
             langConfig,
+            draggable: true,
         }
     },
     methods: {
-       
+
     },
     computed: {
 

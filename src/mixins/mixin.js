@@ -20,18 +20,16 @@ export default {
             return this.$store.state.design.filter(designitem => designitem.pid == this.componentId)
         },
         getComponentActive() {
-            let item = this.$store.state.design.find(designitem => designitem.id == this.componentId)
-            if (this.componentId == 0) {
-                item = this.$store.state.design.find(designitem => {
-                    return designitem.dragenter
-                })
-            }
+            let item = this.$store.state.design.find(designitem => {
+                return designitem.id == this.componentId
+            })
+            console.log('getComponentActive',item,this.pid,this.componentId)
             let classobj = {
                 'dragenter': false,
-                'active': false
+                'btactive': false
             }
             if (this.$store.state.dragenterCol == this.pid) {
-                classobj.active = true
+                classobj.btactive = true
             }
             if (item) {
                 classobj.dragenter = true

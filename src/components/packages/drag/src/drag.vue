@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" :draggable="draggable" @dragstart="dragstart($event)" >
+    <div :id="getPid" :draggable="draggable" @dragstart="dragstart($event)" :class="getClass()">
         <slot></slot>
     </div>
 </template>
@@ -31,6 +31,19 @@ export default {
                 ev.dataTransfer.setData('component', this.component)
             }
         },
+        getClass() {
+            let className = {}
+            if (this.component == 'bt-label') {
+                let dragenterClassTemp = this.getComponentActive()
+                className = {
+                    'dragblock': true
+                }
+                console.log(dragenterClassTemp)
+                className = lodash.merge(className, dragenterClassTemp)
+            }
+
+            return className
+        },
     },
     computed: {
         getPid() {
@@ -40,7 +53,7 @@ export default {
             }
             return 'pid' + pid
         },
-       
+
     }
 }
 </script>

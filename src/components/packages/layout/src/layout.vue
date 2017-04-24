@@ -1,11 +1,9 @@
 <template>
-    <bt-drag :draggable="draggable" :component="componentData.component" :component-id="componentData.id" :component-data="componentData.componentdata" :component-name="componentData.name">
-        <bt-row :row-id='getComponentId'>
-            <template v-for="item,index in colArray">
-                <bt-col :class="colClass(item)" :component-id="getComponentId+index"> </bt-col>
-            </template>
-        </bt-row>
-    </bt-drag>
+    <bt-row :row-id='getComponentId'>
+        <template v-for="item,index in colArray">
+            <bt-col :class="colClass(item)" :component-id="getComponentId+index"> </bt-col>
+        </template>
+    </bt-row>
 </template>
 <script>
 import langConfig from '~/lang'
@@ -17,7 +15,6 @@ export default {
     data() {
         return {
             langConfig,
-            draggable: true,
             active: false
         }
     },

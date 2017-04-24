@@ -109,16 +109,18 @@
     border: 1px dashed #ff0000 !important;
 }
 
-.bt-row.active {
-    border: 1px dashed #0000ff !important;
-}
-
-.bt-col.active {
+.btactive {
     border: 1px dashed #ff0000 !important;
 }
-
+.btactive:after {
+    border: 1px dashed #ff00ff !important;
+}
 .bt-row.haveactive {
     border: 1px dashed #ff00ff !important;
+}
+
+.dragblock {
+    display: inline-block;
 }
 </style>
 <script>
