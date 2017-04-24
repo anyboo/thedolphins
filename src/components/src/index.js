@@ -21,6 +21,7 @@ import Component from '../packages/component'
 import Layout from '../packages/layout'
 import Drag from '../packages/drag'
 import Drop from '../packages/drop'
+import DropList from '../packages/droplist'
 
 const components = [
     Design,
@@ -47,7 +48,8 @@ const components = [
     Layout.Row,
     Layout.Col,
     Drag,
-    Drop
+    Drop,
+    DropList
 ]
 
 const install = function(Vue) {
@@ -83,5 +85,6 @@ export default {
     Component,
     Layout,
     Drag,
-    Drop
+    Drop,
+    DropList
 }

@@ -27,7 +27,7 @@ export default {
                 })
                 ev.dataTransfer.setData('id', this.componentId)
                 ev.dataTransfer.setData('name', this.componentName)
-                ev.dataTransfer.setData('componentdata', this.componentData)
+                ev.dataTransfer.setData('componentdata', JSON.stringify(this.componentData))
                 ev.dataTransfer.setData('component', this.component)
             }
         },

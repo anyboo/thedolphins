@@ -1,12 +1,12 @@
 <template>
-    <span :class="styleName">{{ labelText }}</span>
+    <span :class="styleName">{{ getProps('labelText','label') }}</span>
 </template>
 <script>
 import langConfig from '~/lang'
 
 export default {
     name: 'BtLabel',
-    props: ['labelStyle', 'labelText', 'lableBadge'],
+    props: ['labelStyle', 'labelText', 'lableBadge','componentData'],
     data() {
         return {
             langConfig
@@ -15,11 +15,12 @@ export default {
     computed: {
         styleName() {
             var styleName = 'abel-primary'
-            if (this.lableBadge) {
-                styleName = 'badge badge-' + this.labelStyle
+            if (this.getProps('lableBadge',false)) {
+                styleName = 'badge badge-' + this.getProps('labelStyle','primary')
             } else {
-                styleName = 'label label-' + this.labelStyle
+                styleName = 'label label-' + this.getProps('labelStyle','primary')
             }
+
             return styleName
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)" @click="handleClick($event)" :class="getComponentActive">
+    <div :id="getPid" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)" @click="handleClick($event)" :class="getClass()">
         <slot></slot>
     </div>
 </template>
@@ -13,6 +13,10 @@ export default {
         'pid': {
             type: Number,
             default: 0
+        },
+        'componentClass': {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -21,6 +25,18 @@ export default {
         }
     },
     methods: {
+        getClass() {
+            let result = {}
+            let className = this.getProps('componentClass', '')
+            let classlist = className.split(' ')
+            classlist.forEach(item => {
+                result[item] = true
+            })
+            let ActiveName = this.getComponentActive()
+            result = lodash.merge(result, ActiveName)
+            console.log(result)
+            return result
+        },
         allowDrop(ev) {
             ev.preventDefault()
         },
@@ -57,7 +73,7 @@ export default {
                     this.$store.state.designitem.id = maxid
                     this.$store.state.designitem.name = ev.dataTransfer.getData('name')
                     this.$store.state.designitem.component = ev.dataTransfer.getData('component')
-                    this.$store.state.designitem.componentdata = ev.dataTransfer.getData('componentdata')
+                    this.$store.state.designitem.componentdata = JSON.parse(ev.dataTransfer.getData('componentdata'))
                     this.$store.state.designitem.pid = this.pid
                     this.$store.state.designitem.index = maxid
                     designitem = lodash.cloneDeep(this.$store.state.designitem)
@@ -91,17 +107,6 @@ export default {
                 pid = -1
             }
             return 'pid' + pid
-        },
-        getComponentActive() {
-            let classobj = {
-                'active': false
-            }
-            if (this.$store.state.dragenterCol == this.pid) {
-                classobj = {
-                    'active': true
-                }
-            }
-            return classobj
         }
     }
 }

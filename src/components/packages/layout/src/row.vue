@@ -19,7 +19,7 @@ export default {
             this.$store.commit('componentStatusChange', {
                 'id': this.rowId,
                 'status': [{
-                    'active': status
+                    'active': true
                 }]
             })
             event.stopPropagation()

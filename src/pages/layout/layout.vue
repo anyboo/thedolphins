@@ -1,9 +1,34 @@
 <template>
-    <bt-drop class="demo" :class="getComponentActive">
-        <template v-for="item in getDesignStore">
-            <bt-component :component-name="item.component" :component-data="item" />
-        </template>
-    </bt-drop>
+    <<div class="row">
+        <div class="col-md-8">
+            <bt-droplist componentClass="demo" :component-id="0"/>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-violet">
+                <div class="panel-heading">属性</div>
+                <div class="panel-body pan">
+                    <bt-form :item-data="modalsdata" ref="modalform" :form-data="tabsData" />
+                    <div class="form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary">保存</button>&nbsp;
+                            <button type="button" class="btn btn-green">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-green">
+                <div class="panel-heading">事件</div>
+                <div class="panel-body pan">
+                    <div class="form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary">保存</button>&nbsp;
+                            <button type="button" class="btn btn-green">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 </template>
 <style>
 .demo {
@@ -87,41 +112,33 @@
 .bt-row.active {
     border: 1px dashed #0000ff !important;
 }
+
 .bt-col.active {
     border: 1px dashed #ff0000 !important;
 }
+
 .bt-row.haveactive {
     border: 1px dashed #ff00ff !important;
 }
 </style>
 <script>
 import langConfig from '~/lang'
-
+import layouteStore from '~/store/pages/layout.js'
 export default {
     name: 'BtLayoutPage',
     data() {
         return {
-            langConfig
+            langConfig,
+            modalsdata: layouteStore.layout,
+            tabsData: {}
         }
     },
     methods: {
 
     },
     computed: {
-        getDesignStore() {
-            return this.$store.state.design.filter(designitem => designitem.pid == 0)
-        },
-        getComponentActive() {
-            let item = this.$store.state.design.find(designitem => designitem.dragenter == true)
-            let classobj = {'dragenter': false}
-            if (item) {
-                classobj = {
-                    'dragenter': true
-                }
-            }
-            console.log('getComponentActive',item)
-            return classobj
-        }
+   
+    
     },
 }
 </script>

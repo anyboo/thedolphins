@@ -1,9 +1,5 @@
 <template>
-    <bt-drop class="bt-col" :pid="componentId">
-        <template v-for="item in getDesignStore">
-            <bt-component :component-name="item.component" :component-data="item" />
-        </template>
-    </bt-drop>
+    <bt-droplist componentClass="bt-col" :component-id="componentId" />
 </template>
 <script>
 import langConfig from '~/lang'

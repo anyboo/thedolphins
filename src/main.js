@@ -10,7 +10,7 @@ import store from './store/'
 //import VueI18n from 'vue-i18n'
 import Element from 'element-ui'
 import BtCom from './components/src'
-
+import mixin from './mixins/mixin'
 
 //require('es6-promise').polyfill()
 
@@ -23,6 +23,8 @@ Vue.use(BtCom)
 Vue.config.lang = 'zh-cn'
 //Vue.locale('zh-cn', zhLocale)
 //Vue.locale('en', enLocale)
+
+Vue.mixin(mixin)
 
 new Vue({
     el: '#app',
