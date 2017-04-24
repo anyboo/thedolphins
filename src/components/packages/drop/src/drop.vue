@@ -22,6 +22,7 @@ export default {
     data() {
         return {
             langConfig,
+            dragenterClass: false
         }
     },
     methods: {
@@ -32,9 +33,15 @@ export default {
             classlist.forEach(item => {
                 result[item] = true
             })
-            let ActiveName = this.getComponentActive()
-            result = lodash.merge(result, ActiveName)
-            console.log(result)
+            let dragenterClassTemp = this.dragenterClass
+            if (!dragenterClassTemp) {
+                dragenterClassTemp = this.getComponentActive()
+            } else {
+                dragenterClassTemp = {
+                    'dragenter': dragenterClassTemp
+                }
+            }
+            result = lodash.merge(result, dragenterClassTemp)
             return result
         },
         allowDrop(ev) {
@@ -48,6 +55,7 @@ export default {
                         'dragenter': status
                     }
                 })
+                this.dragenterClass = status
             }
         },
         dragleave(ev) {

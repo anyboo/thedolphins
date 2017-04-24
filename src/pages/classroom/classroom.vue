@@ -102,16 +102,6 @@ export default {
         this.operationGet()
     },
     methods: {
-        add: function() {
-            this.list.push({
-                name: 'Juan'
-            });
-        },
-        replace: function() {
-            this.list = [{
-                name: 'Edgard'
-            }]
-        },
         btnStyleName(index) {
             var styleName = 'btn-orange'
             if (this.panelStyle) {

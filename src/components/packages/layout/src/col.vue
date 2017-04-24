@@ -9,17 +9,11 @@ export default {
     props: ['componentId'],
     data() {
         return {
-            langConfig,
-            dragenterclass: false,
+            langConfig
         }
     },
     methods: {
 
-    },
-    computed: {
-        getDesignStore() {
-            return this.$store.state.design.filter(designitem => designitem.pid == this.componentId)
-        }
-    },
+    }
 }
 </script>

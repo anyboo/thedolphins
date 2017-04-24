@@ -86,7 +86,6 @@ export default new Vuex.Store({
                         return Math.floor(pid / 100) == Math.floor(o.id / 100)
                     })
                     designArray.forEach(item => {
-
                         item[field] = value
                         let pidtemp = Math.floor(item.pid / 100) * 100
                         designChange(design, pidtemp, field, value)

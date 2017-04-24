@@ -17,18 +17,24 @@ export default {
             return result
         },
         getDesignStore() {
-            console.log(this.componentId)
             return this.$store.state.design.filter(designitem => designitem.pid == this.componentId)
         },
         getComponentActive() {
-            let item = this.$store.state.design.find(designitem => designitem.dragenter == true)
+            let item = this.$store.state.design.find(designitem => designitem.id == this.componentId)
+            if (this.componentId == 0) {
+                item = this.$store.state.design.find(designitem => {
+                    return designitem.dragenter
+                })
+            }
             let classobj = {
-                'dragenter': false
+                'dragenter': false,
+                'active': false
+            }
+            if (this.$store.state.dragenterCol == this.pid) {
+                classobj.active = true
             }
             if (item) {
-                classobj = {
-                    'dragenter': true
-                }
+                classobj.dragenter = true
             }
             return classobj
         }
