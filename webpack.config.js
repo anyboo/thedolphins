@@ -86,6 +86,15 @@ module.exports = (options = {}) => ({
     devServer: {
         host: '0.0.0.0',
         port: 8010,
+        proxy: {
+            '/api/': {
+                target: 'http://0.0.0.0:8080',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        },
         historyApiFallback: {
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }
