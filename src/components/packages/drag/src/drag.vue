@@ -1,5 +1,5 @@
 <template>
-    <div :id="getId" :draggable="draggable" @dragstart="dragstart($event)" :class="getClass()">
+    <div :id="getId" :draggable="draggable" @dragstart="dragstart($event)" :class="getClass()" @click="handleClick($event)">
         <slot></slot>
     </div>
 </template>
@@ -26,7 +26,15 @@ export default {
     data() {
         return {
             langConfig,
-            ctrlkey: false
+            ctrlkey: false,
+            dragblock: {
+                'bt-label': true,
+                'bt-button': true,
+                'bt-note': false,
+                'bt-alert': false,
+                'bt-icon': true,
+                'bt-progress': false,
+            }
         }
     },
     methods: {
@@ -47,15 +55,28 @@ export default {
         },
         getClass() {
             let className = {}
-            if (this.component == 'bt-label') {
+            if (lodash.has(this.dragblock, this.component)) {
                 let dragenterClassTemp = this.getComponentActive()
                 className = {
-                    'dragblock': true
+                    'dragblock': this.dragblock[this.component]
                 }
                 className = lodash.merge(className, dragenterClassTemp)
             }
-
             return className
+        },
+        handleClick(event) {
+            if (lodash.has(this.dragblock, this.component)) {
+                this.$store.commit('componentColChange', {
+                    'id': this.componentId,
+                })
+                this.$store.commit('componentStatusChange', {
+                    'id': this.componentId,
+                    'status': [{
+                        'active': true
+                    }]
+                })
+                event.stopPropagation()
+            }
         },
     },
     computed: {

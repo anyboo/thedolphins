@@ -5,20 +5,14 @@
                 <button type="button" class="btn btn-red btn-outlined btn-square" @click="handleNew">新建</button>
                 <button type="button" class="btn btn-orange btn-outlined btn-square" @click="handleEdit">保存</button>
                 <button type="button" class="btn btn-green btn-outlined btn-square" @click="handleDel">删除</button>
-                <button type="button" class="btn btn-violet btn-outlined btn-square" @click="handlePreiew">预览</button>
-                <button type="button" class="btn btn-blue btn-outlined btn-square" @click="handleDesign">设计</button>
+                <button type="button" class="btn btn-violet btn-outlined btn-square" @click="handlePreiew" v-if="!isPreiew">预览</button>
+                <button type="button" class="btn btn-blue btn-outlined btn-square" @click="handleDesign" v-if="isPreiew">设计</button>
             </div>
         </div>
         <div class="col-md-8">
-            <bt-droplist componentClass="demo" :component-id="100" :component-pid="0"/>
+            <bt-droplist :componentClass="componentClass" :component-id="100" :component-pid="0" />
         </div>
         <div class="col-md-4">
-            <div class="panel panel-blue">
-                <div class="panel-heading">控件预览</div>
-                <div class="panel-body pan">
-                    水电sdf
-                </div>
-            </div>
             <div class="panel panel-violet">
                 <div class="panel-heading">属性</div>
                 <div class="panel-body pan">
@@ -151,10 +145,12 @@ export default {
         return {
             langConfig,
             modalsdata: layouteStore.layout,
-            tabsData: {}
+            tabsData: {},
+            isPreiew: false,
+            componentClass: 'demo'
         }
     },
-    mounted(){
+    mounted() {
         this.handleNew()
     },
     methods: {
@@ -179,10 +175,15 @@ export default {
 
         },
         handlePreiew() {
-
+            this.isPreiew = true
+            this.$store.commit('componentColChange', {
+                'id': 0,
+            })
+            this.componentClass = ''
         },
         handleDesign() {
-
+            this.isPreiew = false
+            this.componentClass = 'demo'
         },
     },
     computed: {

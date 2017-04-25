@@ -29,13 +29,16 @@ export default {
             let item = this.$store.state.design.find(designitem => {
                 return designitem.id == this.componentId && designitem.dragenter
             })
-            console.log('getComponentActive', item, this.componentPid, this.componentId)
             let classobj = {
                 'dragenter': false,
                 'btactive': false
             }
-            if (this.$store.state.dragenterCol == this.componentId ) {
+
+            if (this.$store.state.dragenterCol == this.componentId) {
                 classobj.btactive = true
+            }
+            if (this.componentId == this.componentPid && this.componentPid == 0) {
+                classobj.btactive = false
             }
             if (item) {
                 classobj.dragenter = true

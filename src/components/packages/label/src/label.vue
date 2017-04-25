@@ -14,7 +14,7 @@ export default {
     },
     computed: {
         styleName() {
-            var styleName = 'abel-primary'
+            var styleName = 'label-primary'
             if (this.getProps('lableBadge',false)) {
                 styleName = 'badge badge-' + this.getProps('labelStyle','primary')
             } else {

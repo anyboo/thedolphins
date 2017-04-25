@@ -22,6 +22,11 @@ import Layout from '../packages/layout'
 import Drag from '../packages/drag'
 import Drop from '../packages/drop'
 import DropList from '../packages/droplist'
+import Button from '../packages/button'
+import Note from '../packages/note'
+import Alert from '../packages/alert'
+import Icon from '../packages/icon'
+import Progress from '../packages/progress'
 
 const components = [
     Design,
@@ -49,7 +54,12 @@ const components = [
     Layout.Col,
     Drag,
     Drop,
-    DropList
+    DropList,
+    Button,
+    Note,
+    Alert,
+    Icon,
+    Progress
 ]
 
 const install = function(Vue) {
@@ -86,5 +96,10 @@ export default {
     Layout,
     Drag,
     Drop,
-    DropList
+    DropList,
+    Button,
+    Note,
+    Alert,
+    Icon,
+    Progress
 }

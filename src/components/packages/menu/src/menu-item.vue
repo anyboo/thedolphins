@@ -1,7 +1,7 @@
 <template>
     <li :class="{ active: isActive }">
         <a @click="handleClick">
-            <bt-drag :draggable="draggable" :component="component" :component-id="0" :component-data="componentData" :component-name="menuTitle">
+            <bt-drag :draggable="draggable" :component="component" :component-pid="0"  :component-id="0" :component-data="componentData" :component-name="menuTitle">
                 <i class="fa" :class="menuIcon">
                      <div class="icon-bg bg-orange"/>
               </i>

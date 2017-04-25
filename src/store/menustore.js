@@ -85,8 +85,8 @@ export default [{
         }, {
             menuTitle: 'Progressbar控件',
             menuIcon: 'fa-puzzle-piece',
-            component: 'bt-progressbar',
-            componentdata: {}
+            component: 'bt-progress',
+            componentdata: {progressValue:60}
         }]
     }, {
         menuTitle: '容器控件库',
