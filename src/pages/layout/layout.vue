@@ -1,9 +1,24 @@
 <template>
     <div class="row">
+        <div class="col-md-12">
+            <div class="demo-btn">
+                <button type="button" class="btn btn-red btn-outlined btn-square" @click="handleNew">新建</button>
+                <button type="button" class="btn btn-orange btn-outlined btn-square" @click="handleEdit">保存</button>
+                <button type="button" class="btn btn-green btn-outlined btn-square" @click="handleDel">删除</button>
+                <button type="button" class="btn btn-violet btn-outlined btn-square" @click="handlePreiew">预览</button>
+                <button type="button" class="btn btn-blue btn-outlined btn-square" @click="handleDesign">设计</button>
+            </div>
+        </div>
         <div class="col-md-8">
-            <bt-droplist componentClass="demo" :component-id="0" />
+            <bt-droplist componentClass="demo" :component-id="100" :component-pid="0"/>
         </div>
         <div class="col-md-4">
+            <div class="panel panel-blue">
+                <div class="panel-heading">控件预览</div>
+                <div class="panel-body pan">
+                    水电sdf
+                </div>
+            </div>
             <div class="panel panel-violet">
                 <div class="panel-heading">属性</div>
                 <div class="panel-body pan">
@@ -112,9 +127,11 @@
 .btactive {
     border: 1px dashed #ff0000 !important;
 }
+
 .btactive:after {
-    border: 1px dashed #ff00ff !important;
+    border: 1px dashed #ff0000 !important;
 }
+
 .bt-row.haveactive {
     border: 1px dashed #ff00ff !important;
 }
@@ -126,6 +143,8 @@
 <script>
 import langConfig from '~/lang'
 import layouteStore from '~/store/pages/layout.js'
+import lodash from 'lodash'
+
 export default {
     name: 'BtLayoutPage',
     data() {
@@ -135,8 +154,36 @@ export default {
             tabsData: {}
         }
     },
+    mounted(){
+        this.handleNew()
+    },
     methods: {
+        handleNew() {
+            this.$store.commit('designInit')
+            this.$store.state.maxid = 100
+            this.$store.state.designitem.id = this.$store.state.maxid
+            this.$store.state.designitem.name = '拖拉列表组件'
+            this.$store.state.designitem.component = 'bt-droplist'
+            this.$store.state.designitem.componentdata = {}
+            this.$store.state.designitem.pid = 0
+            this.$store.state.designitem.index = this.$store.state.maxid
+            this.$store.state.designitem.real = false
 
+            let designitem = lodash.cloneDeep(this.$store.state.designitem)
+            this.$store.commit('designPush', designitem)
+        },
+        handleEdit() {
+
+        },
+        handleDel() {
+
+        },
+        handlePreiew() {
+
+        },
+        handleDesign() {
+
+        },
     },
     computed: {
 

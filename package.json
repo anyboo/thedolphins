@@ -4,7 +4,7 @@
     "author": "yi.shyang@ele.me",
     "private": true,
     "scripts": {
-        "dev": "webpack-dev-server -d --inline --hot --env.dev",
+        "dev": "webpack-dev-server -d --inline  --env.dev",
         "build": "rimraf dist && webpack -p --progress --hide-modules",
         "test": "karma start"
     },

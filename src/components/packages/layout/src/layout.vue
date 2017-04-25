@@ -1,7 +1,7 @@
 <template>
-    <bt-row :row-id='getComponentId'>
+    <bt-row :row-id="getProps('id',0)">
         <template v-for="item,index in colArray">
-            <bt-col :class="colClass(item)" :component-id="getComponentId+index"> </bt-col>
+            <bt-col :class="colClass(item)" :component-id="getProps('id',0)+index+1"> </bt-col>
         </template>
     </bt-row>
 </template>
@@ -25,7 +25,7 @@ export default {
     },
     computed: {
         colArray() {
-            let colvalue = this.componentData ? this.componentData.componentdata : 12
+            let colvalue = this.getProps('colvalue', 12)
             let col = this.colNum || colvalue
             let num = lodash(col).trim()
             let numArray = num.split(' ')
@@ -37,9 +37,6 @@ export default {
                 numArray = [12]
             }
             return numArray
-        },
-        getComponentId() {
-            return this.componentData ? this.componentData.id : 0
         }
     },
 }

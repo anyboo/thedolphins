@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" :draggable="draggable" @dragstart="dragstart($event)" :class="getClass()">
+    <div :id="getId" :draggable="draggable" @dragstart="dragstart($event)" :class="getClass()">
         <slot></slot>
     </div>
 </template>
@@ -9,7 +9,20 @@ import lodash from 'lodash'
 
 export default {
     name: 'BtDrag',
-    props: ['draggable', 'component', 'componentData', 'componentName', 'componentId'],
+    props: {
+        'draggable': Boolean,
+        'component': String,
+        'componentData': Object,
+        'componentName': String,
+        'componentPid': {
+            type: Number,
+            default: 0
+        },
+        'componentId': {
+            type: Number,
+            default: 0
+        }
+    },
     data() {
         return {
             langConfig,
@@ -18,7 +31,7 @@ export default {
     },
     methods: {
         dragstart(ev) {
-            if (ev.target.id == this.getPid) {
+            if (ev.target.id == this.getId) {
                 this.$store.commit('componentStatusChange', {
                     'id': 0,
                     'status': [{
@@ -27,6 +40,7 @@ export default {
                 })
                 ev.dataTransfer.setData('id', this.componentId)
                 ev.dataTransfer.setData('name', this.componentName)
+
                 ev.dataTransfer.setData('componentdata', JSON.stringify(this.componentData))
                 ev.dataTransfer.setData('component', this.component)
             }
@@ -38,7 +52,6 @@ export default {
                 className = {
                     'dragblock': true
                 }
-                console.log(dragenterClassTemp)
                 className = lodash.merge(className, dragenterClassTemp)
             }
 
@@ -46,12 +59,12 @@ export default {
         },
     },
     computed: {
-        getPid() {
-            let pid = this.componentId
-            if (!lodash.isNumber(pid)) {
-                pid = -1
+        getId() {
+            let id = this.componentId
+            if (!lodash.isNumber(id)) {
+                id = -1
             }
-            return 'pid' + pid
+            return 'id' + id
         },
 
     }

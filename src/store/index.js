@@ -9,10 +9,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        designitem: { id: 1, name: '', component: '', componentdata: {}, pid: 0, index: 0, active: false, haveactive: false, dragenter: false },
-        design: [],
+        designitem: {
+            id: 1, //id编号,根目录为id=0
+            pid: 0, //父类id编号
+            index: 0, //排序,插入的时候默认为当前ID编号
+            name: '', //控件名称
+            component: '', //控件标签名称
+            componentdata: {}, //控件属性值
+            active: false, //是否当前选中
+            haveactive: false, //是否包含选中
+            dragenter: false, //是否拖拉
+            real: false //是否真实组件
+        },
+        design: [], //控件列表
         designid: 0,
-        dragenterArray: [],
+        maxid: 100, //控件最大ID              
+        dragenterArray: [], //拖拉数据,进出堆栈
         dragenterCol: 0
     },
     getters: {
@@ -21,6 +33,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        designInit: (state) => {
+            state.design = []
+        },
         designPush: (state, obj) => {
             state.design.push(obj)
         },
@@ -30,15 +45,17 @@ export default new Vuex.Store({
             })
             designitem.pid = pid
         },
-        designCopy: (state, { id, pid, maxid }) => {
+        designCopy: (state, { id, pid }) => {
+            console.log('designCopy', { id, pid })
             let designitem = lodash.find(state.design, {
                 'id': Number(id)
             })
+            state.maxid += 100
             let designitemcopy = lodash.cloneDeep(designitem)
-            designitemcopy.id = maxid
-            designitemcopy.index = maxid
+            designitemcopy.id = state.maxid
+            designitemcopy.index = state.maxid
             designitemcopy.pid = pid
-            let clientid = maxid
+            let clientid = state.maxid
 
             function designCloneDeep(design, id, pid) {
                 let designArray = lodash.filter(design, function(o) {
@@ -57,12 +74,17 @@ export default new Vuex.Store({
                     designCloneDeep(design, oldid, tempid)
                 })
             }
-            designCloneDeep(state.design, id, maxid)
+            designCloneDeep(state.design, Number(id), state.maxid)
 
             state.design.push(designitemcopy)
         },
         componentColChange: (state, { id }) => {
             state.dragenterCol = id
+            lodash.map(state.design, function(o) {
+                o.active = false
+                o.haveactive = false
+                o.dragenter = false
+            })
         },
         componentStatusChange: (state, { id, status }) => {
             if (id == 0) {
@@ -73,7 +95,6 @@ export default new Vuex.Store({
                 o.haveactive = false
                 o.dragenter = false
             })
-
             let idtemp = Math.floor(id / 100) * 100
 
             let designitem = lodash.find(state.design, {

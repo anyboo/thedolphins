@@ -14,29 +14,39 @@ export default [{
             menuTitle: '12布局控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-layout',
-            componentdata: '12'
+            componentdata: {
+                colvalue: '12'
+            }
         }, {
             menuTitle: '6 6布局控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-layout',
-            componentdata: '6 6'
+            componentdata: {
+                colvalue: '6 6'
+            }
         }, {
             menuTitle: '8 4布局控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-layout',
-            componentdata: '8 4'
+            componentdata: {
+                colvalue: '8 4'
+            }
         }, {
             menuTitle: '4 4 4布局控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-layout',
-            componentdata: '4 4 4'
+            componentdata: {
+                colvalue: '4 4 4'
+            }
         }, {
             menuTitle: '2 6 4布局控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-layout',
-            componentdata: '2 6 4'
+            componentdata: {
+                colvalue: '2 6 4'
+            }
         }]
-    },{
+    }, {
         menuTitle: '基础标签控件库',
         menuIcon: 'fa-credit-card',
         menuName: 'menu1',
@@ -44,41 +54,41 @@ export default [{
             menuTitle: 'Label控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-label',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'Badge控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-label',
             componentdata: {
-                lableBadge:true
+                lableBadge: true
             }
-        },{
+        }, {
             menuTitle: 'Note控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-note',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Alert控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-alert',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Button控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-button',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Icon控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-icon',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Progressbar控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-progressbar',
-            componentdata: ''
+            componentdata: {}
         }]
-    },{
+    }, {
         menuTitle: '容器控件库',
         menuIcon: 'fa-credit-card',
         menuName: 'menu1',
@@ -86,34 +96,34 @@ export default [{
             menuTitle: 'Tab控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-tab',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'Portlet控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-portlet',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Panel控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-panel',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'Table控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-table',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'List控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-list',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'TimeLine控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-timeline',
-            componentdata: ''
+            componentdata: {}
         }]
-    },{
+    }, {
         menuTitle: '表单控件库',
         menuIcon: 'fa-credit-card',
         menuName: 'menu1',
@@ -121,49 +131,49 @@ export default [{
             menuTitle: 'Form控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-form',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'Input控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-input',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: '数字input控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-input',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: '邮件input控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-input',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: '电话input控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-input',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: '密码input控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-input',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'select控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-select',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: 'textarea控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-textarea',
-            componentdata: ''
-        },{
+            componentdata: {}
+        }, {
             menuTitle: '头像photo控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-photo',
-            componentdata: ''
+            componentdata: {}
         }]
-    },{
+    }, {
         menuTitle: 'html控件库',
         menuIcon: 'fa-credit-card',
         menuName: 'menu1',
@@ -171,39 +181,39 @@ export default [{
             menuTitle: 'div控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-label',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'hr控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'br控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'p控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'span控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'a控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: 'h1-h6控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }]
-    },{
+    }, {
         menuTitle: '数据控件库',
         menuIcon: 'fa-credit-card',
         menuName: 'menu1',
@@ -211,32 +221,32 @@ export default [{
             menuTitle: '数据源控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-label',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: '数据字段控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: '数据关联控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: '数据过滤控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: '数据转换控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }, {
             menuTitle: '数据检验控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-badge',
-            componentdata: ''
+            componentdata: {}
         }]
     }]
 }, {

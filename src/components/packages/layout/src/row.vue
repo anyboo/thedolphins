@@ -31,7 +31,7 @@ export default {
             let classobj = {}
             if (item) {
                 classobj = {
-                    'active': item.active,
+                    'btactive': item.active,
                     'haveactive': item.haveactive,
                     'dragenter': item.dragenter
                 }

@@ -1,5 +1,5 @@
 <template>
-    <div :id="getPid" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)" @click="handleClick($event)" :class="getClass()">
+    <div :id="getId" @drop="drop($event)" @dragover="allowDrop($event)" @dragleave="dragleave($event)" @dragenter="dragenter($event)" @click="handleClick($event)" :class="getClass()">
         <slot></slot>
     </div>
 </template>
@@ -10,7 +10,11 @@ import lodash from 'lodash'
 export default {
     name: 'BtDrop',
     props: {
-        'pid': {
+        'componentPid': {
+            type: Number,
+            default: 0
+        },
+        'componentId': {
             type: Number,
             default: 0
         },
@@ -22,7 +26,6 @@ export default {
     data() {
         return {
             langConfig,
-            dragenterClass: false
         }
     },
     methods: {
@@ -34,14 +37,6 @@ export default {
                 result[item] = true
             })
             let dragenterClassTemp = this.getComponentActive()
-                //let dragenterClassTemp = this.dragenterClass
-                //if (!dragenterClassTemp) {
-                //    dragenterClassTemp = this.getComponentActive()
-                //} else {
-                //    dragenterClassTemp = {
-                //       'dragenter': dragenterClassTemp
-                //   }
-                //}
             result = lodash.merge(result, dragenterClassTemp)
             return result
         },
@@ -49,14 +44,13 @@ export default {
             ev.preventDefault()
         },
         changeDragenter(ev, status) {
-            if (ev.target.id == this.getPid) {
+            if (ev.target.id == this.getId) {
                 this.$store.commit('componentStatusChange', {
-                    'id': this.pid,
+                    'id': this.componentId,
                     'status': {
                         'dragenter': status
                     }
                 })
-                this.dragenterClass = status
             }
         },
         dragleave(ev) {
@@ -68,23 +62,26 @@ export default {
             return true
         },
         drop(ev) {
-            if (ev.target.id == this.getPid) {
-                let maxobj = lodash.maxBy(this.$store.state.design, 'id')
-                let maxid = 100
-                if (lodash.isObject(maxobj) && lodash.isInteger(maxobj.id)) {
-                    maxid = maxobj.id + 100
-                }
+            if (ev.target.id == this.getId) {
                 let designitem = {}
                 let id = ev.dataTransfer.getData('id')
                 let copy = ev.dataTransfer.effectAllowed
 
+                if (id.length == 0) {
+                    return
+                }
+
                 if (id == 0) {
-                    this.$store.state.designitem.id = maxid
+                    this.$store.state.maxid += 100
+                    this.$store.state.designitem.id = this.$store.state.maxid
                     this.$store.state.designitem.name = ev.dataTransfer.getData('name')
                     this.$store.state.designitem.component = ev.dataTransfer.getData('component')
-                    this.$store.state.designitem.componentdata = JSON.parse(ev.dataTransfer.getData('componentdata'))
-                    this.$store.state.designitem.pid = this.pid
-                    this.$store.state.designitem.index = maxid
+                    let componentdata = ev.dataTransfer.getData('componentdata') || {}
+
+                    this.$store.state.designitem.componentdata = JSON.parse(componentdata)
+                    this.$store.state.designitem.pid = this.componentId
+                    this.$store.state.designitem.index = this.$store.state.maxid
+                    this.$store.state.designitem.real = true
                     designitem = lodash.cloneDeep(this.$store.state.designitem)
                     this.$store.commit('designPush', designitem)
                 } else {
@@ -94,9 +91,8 @@ export default {
                     }
 
                     this.$store.commit(action, {
-                        'id': id,
-                        'pid': this.pid,
-                        'maxid': maxid
+                        'id': Number(id),
+                        'pid': this.componentId
                     })
                 }
                 this.changeDragenter(ev, false)
@@ -105,17 +101,17 @@ export default {
         },
         handleClick() {
             this.$store.commit('componentColChange', {
-                'id': this.pid,
+                'id': this.componentId,
             })
         },
     },
     computed: {
-        getPid() {
-            let pid = this.pid
-            if (!lodash.isNumber(pid)) {
-                pid = -1
+        getId() {
+            let id = this.componentId
+            if (!lodash.isNumber(id)) {
+                id = -1
             }
-            return 'pid' + pid
+            return 'id' + id
         }
     }
 }

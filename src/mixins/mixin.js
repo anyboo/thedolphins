@@ -10,6 +10,12 @@ export default {
                         result = this.componentData.componentdata ? this.componentData.componentdata[propsName] : defValue
                     }
                 }
+                if (!find) {
+                    if (this.componentData[propsName]) {
+                        find = true
+                        result = this.componentData ? this.componentData[propsName] : defValue
+                    }
+                }
             }
             if (!find) {
                 result = this[propsName] ? this[propsName] : defValue
@@ -21,14 +27,14 @@ export default {
         },
         getComponentActive() {
             let item = this.$store.state.design.find(designitem => {
-                return designitem.id == this.componentId
+                return designitem.id == this.componentId && designitem.dragenter
             })
-            console.log('getComponentActive',item,this.pid,this.componentId)
+            console.log('getComponentActive', item, this.componentPid, this.componentId)
             let classobj = {
                 'dragenter': false,
                 'btactive': false
             }
-            if (this.$store.state.dragenterCol == this.pid) {
+            if (this.$store.state.dragenterCol == this.componentId ) {
                 classobj.btactive = true
             }
             if (item) {
