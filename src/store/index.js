@@ -22,31 +22,32 @@ export default new Vuex.Store({
             real: false //是否真实组件
         },
         design: [], //控件列表
-        designid: 0,
+        designid: '', //当前设计的编号
+        designChange: false, //是否有变动
         maxid: 100, //控件最大ID              
         dragenterArray: [], //拖拉数据,进出堆栈
-        dragenterCol: 0
-    },
-    getters: {
-        getDesignStore: state => {
-            return state.design.filter(designitem => designitem.pid == state.designid)
-        }
+        dragenterCol: 0 //选择控件
     },
     mutations: {
         designInit: (state) => {
             state.design = []
+            state.designChange = false
         },
         designPush: (state, obj) => {
             state.design.push(obj)
+            if (state.design.length > 1) {
+                state.designChange = true
+            }
         },
         designEdit: (state, { id, pid }) => {
+            state.designChange = true
             let designitem = lodash.find(state.design, {
                 'id': Number(id)
             })
             designitem.pid = pid
         },
         designCopy: (state, { id, pid }) => {
-            console.log('designCopy', { id, pid })
+            state.designChange = true
             let designitem = lodash.find(state.design, {
                 'id': Number(id)
             })

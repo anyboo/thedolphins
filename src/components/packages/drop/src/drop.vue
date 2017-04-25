@@ -85,9 +85,9 @@ export default {
                     designitem = lodash.cloneDeep(this.$store.state.designitem)
                     this.$store.commit('designPush', designitem)
                 } else {
-                    let action = 'designCopy'
+                    let action = 'designEdit'
                     if (copy == 'move') {
-                        action = 'designEdit'
+                        action = 'designCopy'
                     }
 
                     this.$store.commit(action, {
