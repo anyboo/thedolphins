@@ -157,7 +157,7 @@ export default {
             isPreiew: false,
             componentClass: 'demo',
             isProperty: true,
-            formData: {},
+            formData: [],
             modalsType: types.APPEND_API
         }
     },
@@ -172,7 +172,7 @@ export default {
         handleGetData() {
             let vm = this
             let id = vm.$route.params.id
-            console.log('handleGetData',id)
+            console.log('handleGetData', id)
             vm.$store.commit(types.GET_CURRENT_API, 'rb_designmanage')
             if (vm.$store.getters.getCurrentModel['rb_designmanage']) {
                 let Mdata = vm.$store.getters.getCurrentModel['rb_designmanage'].data
@@ -182,9 +182,16 @@ export default {
                 if (item) {
                     vm.$store.state.designid = id
                     vm.$store.state.design = item.design
-
+                    let formItem = {}
+                    formItem.name = item.name
+                    formItem.flag = item.flag
+                    formItem.className = item.className
+                    this.formData = []
+                    this.formData.push(formItem)
+                    console.log(this.formData)
                 } else {
                     vm.handleNew()
+                    this.formData = []
                 }
             }
         },
@@ -262,7 +269,7 @@ export default {
             let modalform = vm.$refs.modalform
             let modalformValue = modalform.getForm()
             let id = modalform.getValue('_id')
-            this.modalsType == types.EDIT_API
+            this.modalsType = types.EDIT_API
             if (this.$store.state.designid.length == 0) {
                 this.modalsType = types.APPEND_API
             }
@@ -298,7 +305,6 @@ export default {
             }
         },
         handleShowModals() {
-            this.formData = {}
             this.showModals = true
             return false
         },

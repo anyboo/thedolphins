@@ -64,7 +64,7 @@ module.exports.fetch = function* fetch(name, id, next) {
 module.exports.add = function* add(name, next) {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
-        limit: '10kb'
+        limit: '100kb'
     })
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
@@ -77,7 +77,7 @@ module.exports.modify = function* modify(name, id, next) {
     if ('PUT' != this.method) return yield next
 
     var data = yield parse(this, {
-        limit: '1kb'
+        limit: '100kb'
     })
 
     var model = yield wrap(db.get(name)).find({ '_id': monk.id(id) })
