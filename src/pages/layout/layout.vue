@@ -152,18 +152,42 @@ export default {
             langConfig,
             showModals: false,
             modalsdata: layouteStore.design,
-            layoutdata:layouteStore.layout,
+            layoutdata: layouteStore.layout,
             tabsData: {},
             isPreiew: false,
             componentClass: 'demo',
             isProperty: true,
             formData: {},
+            modalsType: types.APPEND_API
         }
     },
     mounted() {
-        this.handleNew()
+        this.handleGetData()
+    },
+    beforeRouteUpdate(to, from, next) {
+        next()
+        this.handleGetData()
     },
     methods: {
+        handleGetData() {
+            let vm = this
+            let id = vm.$route.params.id
+            console.log('handleGetData',id)
+            vm.$store.commit(types.GET_CURRENT_API, 'rb_designmanage')
+            if (vm.$store.getters.getCurrentModel['rb_designmanage']) {
+                let Mdata = vm.$store.getters.getCurrentModel['rb_designmanage'].data
+                let item = lodash.find(Mdata, {
+                    '_id': id
+                })
+                if (item) {
+                    vm.$store.state.designid = id
+                    vm.$store.state.design = item.design
+
+                } else {
+                    vm.handleNew()
+                }
+            }
+        },
         handleNewAction() {
             this.$store.commit('designInit')
             this.$store.state.maxid = 100
@@ -238,11 +262,16 @@ export default {
             let modalform = vm.$refs.modalform
             let modalformValue = modalform.getForm()
             let id = modalform.getValue('_id')
-            console.log(modalform)
+            this.modalsType == types.EDIT_API
+            if (this.$store.state.designid.length == 0) {
+                this.modalsType = types.APPEND_API
+            }
+            modalformValue.form.design = this.$store.state.design
+
             if (modalformValue.validate) {
                 if (this.modalsType == types.APPEND_API) {
                     vm.$store.dispatch(types.APPEND_API, {
-                        'model': 'designmanage',
+                        'model': 'rb_designmanage',
                         'form': modalformValue.form
                     }).then(() => {
                         this.$notify({
@@ -254,7 +283,7 @@ export default {
                     })
                 } else {
                     vm.$store.dispatch(types.EDIT_API, {
-                        'model': 'designmanage',
+                        'model': 'rb_designmanage',
                         'id': id,
                         'form': modalformValue.form,
                     }).then(() => {

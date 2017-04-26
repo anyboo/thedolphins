@@ -101,7 +101,7 @@ const routes = [
         path: '/coursemanage',
         component: coursemanage
     },{
-        path: '/layout',
+        path: '/layout/:id',
         component: layout
     }, {
         path: '/techerprofile/:id',

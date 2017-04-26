@@ -64,7 +64,7 @@ module.exports.fetch = function* fetch(name, id, next) {
 module.exports.add = function* add(name, next) {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
-        limit: '1kb'
+        limit: '10kb'
     })
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {

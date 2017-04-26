@@ -59,7 +59,7 @@ export default {
         /*required: true,*/
         props: {
             applend: true,
-            tableName: 'designclass',
+            tableName: 'rb_designclass',
             tableLabel: 'className',
             tableId: '_id'
         }

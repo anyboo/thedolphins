@@ -1,7 +1,7 @@
 export default [{
     menuTitle: '设计',
     menuIcon: 'fa-columns',
-    to: '/layout'
+    to: '/layout/0'
 }, {
     menuTitle: '设计库',
     menuIcon: 'fa-gear',
@@ -250,15 +250,14 @@ export default [{
         }]
     }]
 }, {
-    menuTitle: '元素库',
+    menuTitle: '页面库',
     menuIcon: 'fa-gear',
     menuName: 'menu1',
     menu: [{
-        menuTitle: '元素列表',
+        menuTitle: '默认页面',
         menuIcon: 'fa-credit-card',
     }],
     menutree: true
-
 }, {
     menuTitle: '桌面',
     menuIcon: 'fa-windows',

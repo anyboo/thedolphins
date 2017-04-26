@@ -32,6 +32,7 @@ export default new Vuex.Store({
         designInit: (state) => {
             state.design = []
             state.designChange = false
+            state.designid = ''
         },
         designPush: (state, obj) => {
             state.design.push(obj)
