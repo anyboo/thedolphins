@@ -76,7 +76,7 @@ export default new Vuex.Store({
                     designCloneDeep(design, oldid, tempid)
                 })
             }
-            designCloneDeep(state.design, Number(id), state.maxid)
+            designCloneDeep(state.design, Math.floor(id), state.maxid)
 
             state.design.push(designitemcopy)
         },
@@ -105,6 +105,7 @@ export default new Vuex.Store({
 
             function designChange(design, pid, field, value) {
                 if (pid > 0) {
+                    console.log(design, pid, field, value)
                     let designArray = lodash.filter(design, function(o) {
                         return Math.floor(pid / 100) == Math.floor(o.id / 100)
                     })
@@ -144,7 +145,7 @@ export default new Vuex.Store({
                         }
 
                         designitem.dragenter = status.dragenter
-                        let pidtemp = Number(designitem.pid / 100) * 100
+                        let pidtemp = Math.floor(designitem.pid / 100) * 100
                         designChange(state.design, pidtemp, 'dragenter', status.dragenter)
                     }
                 } else {

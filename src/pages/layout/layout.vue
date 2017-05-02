@@ -172,7 +172,6 @@ export default {
         handleGetData() {
             let vm = this
             let id = vm.$route.params.id
-            console.log('handleGetData', id)
             vm.$store.commit(types.GET_CURRENT_API, 'rb_designmanage')
             if (vm.$store.getters.getCurrentModel['rb_designmanage']) {
                 let Mdata = vm.$store.getters.getCurrentModel['rb_designmanage'].data
@@ -182,9 +181,16 @@ export default {
                 if (item) {
                     vm.$store.state.designid = id
                     vm.$store.state.design = item.design
+                    let maxobj = lodash.maxBy(this.$store.state.design, 'id')
+                    let maxid = 100
+                    if (lodash.isObject(maxobj) && lodash.isInteger(maxobj.id)) {
+                        maxid = maxobj.id
+                    }
+                    vm.$store.state.maxid = maxid
                     let formItem = {}
                     formItem.name = item.name
                     formItem.flag = item.flag
+                    formItem._id = id
                     formItem.className = item.className
                     this.formData = []
                     this.formData.push(formItem)
@@ -230,7 +236,34 @@ export default {
             }
         },
         handleDel() {
+            let vm = this
+            let id = vm.$store.state.designid
 
+            this.modalsType = types.EDIT_API
+            if (id.length == 0) {
+                return
+            }
+
+            this.$confirm('页面删除操作, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                vm.$store.dispatch(types.DELETE_API, {
+                    'model': 'rb_designmanage',
+                    'id': id,
+                }).then(() => {
+                    vm.handleNew()
+                    this.formData = []
+                    this.$notify({
+                        title: '成功',
+                        message: '页面删除成功!',
+                        type: 'success'
+                    })
+                })
+            }).catch(() => {
+
+            })
         },
         handlePreiew() {
             this.isPreiew = true
@@ -268,9 +301,10 @@ export default {
             let vm = this
             let modalform = vm.$refs.modalform
             let modalformValue = modalform.getForm()
-            let id = modalform.getValue('_id')
+            let id = this.$store.state.designid
+
             this.modalsType = types.EDIT_API
-            if (this.$store.state.designid.length == 0) {
+            if (id.length == 0) {
                 this.modalsType = types.APPEND_API
             }
             modalformValue.form.design = this.$store.state.design

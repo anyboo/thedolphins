@@ -59,7 +59,6 @@ export default {
     computed: {
         getFormDataLocal() {
             let formDataLocal = []
-            console.log(this.formData)
             this.itemData.forEach(item => {
                 formDataLocal.push({
                     'item': item,
