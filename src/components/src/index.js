@@ -27,6 +27,7 @@ import Note from '../packages/note'
 import Alert from '../packages/alert'
 import Icon from '../packages/icon'
 import Progress from '../packages/progress'
+import HtmlRender from '../packages/htmlrender'
 
 const components = [
     Design,
@@ -59,7 +60,8 @@ const components = [
     Note,
     Alert,
     Icon,
-    Progress
+    Progress,
+    HtmlRender
 ]
 
 const install = function(Vue) {
@@ -101,5 +103,6 @@ export default {
     Note,
     Alert,
     Icon,
-    Progress
+    Progress,
+    HtmlRender
 }

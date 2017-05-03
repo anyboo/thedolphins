@@ -105,7 +105,6 @@ export default new Vuex.Store({
 
             function designChange(design, pid, field, value) {
                 if (pid > 0) {
-                    console.log(design, pid, field, value)
                     let designArray = lodash.filter(design, function(o) {
                         return Math.floor(pid / 100) == Math.floor(o.id / 100)
                     })

@@ -51,6 +51,7 @@ export default {
 
                 ev.dataTransfer.setData('componentdata', JSON.stringify(this.componentData))
                 ev.dataTransfer.setData('component', this.component)
+                console.log(ev.clientX,ev.clientY)
             }
         },
         getClass() {

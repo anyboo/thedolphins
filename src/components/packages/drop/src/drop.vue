@@ -63,6 +63,7 @@ export default {
         },
         drop(ev) {
             if (ev.target.id == this.getId) {
+                console.log('drop',ev.clientX,ev.clientY,ev.target.getBoundingClientRect().left,ev.target.getBoundingClientRect().top)
                 let designitem = {}
                 let id = ev.dataTransfer.getData('id')
                 let copy = ev.dataTransfer.effectAllowed
