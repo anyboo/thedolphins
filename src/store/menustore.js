@@ -86,7 +86,7 @@ export default [{
             menuTitle: 'Progressbar控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-progress',
-            componentdata: {progressValue:60}
+            componentdata: { progressValue: 60 }
         }]
     }, {
         menuTitle: '容器控件库',
@@ -95,18 +95,38 @@ export default [{
         menu: [{
             menuTitle: 'Tab控件',
             menuIcon: 'fa-puzzle-piece',
-            component: 'bt-tab',
-            componentdata: {}
+            component: 'bt-tabs',
+            componentdata: {
+                tabs: [{
+                    title: '老师信息',
+                    icon: 'fa-edit',
+                    to: '/techerprofile/step2'
+                }, {
+                    title: '带班信息',
+                    icon: 'fa-edit',
+                    to: '/userprofile/step1'
+                }, {
+                    title: '排课信息',
+                    icon: 'fa-edit',
+                    to: '/userprofile/step3'
+                }]
+            }
         }, {
             menuTitle: 'Portlet控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-portlet',
-            componentdata: {}
+            componentdata: {
+                portletTitle: 'portlet',
+                portletTools:'true',
+                portletActive:'true'
+            }
         }, {
             menuTitle: 'Panel控件',
             menuIcon: 'fa-puzzle-piece',
             component: 'bt-panel',
-            componentdata: {}
+            componentdata: {
+                portletTitle: 'Panel'
+            }
         }, {
             menuTitle: 'Table控件',
             menuIcon: 'fa-puzzle-piece',

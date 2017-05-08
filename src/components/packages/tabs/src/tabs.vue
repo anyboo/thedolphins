@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="nav nav-tabs ul-edit responsive">
-            <bt-tab-pane v-for="(item, index) in tabs" :to="item.to" :tab-pane-active="index==0" :tab-pane-title="item.title" :tab-pane-icon="item.icon"></bt-tab-pane>
+            <bt-tab-pane v-for="(item, index) in getProps('tabs',[])" :to="item.to" :tab-pane-active="index==0" :tab-pane-title="item.title" :tab-pane-icon="item.icon"></bt-tab-pane>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active">
@@ -16,7 +16,7 @@ import BtTabPane from './tab-pane.vue'
 
 export default {
     name: 'BtTabs',
-    props: ['tabs', 'tabsData'],
+    props: ['tabs', 'tabsData','componentData'],
     data() {
         return {
             langConfig

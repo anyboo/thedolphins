@@ -1,12 +1,12 @@
 <template>
     <div class="portlet portlet-blue box">
         <div class="portlet-header">
-            <div class="caption">{{ portletTitle }}</div>
-            <div class="tools" v-if="portletTools"><i class="fa" :class="classtool" @click="handClick"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i>
+            <div class="caption">{{ getProps('portletTitle','') }}</div>
+            <div class="tools" v-if="getProps('portletTools',false)"><i class="fa" :class="classtool" @click="handClick"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i>
             </div>
         </div>
         <div class="portlet-body pan" v-if="isActive">
-          <slot></slot>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -15,11 +15,11 @@ import langConfig from '~/lang'
 
 export default {
     name: 'BtPortlet',
-    props: ['portletTitle', 'portletTools', 'portletActive'],
+    props: ['portletTitle', 'portletTools', 'portletActive', 'componentData'],
     data() {
         return {
             langConfig,
-            isActive: this.portletActive,
+            isActive: this.getProps(this.portletActive, false),
             classtool: this.GetToolUpDown()
         }
     },

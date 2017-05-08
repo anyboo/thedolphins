@@ -33,7 +33,7 @@ import langConfig from '~/lang'
 
 export default {
     name: 'BtPanel',
-    props: ['panelStyle'],
+    props: ['panelStyle', 'componentData'],
     data() {
         return {
             langConfig

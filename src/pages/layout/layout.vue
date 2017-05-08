@@ -138,6 +138,27 @@
 .dragblock {
     display: inline-block;
 }
+.dg.ac {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    z-index: 999  !important;
+}
+.dg li:not(.folder) {
+    cursor: auto;
+    height: 27px;
+    line-height: 25px !important;
+    padding: 0 4px 0 5px;
+}
+.dg .c input[type=text] {
+    border: 0;
+    margin-top: 0px !important;
+    padding: 0px!important; 
+    width: 100%;
+    float: right;
+}
 </style>
 <script>
 import langConfig from '~/lang'
@@ -236,22 +257,22 @@ export default {
                 this.gui.add(obj, 'type', ['one', 'two', 'three'])
                     // Choose from named values
                 this.gui.add(obj,
-                        'speed', {
-                            Stopped: 0,
-                            Slow: 0.1,
-                            Fast: 5
-                        })
-                    /*
-                    var f1 = this.gui.addFolder('Colors')
-                    f1.addColor(obj, 'color0')
-                    f1.addColor(obj, 'color1')
-                    f1.addColor(obj, 'color2')
-                    f1.addColor(obj, 'color3')
-                    var f2 = this.gui.addFolder('Another Folder')
-                    f2.add(obj, 'noiseStrength')
-                    var f3 = f2.addFolder('Nested Folder')
-                    f3.add(obj, 'growthSpeed')
-                    */
+                    'speed', {
+                        Stopped: 0,
+                        Slow: 0.1,
+                        Fast: 5
+                    })
+
+                var f1 = this.gui.addFolder('Colors')
+                f1.addColor(obj, 'color0')
+                f1.addColor(obj, 'color1')
+                f1.addColor(obj, 'color2')
+                f1.addColor(obj, 'color3')
+                var f2 = this.gui.addFolder('Another Folder')
+                f2.add(obj, 'noiseStrength')
+                var f3 = f2.addFolder('Nested Folder')
+                f3.add(obj, 'growthSpeed')
+
             }
         },
         handleNewAction() {
