@@ -1,7 +1,7 @@
 <template>
     <div class="portlet portlet-blue box">
         <div class="portlet-header">
-            <div class="caption">{{ getProps('portletTitle','') }}</div>
+            <div class="caption" contenteditable @input="handChange($event.target.value)">{{ getProps('portletTitle','') }}<h1>sdfsdf</h1><div>sdfs</div></div>
             <div class="tools" v-if="getProps('portletTools',false)"><i class="fa" :class="classtool" @click="handClick"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i>
             </div>
         </div>
@@ -38,6 +38,9 @@ export default {
             this.isActive = !this.isActive
             this.classtool = this.GetToolUpDown()
 
+        },
+        handChange(value){
+            console.log(value)
         }
     }
 }
