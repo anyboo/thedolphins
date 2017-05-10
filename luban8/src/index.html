@@ -3,11 +3,63 @@
 
 <head>
     <meta charset="utf-8">
+    <title>鲁班</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 
 <body>
+    <p contenteditable data-dat="sdf" :sdfs="dfgd" @click="sdf">sdf
+        <h1>sdf</h1></p>
+    <template v-for="item in items">
+        <li>{{ item.msg }}</li>
+        <li class="divider">sdfds</li>
+    </template>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="demo-btn">
+                <button type="button" class="btn btn-red btn-outlined btn-square" @click="handleNew">新建</button>
+                <button type="button" class="btn btn-orange btn-outlined btn-square" @click="handleShowModals">保存</button>
+                <button type="button" class="btn btn-green btn-outlined btn-square" @click="handleDel">删除</button>
+                <button type="button" class="btn btn-violet btn-outlined btn-square" @click="handlePreiew" v-if="!isPreiew">预览</button>
+                <button type="button" class="btn btn-blue btn-outlined btn-square" @click="handleDesign" v-if="isPreiew">设计</button>
+                <button type="button" class="btn btn-blue btn-outlined btn-square" @click="handleProperty">属性</button>
+            </div>
+        </div>
+        <div :class="{'col-md-8':isProperty,'col-md-12':!isProperty}">
+            <bt-droplist :componentClass="componentClass" :component-id="100" :component-pid="0" />
+        </div>
+        <div class="col-md-4" v-if="isProperty">
+            <div class="panel panel-violet">
+                <div class="panel-heading">属性</div>
+                <div class="panel-body pan">
+                    <bt-form :item-data="layoutdata" ref="layoutform" :form-data="tabsData" />
+                    <div class="form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary" @click="handleSaveCom">保存</button>&nbsp;
+                            <button type="button" class="btn btn-primary" @click="handleDelCom">删除</button>&nbsp;
+                            <button type="button" class="btn btn-green" @click="handleReset">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-green">
+                <div class="panel-heading">事件</div>
+                <div class="panel-body pan">
+                    <div class="form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary" @click="handleSaveEvent">保存</button>&nbsp;
+                            <button type="button" class="btn btn-green" @click="handleResetEvent">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <bt-modals :modals-active="showModals" modalsTitle="保存页面" @close="handleClose" @save="handleSave">
+            <bt-form :item-data="modalsdata" ref="modalform" :form-data="formData" />
+        </bt-modals>
+    </div>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex"></script>
+
 </html>
