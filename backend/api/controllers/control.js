@@ -22,7 +22,9 @@ module.exports.all = function* all(name, next) {
     let findObj = {}
     if (filter) {
         try {
+            console.log(Buffer.from(filter, 'base64').toString())
             let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
+            console.log(filterObj)
             if (filterObj) {
                 for (var item of filterObj) {
                     let value = item.value
