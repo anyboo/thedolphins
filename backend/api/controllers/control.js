@@ -5,7 +5,7 @@ var monk = require('monk')
 var wrap = require('co-monk')
 var db = monk('localhost/luban')
 var fs = require('fs')
-var Buffer = require('buffer')
+var Buffer = require('buffer').Buffer
 
 /*
 var co = require('co')
@@ -22,6 +22,7 @@ module.exports.all = function* all(name, next) {
     let findObj = {}
     if (filter) {
         try {
+            console.log(filter,Buffer.from(filter, 'base64').toString())
             let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
             if (filterObj) {
                 for (var item of filterObj) {
