@@ -29,7 +29,7 @@ module.exports.all = function* all(name, next) {
                     let type = item.type
                     let key = item.key
                     if (type == 'like') {
-                        let like = eval('/' + value.replace(/[\*\.\?\+\$\^\\[\]\(\)\{\}\|\\\/]/g, '\\$1') + '/')
+                        let like = new RegExp('/' + value.replace(/[\*\.\?\+\$\^\\[\]\(\)\{\}\|\\\/]/g, '\\$1') + '/')
                         findObj[key] = like
                     } else {
                         findObj[key] = value
