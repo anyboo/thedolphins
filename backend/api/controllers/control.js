@@ -22,7 +22,6 @@ module.exports.all = function* all(name, next) {
     let findObj = {}
     if (filter) {
         try {
-            console.log(filter,Buffer.from(filter, 'base64').toString())
             let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
             if (filterObj) {
                 for (var item of filterObj) {
@@ -30,7 +29,7 @@ module.exports.all = function* all(name, next) {
                     let type = item.type
                     let key = item.key
                     if (type == 'like') {
-                        findObj[key] = '/' + value.replace(/[\*\.\?\+\$\^\\[\]\(\)\{\}\|\\\/]/g, '\\$1') + '/'
+                        findObj[key] = { $regex: '/' + value.replace(/[\*\.\?\+\$\^\\[\]\(\)\{\}\|\\\/]/g, '\\$1') + '/' }
                     } else {
                         findObj[key] = value
                     }
