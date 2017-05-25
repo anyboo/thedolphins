@@ -44,6 +44,50 @@ module.exports.all = function* all(name, next) {
     console.log(findObj)
     var dbtable = wrap(db.get(name))
     let count = yield dbtable.count(findObj)
+    let data = yield dbtable.aggregate(
+        [{ '$match': findObj },
+            { '$sort': { '_id': -1 } },
+            { '$limit': limit },
+            { '$skip': skip }
+        ])
+    this.body = {
+        'data': data,
+        'count': count,
+        'name': name
+    }
+}
+
+module.exports.allold = function* allold(name, next) {
+    if ('GET' != this.method) return yield next
+    let query = this.query
+    let limit = Number.parseInt(query.prepage || 30)
+    let skip = Number.parseInt(query.page || 0) * limit
+    let filter = query.filter
+    let findObj = {}
+    if (filter) {
+        try {
+            let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
+            if (filterObj) {
+                for (var item of filterObj) {
+                    let value = item.value
+                    let type = item.type
+                    let key = item.key
+                    if (type == 'like') {
+                        let like = new RegExp(value)
+                        findObj[key] = like
+                    } else {
+                        findObj[key] = value
+                    }
+
+                }
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    console.log(findObj)
+    var dbtable = wrap(db.get(name))
+    let count = yield dbtable.count(findObj)
     let data = yield dbtable.find(findObj, {
         'skip': skip,
         'limit': limit,
@@ -86,32 +130,11 @@ module.exports.fetch = function* fetch(name, id, next) {
 
 }
 
-function changeModelRef(model) {
-    for (var item in model) {
-        if (typeof model[item] === 'object') {
-            changeModelRef(model[item])
-        } else {
-            if (model[item] == '$id') {
-                let id = model['$id']
-                let db = model['$db']
-                let ref = model['$ref']
-                model = {
-                    $id: monk.id(id),
-                    $db: db,
-                    $ref: ref
-                }
-                break
-            }
-        }
-    }
-}
 module.exports.add = function* add(name, next) {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
         limit: '100kb'
     })
-    changeModelRef(model)
-    console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
