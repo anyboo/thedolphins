@@ -90,8 +90,18 @@ function changeModelRef(model) {
     for (var item in model) {
         if (typeof model[item] === 'object') {
             changeModelRef(model[item])
-        } else if (model[item] == '$id') {
-            model[item] = monk.id(model[item])
+        } else {
+            if (model[item] == '$id') {
+                let id = monk.id(model['$id'])
+                let db = model['$db']
+                let ref = model['$ref']
+                model = {
+                    $id: id,
+                    $db: db,
+                    $ref: ref
+                }
+                break
+            }
         }
     }
 }
@@ -101,7 +111,7 @@ module.exports.add = function* add(name, next) {
         limit: '100kb'
     })
     changeModelRef(model)
-
+    console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
