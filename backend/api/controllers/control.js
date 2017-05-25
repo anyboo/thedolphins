@@ -92,11 +92,11 @@ function changeModelRef(model) {
             changeModelRef(model[item])
         } else {
             if (model[item] == '$id') {
-                let id = monk.id(model['$id'])
+                let id = model['$id']
                 let db = model['$db']
                 let ref = model['$ref']
                 model = {
-                    $id: id,
+                    $id: monk.id(id),
                     $db: db,
                     $ref: ref
                 }
