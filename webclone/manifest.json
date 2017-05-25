@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "永远点不到的搜索按钮",
+    "version": "1.0",
+    "description": "获取web元素",
+    "content_scripts": [{
+        "matches": ["https://modao.cc/*"],
+        "js": ["js/jquery-3.2.0.js", "js/background.js"]
+    }],
+    "icons": {
+        "16": "images/icon16.png"
+    },
+    "permissions": [
+        "*://bullstech.cn/*"
+    ]
+}

@@ -36,7 +36,7 @@ class CssParser {
                 if (!this.comment) {
                     this.ruleFalg.push(i)
                     if (this.ruleFalg.length == 3) {
-
+                        console.log(this.ruleFalg)
                     } else {
                         this.ruleFalg = []
                     }

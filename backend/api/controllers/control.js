@@ -86,11 +86,22 @@ module.exports.fetch = function* fetch(name, id, next) {
 
 }
 
+function changeModelRef(model) {
+    for (var item in model) {
+        if (typeof model[item] === 'object') {
+            changeModelRef(model[item])
+        } else if (model[item] == '$id') {
+            model[item] = monk.id(model[item])
+        }
+    }
+}
 module.exports.add = function* add(name, next) {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
         limit: '100kb'
     })
+    changeModelRef(model)
+
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
