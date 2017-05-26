@@ -127,9 +127,9 @@ module.exports.fetch = function* fetch(name, id, next) {
     if (model.length === 0) {
         this.throw(404, 'model with _id = ' + id + ' was not found')
     }
-    this.body = yield model
-        //}
-
+    this.body = {
+        'data': model
+    }
 }
 
 module.exports.add = function* add(name, next) {
