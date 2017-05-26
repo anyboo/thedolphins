@@ -51,7 +51,7 @@ module.exports.all = function* all(name, next) {
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$limit': limit })
     options.push({ '$skip': skip })
-    console.log(options,name)
+    console.log(options, name)
     let data = yield dbtable.aggregate(options)
     this.body = {
         'data': data,
@@ -135,8 +135,12 @@ function changeModelId(model) {
     for (var item in model) {
         if (typeof item == 'string') {
             if (item.indexOf('_id') >= 0) {
-                let monkid = monk.id(model[item])
-                model[item] = monkid
+                try {
+                    let monkid = monk.id(model[item])
+                    model[item] = monkid
+                } catch (e) {
+                    console.log(e)
+                }
             }
         }
     }
