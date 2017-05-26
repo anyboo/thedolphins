@@ -21,6 +21,7 @@ module.exports.all = function* all(name, next) {
     let filter = query.filter
     let findObj = {}
     let options = []
+    console.log(filter)
     if (filter) {
         try {
             let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
@@ -29,7 +30,6 @@ module.exports.all = function* all(name, next) {
                     let value = item.value
                     let type = item.type
                     let key = item.key
-                    console.log(item)
                     if (type == 'like') {
                         let like = new RegExp(value)
                         findObj[key] = like
