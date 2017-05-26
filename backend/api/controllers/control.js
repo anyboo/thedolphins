@@ -36,9 +36,7 @@ module.exports.all = function* all(name, next) {
                         findObj[key] = value
                     }
                     if (type == 'lookup') {
-                        options.push({ '$lookup': findObj[key] })
-                        findObj[key] = null
-                        delete findObj[key]
+                        options.push({ '$lookup': item.value })
                     }
                 }
             }
