@@ -131,11 +131,22 @@ module.exports.fetch = function* fetch(name, id, next) {
     this.body = yield model
 }
 
+function changeModelId(model) {
+    for (var item in model) {
+        if (typeof item == 'string') {
+            if (item.indexOf('_id') >= 0) {
+                let monkid = monk.id(model[item])
+                model[item] = monkid
+            }
+        }
+    }
+}
 module.exports.add = function* add(name, next) {
     if ('POST' != this.method) return yield next
     var model = yield parse(this, {
-        limit: '100kb'
+        limit: '500kb'
     })
+    changeModelId(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
@@ -147,7 +158,7 @@ module.exports.modify = function* modify(name, id, next) {
     if ('PUT' != this.method) return yield next
 
     var data = yield parse(this, {
-        limit: '100kb'
+        limit: '500kb'
     })
 
     var model = yield wrap(db.get(name)).find({ '_id': monk.id(id) })
@@ -155,7 +166,7 @@ module.exports.modify = function* modify(name, id, next) {
     if (model.length === 0) {
         this.throw(404, 'model with _id = ' + id + ' was not found')
     }
-
+    changeModelId(data)
     var updated = wrap(db.get(name)).update(model[0], {
         $set: data
     })
