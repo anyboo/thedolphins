@@ -33,7 +33,7 @@ module.exports.all = function* all(name, next) {
                         let like = new RegExp(value)
                         findObj[key] = like
                     } else if (type == 'lookup') {
-                        options.push({ '$lookup': item.value })
+                        options.push({ '$lookup': value })
                     } else {
                         findObj[key] = value
                     }
