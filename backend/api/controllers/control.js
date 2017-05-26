@@ -35,6 +35,8 @@ module.exports.all = function* all(name, next) {
                         findObj[key] = like
                     } else if (type == 'lookup') {
                         options.push({ '$lookup': value })
+                    } else if (type == 'lt') {
+                        findObj[key] = { '$lt': value }
                     } else {
                         findObj[key] = value
                     }
