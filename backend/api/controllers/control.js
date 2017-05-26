@@ -20,6 +20,7 @@ module.exports.all = function* all(name, next) {
     let skip = Number.parseInt(query.page || 0) * limit
     let filter = query.filter
     let findObj = {}
+    let options = []
     if (filter) {
         try {
             let filterObj = JSON.parse(Buffer.from(filter, 'base64').toString())
@@ -34,7 +35,11 @@ module.exports.all = function* all(name, next) {
                     } else {
                         findObj[key] = value
                     }
-
+                    if (type == 'lookup') {
+                        options.push({ '$lookup': findObj[key] })
+                        findObj[key] = null
+                        delete findObj[key]
+                    }
                 }
             }
         } catch (e) {
@@ -44,12 +49,11 @@ module.exports.all = function* all(name, next) {
     console.log(findObj)
     var dbtable = wrap(db.get(name))
     let count = yield dbtable.count(findObj)
-    let data = yield dbtable.aggregate(
-        [{ '$match': findObj },
-            { '$sort': { '_id': -1 } },
-            { '$limit': limit },
-            { '$skip': skip }
-        ])
+    options.push({ '$match': findObj })
+    options.push({ '$sort': { '_id': -1 } })
+    options.push({ '$limit': limit })
+    options.push({ '$skip': skip })
+    let data = yield dbtable.aggregate(options)
     this.body = {
         'data': data,
         'count': count,
