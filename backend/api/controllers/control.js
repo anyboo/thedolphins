@@ -29,6 +29,7 @@ module.exports.all = function* all(name, next) {
                     let value = item.value
                     let type = item.type
                     let key = item.key
+                    console.log(item)
                     if (type == 'like') {
                         let like = new RegExp(value)
                         findObj[key] = like
