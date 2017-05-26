@@ -51,7 +51,7 @@ module.exports.all = function* all(name, next) {
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$limit': limit })
     options.push({ '$skip': skip })
-    console.log(options)
+    console.log(options,name)
     let data = yield dbtable.aggregate(options)
     this.body = {
         'data': data,
@@ -146,7 +146,9 @@ module.exports.add = function* add(name, next) {
     var model = yield parse(this, {
         limit: '500kb'
     })
+    console.log(model)
     changeModelId(model)
+    console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
