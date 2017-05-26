@@ -44,13 +44,13 @@ module.exports.all = function* all(name, next) {
             console.log(e)
         }
     }
-    console.log(findObj)
     var dbtable = wrap(db.get(name))
     let count = yield dbtable.count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$limit': limit })
     options.push({ '$skip': skip })
+    console.log(options)
     let data = yield dbtable.aggregate(options)
     this.body = {
         'data': data,
