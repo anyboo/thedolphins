@@ -32,12 +32,12 @@ module.exports.all = function* all(name, next) {
                     if (type == 'like') {
                         let like = new RegExp(value)
                         findObj[key] = like
+                    } else if (type == 'lookup') {
+                        options.push({ '$lookup': item.value })
                     } else {
                         findObj[key] = value
                     }
-                    if (type == 'lookup') {
-                        options.push({ '$lookup': item.value })
-                    }
+
                 }
             }
         } catch (e) {
@@ -127,9 +127,7 @@ module.exports.fetch = function* fetch(name, id, next) {
     if (model.length === 0) {
         this.throw(404, 'model with _id = ' + id + ' was not found')
     }
-    this.body = {
-        'data': model
-    }
+    this.body = yield model
 }
 
 module.exports.add = function* add(name, next) {
