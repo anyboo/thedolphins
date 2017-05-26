@@ -141,7 +141,7 @@ module.exports.add = function* add(name, next) {
     if (!inserted) {
         this.throw(405, 'The model couldn\'t be added.')
     }
-    this.body = '{"success":1}'
+    this.body = yield model
 }
 
 module.exports.modify = function* modify(name, id, next) {
