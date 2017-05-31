@@ -190,7 +190,7 @@ module.exports.modify = function* modify(name, id, next) {
     if (!updated) {
         this.throw(405, 'Unable to update.')
     } else {
-        this.body = '{"success":1}'
+        this.body = yield model
     }
 }
 
