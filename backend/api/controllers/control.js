@@ -58,6 +58,14 @@ module.exports.all = function* all(name, next) {
                         findObj[key] = findObj[key] || {}
                         findObj[key]['$gt'] = value
                         console.log(findObj[key])
+                    } else if (type == 'lte') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$lte'] = value
+                        console.log(findObj[key])
+                    } else if (type == 'gte') {
+                        findObj[key] = findObj[key] || {}
+                        findObj[key]['$gte'] = value
+                        console.log(findObj[key])
                     } else {
                         findObj[key] = value
                     }
