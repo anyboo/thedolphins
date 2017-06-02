@@ -73,8 +73,8 @@ module.exports.all = function* all(name, next) {
     let count = yield dbtable.count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
-    options.push({ '$limit': limit })
     options.push({ '$skip': skip })
+    options.push({ '$limit': limit })
     console.log(options, name)
     let data = yield dbtable.aggregate(options)
     this.body = {
