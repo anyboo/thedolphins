@@ -84,7 +84,7 @@ module.exports.all = function* all(name, next) {
     options.push({ '$limit': limit })
     console.log(options, name)
     let data = yield wrap(db.get(name)).aggregate(options)
-    this.body = {
+    this.body = yield {
         'data': data,
         'count': count,
         'name': name
@@ -217,7 +217,7 @@ module.exports.remove = function* remove(name, id, next) {
     if (!removed) {
         this.throw(405, 'Unable to delete.')
     } else {
-        this.body = '{"success":1}'
+        this.body = yield '{"success":1}'
     }
 
 }
