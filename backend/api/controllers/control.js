@@ -169,7 +169,7 @@ module.exports.add = function* add(name, next) {
     })
     console.log(model)
     changeModelId(model)
-    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ id: name }, { seq: { $inc: { seq: 1 } } })
+    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ id: name }, { seq: { $inc: { seq: 1 } } }, { upsert: true })
     model.lbseqid = seqid.seq
     console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
