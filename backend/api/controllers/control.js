@@ -77,7 +77,7 @@ module.exports.all = function* all(name, next) {
         }
     }
     changeModelId(findObj)
-    var dbtable = wrap(db.get(name))
+    var dbtable = yield wrap(db.get(name))
     let count = yield dbtable.count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
@@ -121,7 +121,7 @@ module.exports.allold = function* allold(name, next) {
         }
     }
     console.log(findObj)
-    var dbtable = wrap(db.get(name))
+    var dbtable = yield wrap(db.get(name))
     let count = yield dbtable.count(findObj)
     let data = yield dbtable.find(findObj, {
         'skip': skip,
@@ -170,6 +170,8 @@ module.exports.add = function* add(name, next) {
     })
     console.log(model)
     changeModelId(model)
+    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ _id: name }, { seq: { $inc: { seq: 1 } } })
+    model.lbseqid = seqid.seq
     console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
@@ -191,7 +193,7 @@ module.exports.modify = function* modify(name, id, next) {
         this.throw(404, 'model with _id = ' + id + ' was not found')
     }
     changeModelId(data)
-    var updated = wrap(db.get(name)).update(model[0], {
+    var updated = yield wrap(db.get(name)).update(model[0], {
         $set: data
     })
 
