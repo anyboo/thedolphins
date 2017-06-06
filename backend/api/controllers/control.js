@@ -128,7 +128,7 @@ module.exports.allold = function* allold(name, next) {
         'limit': limit,
         'sort': { '_id': -1 }
     })
-    this.body = {
+    this.body = yield {
         'data': data,
         'count': count,
         'name': name
@@ -150,7 +150,7 @@ module.exports.upload = function* upload(next) {
         part.pipe(stream)
         console.log('uploading %s -> %s', part.filename, stream.path)
     }
-    this.body = { success: 1, name: filename, url: 'http://www.bullstech.cn:9999/upload/' + filename }
+    this.body = yield { success: 1, name: filename, url: 'http://www.bullstech.cn:9999/upload/' + filename }
 }
 
 module.exports.fetch = function* fetch(name, id, next) {
