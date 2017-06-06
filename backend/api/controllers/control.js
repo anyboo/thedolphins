@@ -77,14 +77,13 @@ module.exports.all = function* all(name, next) {
         }
     }
     changeModelId(findObj)
-    var dbtable = yield wrap(db.get(name))
-    let count = yield dbtable.count(findObj)
+    let count = yield wrap(db.get(name)).count(findObj)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$skip': skip })
     options.push({ '$limit': limit })
     console.log(options, name)
-    let data = yield dbtable.aggregate(options)
+    let data = yield wrap(db.get(name)).aggregate(options)
     this.body = {
         'data': data,
         'count': count,
@@ -128,7 +127,7 @@ module.exports.allold = function* allold(name, next) {
         'limit': limit,
         'sort': { '_id': -1 }
     })
-    this.body = {
+    this.body = yield {
         'data': data,
         'count': count,
         'name': name
@@ -170,8 +169,8 @@ module.exports.add = function* add(name, next) {
     })
     console.log(model)
     changeModelId(model)
-    //let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ _id: name }, { seq: { $inc: { seq: 1 } } })
-    //model.lbseqid = seqid.seq
+    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ _id: name }, { seq: { $inc: { seq: 1 } } })
+    model.lbseqid = seqid.seq
     console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
     if (!inserted) {
