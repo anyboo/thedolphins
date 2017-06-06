@@ -121,9 +121,8 @@ module.exports.allold = function* allold(name, next) {
         }
     }
     console.log(findObj)
-    var dbtable = db.get(name)
-    let count = yield dbtable.count(findObj)
-    let data = yield dbtable.find(findObj, {
+    let count = yield wrap(db.get(name)).count(findObj)
+    let data = yield wrap(db.get(name)).find(findObj, {
         'skip': skip,
         'limit': limit,
         'sort': { '_id': -1 }
