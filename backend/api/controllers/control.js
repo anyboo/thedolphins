@@ -121,13 +121,14 @@ module.exports.allold = function* allold(name, next) {
         }
     }
     console.log(findObj)
-    let count = yield wrap(db.get(name)).count(findObj)
-    let data = yield wrap(db.get(name)).find(findObj, {
+    var dbtable = wrap(db.get(name))
+    let count = yield dbtable.count(findObj)
+    let data = yield dbtable.find(findObj, {
         'skip': skip,
         'limit': limit,
         'sort': { '_id': -1 }
     })
-    this.body = yield {
+    this.body = {
         'data': data,
         'count': count,
         'name': name
