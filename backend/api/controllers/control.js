@@ -169,11 +169,7 @@ module.exports.add = function* add(name, next) {
     })
     console.log(model)
     changeModelId(model)
-    let count = yield wrap(db.get('lb_seq_id')).count({ id: name })
-    if (count == 0) {
-        yield wrap(db.get('lb_seq_id')).insert({ id: name, seq: 0 })
-    }
-    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ id: name }, { seq: { $inc: { seq: 1 } } }, { upsert: true })
+    let seqid = yield wrap(db.get('lb_seq_id')).findOneAndUpdate({ id: name }, { $inc: { seq: 1 } }, { upsert: true })
     model.lbseqid = seqid.seq
     console.log(model)
     var inserted = yield wrap(db.get(name)).insert(model)
