@@ -217,7 +217,7 @@ module.exports.remove = function* remove(name, id, next) {
     if (!removed) {
         this.throw(405, 'Unable to delete.')
     } else {
-        this.body = yield '{"success":1}'
+        this.body = yield {'success':1}
     }
 
 }
