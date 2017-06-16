@@ -78,14 +78,15 @@ module.exports.all = function* all(name, next) {
     }
     changeModelId(findObj)
     console.log(findObj, name)
-    let count = yield wrap(db.get(name)).count(findObj)
+    let table = wrap(db.get(name))
+    let count = yield table.count(findObj)
     console.log(options, name)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$skip': skip })
     options.push({ '$limit': limit })
     console.log(options, name)
-    let data = yield wrap(db.get(name)).aggregate(options)
+    let data = yield table.aggregate(options)
     this.body = yield {
         'data': data,
         'count': count,
