@@ -79,6 +79,7 @@ module.exports.all = function* all(name, next) {
     changeModelId(findObj)
     console.log(findObj, name)
     let table = wrap(db.get(name))
+    console.log('yield',table)
     let count = yield table.count(findObj)
     console.log(options, name)
     options.push({ '$match': findObj })
