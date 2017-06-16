@@ -77,7 +77,9 @@ module.exports.all = function* all(name, next) {
         }
     }
     changeModelId(findObj)
+    console.log(options, name)
     let count = yield wrap(db.get(name)).count(findObj)
+    console.log(options, name)
     options.push({ '$match': findObj })
     options.push({ '$sort': { '_id': -1 } })
     options.push({ '$skip': skip })
