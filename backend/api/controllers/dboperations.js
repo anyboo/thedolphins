@@ -3,10 +3,12 @@ var parse = require('co-body')
 var uploadparse = require('co-busboy')
 var MongoClient = require('mongodb').MongoClient
 var ObjectID = require('mongodb').ObjectID
-var dbstr = 'mongodb://localhost/luban'
+const jwt = require('jsonwebtoken')
 var fs = require('fs')
 var Buffer = require('buffer').Buffer
 var path = require('path')
+
+var dbstr = 'mongodb://localhost/luban'
 
 function checkId(id) {
     let result = false
@@ -14,6 +16,34 @@ function checkId(id) {
         result = true
     }
     return result
+}
+module.exports.login = function* login(next) {
+    if ('POST' != this.method) return yield next
+    var user = yield parse(this, {
+        limit: '500kb'
+    })
+    console.log(user)
+    var db = yield MongoClient.connect(dbstr)
+    let table = db.collection('employee')
+    var model = yield table.find({ 'name': user.user }).toArray()
+    var token = ''
+    var code = -1
+    var message = '登录失败'
+    if (model.length > 0) {
+        var profile = {
+            user: user.user,
+            id: model[0]._id
+        }
+        token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
+        code = 0
+        message = '登录成功'
+    }
+    db.close()
+    this.body = {
+        code,
+        token,
+        message
+    }
 }
 
 function changeModelId(model) {
@@ -34,8 +64,31 @@ function changeModelId(model) {
     }
 }
 
+function verify(token) {
+    let result = false
+    console.log(token)
+    if (token) {
+        try {
+            var profile = jwt.verify(token, 'luban')
+            let nowtime = new Date().getTime() / 1000
+            console.log(profile, nowtime)
+            if (profile.iat < nowtime && nowtime < profile.exp) {
+                result = true
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    return result
+}
 module.exports.all = function* all(name, next) {
     if ('GET' != this.method) return yield next
+    let token = this.req.headers.authorization
+    if (!verify(token)) {
+        this.status = 401
+        this.body = 'Access Forbidden'
+        return
+    }
     var db = yield MongoClient.connect(dbstr)
     let table = db.collection(name)
     let query = this.query
@@ -124,7 +177,7 @@ module.exports.fetch = function* fetch(name, id, next) {
     if (!checkId(id)) return yield next
     var db = yield MongoClient.connect(dbstr)
     let table = db.collection(name)
-    var model = yield table.find({ '_id': ObjectID(id) })
+    var model = yield table.find({ '_id': ObjectID(id) }).toArray()
     if (model.length === 0) {
         this.throw(404, 'model with _id = ' + id + ' was not found')
     }
@@ -186,6 +239,9 @@ module.exports.head = function*() {
 }
 
 module.exports.options = function*() {
+    this.set('Access-Control-Allow-Method', 'HEAD,GET,PUT,DELETE,OPTIONS')
+    this.set('Access-Control-Allow-Origin', '*')
+    this.status = 204
     this.body = yield 'Allow: HEAD,GET,PUT,DELETE,OPTIONS'
 }
 

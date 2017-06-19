@@ -28,6 +28,16 @@ function changeModelId(model) {
     }
 }
 
+module.exports.login = function* login(next) {
+    if ('POST' != this.method) return yield next
+    var model = yield parse(this, {
+        limit: '500kb'
+    })
+    console.log(model)
+    this.body = {
+        token: '123'
+    }
+}
 module.exports.all = function* all(name, next) {
     if ('GET' != this.method) return yield next
     let query = this.query
@@ -79,7 +89,7 @@ module.exports.all = function* all(name, next) {
     changeModelId(findObj)
     console.log(findObj, name)
     let table = wrap(db.get(name))
-    console.log('yield',table)
+    console.log('yield', table)
     let count = yield table.count(findObj)
     console.log(options, name)
     options.push({ '$match': findObj })
