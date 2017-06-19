@@ -1,4 +1,4 @@
-var control = require('./controllers/control')
+var control = require('./controllers/dboperations')
 var compress = require('koa-compress')
 var logger = require('koa-logger')
 var serve = require('koa-static')
