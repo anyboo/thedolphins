@@ -40,7 +40,7 @@ module.exports.login = function* login(next) {
             id: model[0]._id
         }
         account = model[0]
-        acccount.pwd = null
+        account.pwd = null
         delete account.pwd
         token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
         code = 0
