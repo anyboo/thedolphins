@@ -33,15 +33,15 @@ module.exports.login = function* login(next) {
     var token = ''
     var code = -1
     var message = '登录失败'
-    var acount = {}
+    var account = {}
     if (model.length > 0) {
         var profile = {
             user: user.user,
             id: model[0]._id
         }
-        acount = model[0]
-        acount.pwd = null
-        delete acount.pwd
+        account = model[0]
+        acccount.pwd = null
+        delete account.pwd
         token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
         code = 0
         message = '登录成功'
@@ -55,9 +55,9 @@ module.exports.login = function* login(next) {
             token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
             code = 0
             message = '登录成功'
-            acount.name = 'luban'
-            acount._id = 0
-            acount.tel = ''
+            account.name = 'luban'
+            account._id = 0
+            account.tel = ''
         }
     }
     db.close()
@@ -65,7 +65,7 @@ module.exports.login = function* login(next) {
         code,
         token,
         message,
-        acount
+        account
     }
 }
 
