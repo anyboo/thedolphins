@@ -25,15 +25,19 @@ module.exports.login = function* login(next) {
     console.log(user)
     var db = yield MongoClient.connect(dbstr)
     let table = db.collection('employee')
-    var model = yield table.find({ 'name': user.user }).toArray()
+    var model = yield table.find({ 'tel': user.user }).toArray()
     var token = ''
     var code = -1
     var message = '登录失败'
+    var user= {}
     if (model.length > 0) {
         var profile = {
             user: user.user,
             id: model[0]._id
         }
+        user = model[0]
+        user.pwd = null
+        delete user.pwd
         token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
         code = 0
         message = '登录成功'
@@ -42,7 +46,8 @@ module.exports.login = function* login(next) {
     this.body = {
         code,
         token,
-        message
+        message,
+        user
     }
 }
 
