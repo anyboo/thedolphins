@@ -25,11 +25,15 @@ module.exports.login = function* login(next) {
     console.log(user)
     var db = yield MongoClient.connect(dbstr)
     let table = db.collection('employee')
-    var model = yield table.find({ 'tel': user.user,'lock':false }).toArray()
+    var model = yield table.find({
+        'pwd': user.pwd,
+        'tel': user.user,
+        'lock': false
+    }).toArray()
     var token = ''
     var code = -1
     var message = '登录失败'
-    var user= {}
+    var user = {}
     if (model.length > 0) {
         var profile = {
             user: user.user,
@@ -239,17 +243,17 @@ module.exports.remove = function* remove(name, id, next) {
 
 }
 
-module.exports.head = function*() {
+module.exports.head = function* () {
     return yield
 }
 
-module.exports.options = function*() {
+module.exports.options = function* () {
     this.set('Access-Control-Allow-Method', 'HEAD,GET,PUT,DELETE,OPTIONS')
     this.set('Access-Control-Allow-Origin', '*')
     this.status = 204
     this.body = yield 'Allow: HEAD,GET,PUT,DELETE,OPTIONS'
 }
 
-module.exports.trace = function*() {
+module.exports.trace = function* () {
     this.body = yield 'Smart! But you can\'t trace.'
 }
