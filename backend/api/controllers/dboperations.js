@@ -57,7 +57,7 @@ module.exports.login = function* login(next) {
             message = '登录成功'
             account.name = 'luban'
             account._id = 0
-            account.tel = ''
+            account.tel = 'luban'
         }
     }
     db.close()
