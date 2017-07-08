@@ -25,7 +25,7 @@ module.exports.login = function* login(next) {
     console.log(user)
     var db = yield MongoClient.connect(dbstr)
     let table = db.collection('employee')
-    var model = yield table.find({ 'tel': user.user }).toArray()
+    var model = yield table.find({ 'tel': user.user,'lock':false }).toArray()
     var token = ''
     var code = -1
     var message = '登录失败'
