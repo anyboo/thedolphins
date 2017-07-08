@@ -50,8 +50,7 @@ module.exports.login = function* login(next) {
             user: user.user,
             id: 0
         }
-        console.log(user)
-        if (user.name == 'luban' && user.pwd == 'e10adc3949ba59abbe56e057f20f883e') {
+        if (user.user == 'luban' && user.pwd == 'e10adc3949ba59abbe56e057f20f883e') {
             token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
             code = 0
             message = '登录成功'
