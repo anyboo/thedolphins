@@ -42,7 +42,7 @@ module.exports.login = function* login(next) {
         account = model[0]
         account.pwd = null
         delete account.pwd
-        token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
+        token = jwt.sign(profile, 'luban', { expiresIn: 60 * 60 * 24 * 3 /* 1 days */ })
         code = 0
         message = '登录成功'
     } else {
@@ -52,7 +52,7 @@ module.exports.login = function* login(next) {
         }
 
         if (user.user == 'luban' && user.pwd == 'e10adc3949ba59abbe56e057f20f883e') {
-            token = jwt.sign(profile, 'luban', { expiresIn: 60 * 5 /* 1 days */ })
+            token = jwt.sign(profile, 'luban', { expiresIn: 60 * 60 * 24 * 3 /* 1 days */ })
             code = 0
             message = '登录成功'
             account.name = 'luban'
@@ -61,11 +61,13 @@ module.exports.login = function* login(next) {
         }
     }
     db.close()
+    let nowtime = new Date().getTime() / 1000
     this.body = {
         code,
         token,
         message,
-        account
+        account,
+        nowtime
     }
 }
 
@@ -87,15 +89,17 @@ function changeModelId(model) {
     }
 }
 
-function verify(token) {
+function verify(token, authtime) {
     let result = false
-    console.log(token)
+    console.log(token, authtime)
     if (token) {
         try {
             var profile = jwt.verify(token, 'luban')
             let nowtime = new Date().getTime() / 1000
+            let authtimebegin = authtime - 60 * 15
+            let authtimeend = authtime + 60 * 15
             console.log(profile, nowtime)
-            if (profile.iat < nowtime && nowtime < profile.exp) {
+            if (authtimebegin < nowtime && nowtime < authtimeend) {
                 result = true
             }
         } catch (e) {
@@ -107,7 +111,8 @@ function verify(token) {
 module.exports.all = function* all(name, next) {
     if ('GET' != this.method) return yield next
     let token = this.req.headers.authorization
-    if (!verify(token)) {
+    let authtime = this.req.headers.authtime
+    if (!verify(token, authtime)) {
         this.status = 401
         this.body = 'Access Forbidden'
         return
@@ -170,10 +175,12 @@ module.exports.all = function* all(name, next) {
     let cursor = table.aggregate(options)
     let data = yield cursor.toArray()
     db.close()
+    let nowtime = new Date().getTime() / 1000
     this.body = yield {
         'data': data,
         'count': count,
-        'name': name
+        'name': name,
+        'nowtime': nowtime
     }
 
 }
@@ -182,7 +189,6 @@ module.exports.upload = function* upload(next) {
     if (!this.request.is('multipart/*')) return yield next
 
     var parts = uploadparse(this)
-    var part
 
     while ((part = yield parts)) {
         var ext = path.extname(part.filename)
@@ -192,6 +198,7 @@ module.exports.upload = function* upload(next) {
         part.pipe(stream)
         console.log('uploading %s -> %s', part.filename, stream.path)
     }
+
     this.body = yield { success: 1, name: filename, url: 'http://www.bullstech.cn:9999/upload/' + filename }
 }
 
