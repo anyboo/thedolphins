@@ -61,7 +61,7 @@ module.exports.login = function* login(next) {
         }
     }
     db.close()
-    let nowtime = new Date().getTime() / 1000
+    let nowtime = new Date().getTime()
     this.body = {
         code,
         token,
@@ -95,10 +95,10 @@ function verify(token, authtime) {
     if (token) {
         try {
             var profile = jwt.verify(token, 'luban')
-            let nowtime = new Date().getTime() / 1000
+            let nowtime = new Date().getTime()
             let authtimebegin = authtime - 60 * 15
             let authtimeend = authtime + 60 * 15
-            console.log(profile, nowtime)
+            console.log(profile, nowtime,authtimebegin,authtimeend,authtime)
             if (authtimebegin < nowtime && nowtime < authtimeend) {
                 result = true
             }
@@ -175,7 +175,7 @@ module.exports.all = function* all(name, next) {
     let cursor = table.aggregate(options)
     let data = yield cursor.toArray()
     db.close()
-    let nowtime = new Date().getTime() / 1000
+    let nowtime = new Date().getTime()
     this.body = yield {
         'data': data,
         'count': count,
