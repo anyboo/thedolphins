@@ -96,8 +96,8 @@ function verify(token, authtime) {
         try {
             var profile = jwt.verify(token, 'luban')
             let nowtime = new Date().getTime()
-            let authtimebegin = authtime - 60 * 15
-            let authtimeend = authtime + 60 * 15
+            let authtimebegin = Number(authtime) - 60 * 15
+            let authtimeend = Number(authtime) + 60 * 15
             console.log(profile, nowtime,authtimebegin,authtimeend,authtime)
             if (authtimebegin < nowtime && nowtime < authtimeend) {
                 result = true
