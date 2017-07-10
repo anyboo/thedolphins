@@ -224,6 +224,7 @@ module.exports.add = function* add(name, next) {
     let table = db.collection(name)
     let seqid = yield db.collection('lb_seq_id').findOneAndUpdate({ id: name }, { $inc: { seq: 1 } }, { upsert: true })
     model.lbseqid = seqid.seq
+    changeModelId(model)
     console.log(model)
     var inserted = yield table.insert(model)
     if (!inserted) {
